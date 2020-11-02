@@ -1,23 +1,38 @@
 <template>
     <div>
         <Header />
-        <span>{{$store.state.counter}}</span>
-        <span>{{msg}}</span>
-        <el-button @click="add">测试</el-button>
+        <MainBanner></MainBanner>
+        <Toplove></Toplove>
+        <div class="wp clearfix">
+            <MainLeft style="float: left;"></MainLeft>
+            <MainRight style="float: right;"></MainRight>
+        </div>
+        <Footer />
     </div>
 </template>
 
 <script>
+import MainLeft from '@/web/index/MainLeft'
+import MainRight from '@/web/index/MainRight'
+import MainBanner from '@/web/components/MainBanner'
 import { mapMutations } from 'vuex'
+import Toplove from '@/web/components/Toplove'
 import axios from 'axios';
 export default {
     layout: 'theme_one',
+    components: {
+        MainLeft,
+        MainBanner,
+        Toplove,
+        MainRight
+    },
     data() {
         return {
-            msg: ''
+            msg: '',
         }
     },
     mounted() {
+
         // this.$axios.post(`/api/v1/login/userinfo`).then(res => {
         //     this.msg = '测试异步数据1'
         // })
@@ -30,8 +45,12 @@ export default {
     },
     methods: {
         add() {
-            this.$notify({content: '我是一个消息'});
+            this.$notify({ content: '我是一个消息' });
             this.$store.commit('increment');
+        },
+        formatDate(date) {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+            return new Date(date).toLocaleDateString('en-US', options)
         }
     }
 }

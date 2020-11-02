@@ -18,11 +18,13 @@ export default {
     // Global CSS (https://go.nuxtjs.dev/config-css)
     css: [
         'element-ui/lib/theme-chalk/index.css',
-        '@/assets/reset.css'
+        '@/assets/style/reset.css',
+        '@/assets/iconfont/iconfont.css'
     ],
     styleResources: {
         less: [
-            './assets/style.less'
+            './assets/style/theme.less',
+            './assets/style/style.less'
         ]
     },
     router: {
