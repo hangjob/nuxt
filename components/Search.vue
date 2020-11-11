@@ -50,7 +50,7 @@
                         </div>
                     </div>
                     <div class="manuscript-right">
-                        <img src="@/assets/images/3.png" alt />
+                        <img src="https://w.wallhaven.cc/full/8o/wallhaven-8o7oz2.jpg" alt />
                     </div>
                 </div>
             </div>
@@ -59,9 +59,14 @@
 </template>
 <script>
 export default {
+    props:{
+        dialogTableVisible:{
+            type:Boolean,
+            default:false
+        }
+    },
     data() {
         return {
-            dialogTableVisible: true,
             ks: '',
             select: 'logo.png',
             options: [

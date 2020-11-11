@@ -18,6 +18,7 @@ export default {
     // Global CSS (https://go.nuxtjs.dev/config-css)
     css: [
         'element-ui/lib/theme-chalk/index.css',
+        "swiper/css/swiper.css",
         '@/assets/style/reset.css',
         '@/assets/iconfont/iconfont.css'
     ],
@@ -38,9 +39,10 @@ export default {
      */
     plugins: [
         '@/plugins/element-ui',
+        { src: '@/plugins/swiper.js', ssr: false },
         { src: '@/plugins/axios.js', mode: 'server' },
         { src: '@/plugins/utils.js', mode: 'client' },
-        { src: '@/componentsFication/notify/index.js', mode: 'client' }
+        { src: '@/componentsFication/notify/index.js', mode: 'client' },
     ],
 
     // Auto import components (https://go.nuxtjs.dev/config-components)
