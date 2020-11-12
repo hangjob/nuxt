@@ -1,27 +1,32 @@
 <template>
     <div class="wechat-kuai">
-        <div class="tabNav">
+        <div class="tab-nav">
             <a href class="active">全部</a>
             <a href>设计</a>
             <a href>原型</a>
             <a href>绘画</a>
         </div>
+        <div class="tab-items">
+            <WechatItem />
+        </div>
     </div>
 </template>
 <script>
+import WechatItem from '@/web/wechat/WechatItem'
 export default {
-
+    components: {
+        WechatItem
+    }
 }
 </script>
 <style lang="less" scoped>
 .wechat-kuai {
-    background-color: white;
-    padding: 16px 8px;
-    margin-top: 24px;
-    border-radius: 4px;
-    box-sizing: border-box;
-    .tabNav {
-        margin-bottom: -15px;
+    .tab-nav {
+        background-color: white;
+        margin-top: 24px;
+        border-radius: 4px;
+        box-sizing: border-box;
+        padding: 5px 0;
         a {
             padding: 4px 12px;
             font-size: 14px;
@@ -31,7 +36,8 @@ export default {
             font-weight: bold;
             font-weight: 500;
             display: inline-block;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+            margin-top: 10px;
             &:hover {
                 background-color: #f7f8fa;
                 border-color: #f7f8fa;
@@ -41,6 +47,9 @@ export default {
             color: white;
             background-color: #ffd102;
         }
+    }
+    .tab-items{
+        margin-top: 20px;
     }
 }
 </style>

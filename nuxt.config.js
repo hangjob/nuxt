@@ -43,6 +43,7 @@ export default {
         { src: '@/plugins/axios.js', mode: 'server' },
         { src: '@/plugins/utils.js', mode: 'client' },
         { src: '@/componentsFication/notify/index.js', mode: 'client' },
+        { src: '@/plugins/vue-mavon-editor', ssr: false }
     ],
 
     // Auto import components (https://go.nuxtjs.dev/config-components)
