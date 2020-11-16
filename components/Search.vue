@@ -59,10 +59,10 @@
 </template>
 <script>
 export default {
-    props:{
-        dialogTableVisible:{
-            type:Boolean,
-            default:false
+    props: {
+        dialogTableVisible: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -91,7 +91,7 @@ export default {
     }
 }
 </script>
-<style lang="less">
+<style lang="less" scoped>
 .el-select .el-input {
     width: 130px;
 }
@@ -104,14 +104,10 @@ export default {
     margin: 7.5px;
     object-fit: cover;
 }
-.site-name {
-}
 .custom-search {
     border-radius: 6px;
 }
-.el-input-group__append {
-    border-color: #ffd100 !important;
-}
+
 .custom-search-btn {
     text-align: center;
     height: 100%;
@@ -124,6 +120,9 @@ export default {
 }
 </style>
 <style lang="less" scoped>
+.search /deep/ .el-input-group__append {
+    border-color: #ffd100 !important;
+}
 .search {
     &-body {
         min-height: 300px;
