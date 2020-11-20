@@ -9,6 +9,9 @@ export default {
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+        ],
+        script: [
+            { src: 'https://cdn.bootcdn.net/ajax/libs/showdown/1.9.1/showdown.min.js' }
         ]
     },
     // 创建环境变量
@@ -24,8 +27,8 @@ export default {
     ],
     styleResources: {
         less: [
-            './assets/style/theme.less',
-            './assets/style/style.less'
+            '@/assets/style/theme.less',
+            '@/assets/style/style.less'
         ]
     },
     router: {
