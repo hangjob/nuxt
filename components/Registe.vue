@@ -54,14 +54,13 @@
                 </div>
             </div>
             <div class="login-bottom" slot="footer">
-                <button @click="register" :disabled="disabled">注册</button>
+                <button class="itnavs-btn" @click="register" :disabled="disabled">注册</button>
                 <p>
                     你已加入vipbic？马上去
                     <a href="javascript:;" @click="loginOpen">登录</a>
                 </p>
             </div>
         </el-dialog>
-        <!-- <Login ref="login" /> -->
     </div>
 </template>
 <script>
@@ -85,7 +84,7 @@ export default {
             this.registerData.username = randomNickname()
         },
         loginOpen() {
-            this.$refs.login.visible = true;
+            this.$emit('loginOpen')
         },
         // 注册
         register() {

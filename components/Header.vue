@@ -13,7 +13,8 @@
             </div>
         </div>
         <Search :dialogTableVisible.sync="dialogTableVisible" />
-        <Login ref="login" />
+        <Login ref="login" @registerOpen="registerOpen" />
+        <Registe ref="registe" @loginOpen="loginOpen" />
     </div>
 </template>
 <script>
@@ -41,10 +42,18 @@ export default {
             if (item.title === '登录') {
                 this.$refs.login.visible = true;
             }
+        },
+        registerOpen() {
+            this.$refs.login.visible = false;
+            this.$refs.registe.visible = true;
+        },
+        loginOpen() {
+            this.$refs.login.visible = true;
+            this.$refs.registe.visible = false;
         }
     },
     created() {
-      
+
     }
 }
 </script>

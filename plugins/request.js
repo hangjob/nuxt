@@ -1,32 +1,40 @@
 import axios from 'axios'
 
-const http = axios.create({
-    baseURL: '/api/',
-    withCredentials: true,
-    timeout: 10000
-})
-
+axios.defaults.baseURL = '/api/itapi'
 
 // 请求拦截
-http.interceptors.request.use(
+axios.interceptors.request.use(
     config => {
         return config
     },
     error => {
-        console.log(error)
         return Promise.reject(error)
     }
 )
 
 // 响应拦截
-http.interceptors.response.use(
+axios.interceptors.response.use(
     response => {
         return response.data
     },
     error => {
-        console.log(error)
         return Promise.reject(error)
     }
 )
 
-export default http;
+const post = (url, params) => {
+    return new Promise((resolve, reject) => {
+        console.log(url)
+        axios.post(url, params)
+            .then(res => {
+                resolve(res)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    });
+}
+
+export {
+    post
+};

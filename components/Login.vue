@@ -1,6 +1,12 @@
 <template>
     <div class="login">
-        <el-dialog title="登录" :visible.sync="visible" width="450px" :show-close="true" :close-on-click-modal="false">
+        <el-dialog
+            title="登录"
+            :visible.sync="visible"
+            width="450px"
+            :show-close="true"
+            :close-on-click-modal="false"
+        >
             <div slot="title"></div>
             <div class="login-center">
                 <div class="login-center-slogan">
@@ -37,18 +43,19 @@
                 </div>
             </div>
             <div class="login-bottom" slot="footer">
-                <button @click="login" :disabled="disabled">登录</button>
+                <button class="itnavs-btn" @click="login" :disabled="disabled">登录</button>
                 <p>
                     还没加入vipbic？马上去
                     <a href="javascript:;" @click="registerOpen">注册</a>
                 </p>
             </div>
         </el-dialog>
-        <!-- <Registe ref="registe" /> -->
     </div>
 </template>
 <script>
 import randomNickname from '@/utils/name.js'
+import { isEmail } from '@/utils/utils'
+import { apiLogin } from '@/api/login'
 export default {
     data() {
         return {
@@ -66,23 +73,37 @@ export default {
             this.registerData.username = randomNickname()
         },
         registerOpen() {
-            this.$refs.registe.visible = true;
+            this.$emit('registerOpen')
         },
         // 登录
         login() {
-            if (!this.utils.isEmail(this.loginData.usermail)) {
-                this.$Message.warning('小可爱，你输入的邮箱貌似不合法');
+            if (!isEmail(this.loginData.usermail)) {
+                this.$message({
+                    message: '小可爱，你输入的邮箱貌似不合法',
+                    type: 'warning'
+                });
                 return false;
             }
             if (String(this.loginData.password).length < 6) {
-                this.$Message.warning('小可爱，密不规范哦');
+                this.$message({
+                    message: '小可爱，密不规范哦',
+                    type: 'warning'
+                });
                 return false;
             }
-
+            apiLogin(this.loginData)
+            .then((res)=>{
+                this.$utils.isErrJson(res)
+            })
         }
     }
 }
 </script>
+<style>
+.v-modal {
+    opacity: 0.65;
+}
+</style>
 <style lang="less" scoped>
 .login /deep/ .el-dialog {
     border-radius: 6px;
