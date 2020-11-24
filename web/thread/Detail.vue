@@ -26,6 +26,7 @@ export default {
 <style lang="less" scoped>
 .detail {
     background-color: #fff;
+    padding: 20px 0;
     &-md {
         box-shadow: none !important;
     }

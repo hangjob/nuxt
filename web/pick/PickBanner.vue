@@ -1,6 +1,6 @@
 <template>
     <div class="wp pick">
-        <div class="pick-banner">
+        <div class="pick-banner itnavs-banner">
             <div v-swiper="swiperOption" ref="bannerSwiper">
                 <div class="swiper-wrapper">
                     <div v-for="(item, index) in dataImage" :key="index" class="swiper-slide">
@@ -90,39 +90,9 @@ export default {
     margin-right: 20px;
     border-radius: 6px;
     overflow: hidden;
-    &:hover {
-        .swiper-next-prev {
-            background-color: rgba(0, 0, 0, 0.3);
-        }
-    }
     .swiper-container {
         height: 100%;
         width: 100%;
-    }
-    .swiper-next-prev {
-        position: absolute;
-        top: 50%;
-        transform: translate(0%, -50%);
-        width: 46px;
-        height: 46px;
-        text-align: center;
-        color: #fff;
-        z-index: 2;
-        padding: 12px;
-        border-radius: 50%;
-        cursor: pointer;
-        box-sizing: border-box;
-        transition: all 0.3s;
-    }
-    .swiper-next {
-        left: 10px;
-    }
-    .swiper-prev {
-        right: 10px;
-        i {
-            transform: rotate(90deg);
-            -webkit-transform: rotate(90deg);
-        }
     }
 }
 </style>
