@@ -25,16 +25,18 @@ utils.copy = () => {
 }
 
 utils.isErrJson = function(res) {
-    let str = res.message || '小可爱出错了';
-    if (Object.prototype.toString.call(res.message) === "[object Object]") {
-        for (let i in res.message) {
-            if (res.message[i]) {
-                str = res.message[i];
-                break;
+    if (res.code != 1) {
+        let str = res.message || '小可爱出错了';
+        if (Object.prototype.toString.call(res.message) === "[object Object]") {
+            for (let i in res.message) {
+                if (res.message[i]) {
+                    str = res.message[i];
+                    break;
+                }
             }
         }
+        window.vm.$message.warning(str)
     }
-    window.vm.$message.warning(str)
 }
 
 // 挂载到全局Vue实例

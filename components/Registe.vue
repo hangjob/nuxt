@@ -65,6 +65,8 @@
 </template>
 <script>
 import randomNickname from '@/utils/name.js'
+import { apiRegister } from '@/api/login'
+import { isEmail } from '@/utils/utils'
 export default {
     data() {
         return {
@@ -90,26 +92,47 @@ export default {
         register() {
             let filtration = ['admin', 'null', 'test', 'true', 'false'].join('')
             if (!this.registerData.username.trim()) {
-                this.$Message.warning('小可爱，先给自己起名字不好嘛');
+                this.$message({
+                    message: '小可爱，先给自己起名字不好嘛',
+                    type: 'warning'
+                });
                 return false;
             }
             if (filtration.indexOf(this.registerData.username) > -1) {
-                this.$Message.warning('小可爱，名字不合法');
+                this.$message({
+                    message: '小可爱，名字不合法',
+                    type: 'warning'
+                });
                 return false;
             }
             if (this.registerData.username.length >= 10) {
-                this.$Message.warning('小可爱，名字太长也不太合适吧');
+                this.$message({
+                    message: '小可爱，名字太长也不太合适吧',
+                    type: 'warning'
+                });
                 return false;
             }
-            if (!this.utils.isEmail(this.registerData.usermail)) {
-                this.$Message.warning('小可爱，你输入的邮箱貌似不合法');
+            if (!isEmail(this.registerData.usermail)) {
+                this.$message({
+                    message: '小可爱，你输入的邮箱貌似不合法',
+                    type: 'warning'
+                });
                 return false;
             }
             if (String(this.registerData.password).length < 6) {
-                this.$Message.warning('小可爱，密不规范哦');
+                this.$message({
+                    message: '小可爱，密不规范哦',
+                    type: 'warning'
+                });
                 return false;
             }
             this.disabled = true;
+            this.apiRegister();
+        },
+        apiRegister() {
+            apiRegister(this.registerData).then((res) => {
+                console.log(res)
+            })
         }
     }
 }

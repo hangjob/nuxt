@@ -64,6 +64,6 @@ const notify = options => {
 Vue.use({
     install(Vue) {
         Vue.component(Notification.name, Notification)
-        Vue.prototype.$notify = notify
+        Vue.prototype.$$notify = notify
     }
 });

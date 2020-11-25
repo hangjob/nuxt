@@ -55,18 +55,21 @@
 <script>
 import randomNickname from '@/utils/name.js'
 import { isEmail } from '@/utils/utils'
-import { apiLogin } from '@/api/login'
+import { apiLogin, apiUserinfo } from '@/api/login'
 export default {
     data() {
         return {
             loginData: {
-                usermail: '',
-                password: ''
+                usermail: '1234567@qq.com',
+                password: '1234567'
             },
             lock: true,
             disabled: false,
             visible: false
         }
+    },
+    created() {
+        this.apiUserinfo()
     },
     methods: {
         randomNickname() {
@@ -92,9 +95,22 @@ export default {
                 return false;
             }
             apiLogin(this.loginData)
-            .then((res)=>{
-                this.$utils.isErrJson(res)
-            })
+                .then((res) => {
+                    this.$notify({
+                        title: res.data.username,
+                        message: '登录成功',
+                        type: 'success'
+                    });
+                    this.visible = false
+                }).catch((err) => {
+                    this.$utils.isErrJson(err)
+                })
+        },
+        apiUserinfo() {
+            apiUserinfo()
+                .then((res) => {
+                    console.log(res);
+                })
         }
     }
 }
