@@ -54,8 +54,7 @@
 </template>
 <script>
 import randomNickname from '@/utils/name.js'
-import { isEmail } from '@/utils/utils'
-import { apiLogin, apiUserinfo } from '@/api/login'
+import { apiLogin } from '@/api/login'
 export default {
     data() {
         return {
@@ -68,9 +67,6 @@ export default {
             visible: false
         }
     },
-    created() {
-        this.apiUserinfo()
-    },
     methods: {
         randomNickname() {
             this.registerData.username = randomNickname()
@@ -80,7 +76,7 @@ export default {
         },
         // 登录
         login() {
-            if (!isEmail(this.loginData.usermail)) {
+            if (!this.$utils.isEmail(this.loginData.usermail)) {
                 this.$message({
                     message: '小可爱，你输入的邮箱貌似不合法',
                     type: 'warning'
@@ -101,7 +97,8 @@ export default {
                         message: '登录成功',
                         type: 'success'
                     });
-                    this.visible = false
+                    this.visible = false;
+                    this.$store.commit('setUserInfo',res.data)
                 }).catch((err) => {
                     this.$utils.isErrJson(err)
                 })

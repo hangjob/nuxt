@@ -46,7 +46,8 @@ export default {
         { src: '@/plugins/axios.js', mode: 'server' },
         { src: '@/plugins/utils.js', mode: 'client' },
         { src: '@/componentsFication/notify/index.js', mode: 'client' },
-        { src: '@/plugins/vue-mavon-editor', ssr: false }
+        { src: '@/plugins/vue-mavon-editor', ssr: false },
+        { src: '@/plugins/api.js' }
     ],
 
     // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -61,12 +62,18 @@ export default {
     modules: [
         '@nuxtjs/style-resources',
         '@nuxtjs/axios',
-        'cookie-universal-nuxt'
+        'cookie-universal-nuxt',
+        '@nuxtjs/dayjs',
     ],
+    dayjs: {
+        locales: ['en', 'ja'],
+        defaultLocale: 'en'
+    },
     axios: {
         proxy: true, // 表示开启代理
         prefix: '/api', // 表示给请求url加个前缀 /api
-        credentials: true // 表示跨域请求时是否需要使用凭证
+        credentials: true, // 表示跨域请求时是否需要使用凭证
+        // baseUrl: 'http://127.0.0.1:8000/'
     },
 
     proxy: {

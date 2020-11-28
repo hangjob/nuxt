@@ -39,6 +39,12 @@ utils.isErrJson = function(res) {
     }
 }
 
+
+utils.isEmail = (str) => {
+    var pattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+    return pattern.test(str)
+}
+
 // 挂载到全局Vue实例
 Vue.use({
     install(Vue) {

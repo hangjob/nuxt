@@ -1,11 +1,14 @@
-import axios from 'axios'
+import axios from 'axios';
+import { handLastUrl } from '@/config/base'
 
-axios.defaults.baseURL = '/api/itapi'
+const http = axios.create({
+    baseURL: '/api',
+    timeout: 10000,
+    withCredentials: true
+});
 
-axios.defaults.timeout = 20000;
-axios.defaults.withCredentials = true; // 携带cookie
 // 请求拦截
-axios.interceptors.request.use(
+http.interceptors.request.use(
     config => {
         return config
     },
@@ -15,7 +18,7 @@ axios.interceptors.request.use(
 )
 
 // 响应拦截
-axios.interceptors.response.use(
+http.interceptors.response.use(
     response => {
         if (response) {
             if (response.data.code === 1) {
@@ -30,13 +33,10 @@ axios.interceptors.response.use(
     }
 )
 
-const handLastUrl = (url) => {
-    return `${url}.html`
-}
 
 const post = (url, params) => {
     return new Promise((resolve, reject) => {
-        axios.post(handLastUrl(url), params)
+        http.post(handLastUrl(url), params)
             .then(res => {
                 resolve(res)
             })
@@ -47,5 +47,6 @@ const post = (url, params) => {
 }
 
 export {
-    post
+    post,
+    axios
 };

@@ -1,14 +1,14 @@
-import { post } from '@/plugins/request.js'
+import { post } from '@/http/request.js'
 
 const apiLogin = (params) => {
-    return post('login', params)
+    return post('itapi/login', params)
 }
 
-const apiUserinfo = (params) => {
-    return post('login/userinfo', params)
+const apiUserinfo = (optons) => {
+    return post('itapi/login/userinfo', optons)
 }
 const apiRegister = (params) => {
-    return post('login/register', params)
+    return post('itapi/login/register', params)
 }
 
 export {

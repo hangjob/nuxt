@@ -66,7 +66,6 @@
 <script>
 import randomNickname from '@/utils/name.js'
 import { apiRegister } from '@/api/login'
-import { isEmail } from '@/utils/utils'
 export default {
     data() {
         return {
@@ -112,7 +111,7 @@ export default {
                 });
                 return false;
             }
-            if (!isEmail(this.registerData.usermail)) {
+            if (!this.$utils.isEmail(this.registerData.usermail)) {
                 this.$message({
                     message: '小可爱，你输入的邮箱貌似不合法',
                     type: 'warning'

@@ -2,28 +2,16 @@
     <div class="like">
         <div class="wp">
             <div class="like-zan">
-                <i></i>
+                <i>{{detail.like}}</i>
             </div>
             <div class="like-describe">
                 -
-                <span>5</span>位站酷推荐设计师推荐 -
+                <span>{{detail.traffic.zan}}</span>位小可爱推荐 -
             </div>
             <div class="like-user">
-                <a href>
+                <a href v-for="item in detail.zan" :key="item.id">
                     <img
-                        src="https://img.zcool.cn/community/0434d357280b30000001797059c050.jpg@80w_80h_1c_1e_1o_100sh.jpg"
-                        alt
-                    />
-                </a>
-                <a href>
-                    <img
-                        src="https://img.zcool.cn/community/0434d357280b30000001797059c050.jpg@80w_80h_1c_1e_1o_100sh.jpg"
-                        alt
-                    />
-                </a>
-                <a href>
-                    <img
-                        src="https://img.zcool.cn/community/0434d357280b30000001797059c050.jpg@80w_80h_1c_1e_1o_100sh.jpg"
+                        :src="item.member.userhead"
                         alt
                     />
                 </a>
@@ -33,7 +21,12 @@
 </template>
 <script>
 export default {
-
+    props: {
+        detail: {
+            type: Object,
+            default: () => { }
+        }
+    },
 }
 </script>
 <style lang="less" scoped>

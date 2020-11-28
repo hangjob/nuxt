@@ -18,6 +18,7 @@ import MainBanner from '@/web/components/MainBanner'
 import { mapMutations } from 'vuex'
 import Toplove from '@/web/components/Toplove'
 import axios from 'axios';
+
 export default {
     layout: 'theme_one',
     components: {
@@ -31,22 +32,25 @@ export default {
             msg: '',
         }
     },
-    mounted() {
+    computed: {
 
-        // this.$axios.post(`/api/v1/login/userinfo`).then(res => {
-        //     this.msg = '测试异步数据1'
-        // })
     },
-    async asyncData({ $axios, app }) {
-        // const title = await $axios.post(`/api/v1/login/userinfo`)
-        // return {
-        //     title:'ssss'
-        // }
+    mounted() {
+       
+    },
+    async asyncData({ $axios, app, store }) {
+        return $axios.post(app.$api.loginUserinfo).then((res) => {
+            store.commit('setUserInfo', res.data)
+            return {
+                userInfo: res.data,
+            }
+        }).catch((err)=>{
+
+        })
     },
     methods: {
         add() {
             this.$notify({ content: '我是一个消息' });
-            this.$store.commit('increment');
         },
         formatDate(date) {
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }

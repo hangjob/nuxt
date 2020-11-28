@@ -7,7 +7,12 @@
             <div class="menus">
                 <ul>
                     <li v-for="item in items" :key="item.id">
-                        <a href @click.prevent="handClickItem(item)">{{item.title}}</a>
+                        <template v-if="item.id === 7 && userInfo.username">
+                            <a>{{userInfo.username}}</a>
+                        </template>
+                        <template v-else>
+                            <a href @click.prevent="handClickItem(item)">{{item.title}}</a>
+                        </template>
                     </li>
                 </ul>
             </div>
@@ -32,6 +37,11 @@ export default {
                 { title: '开源', id: 12 },
                 { title: '联系我们', id: 5 },
                 { title: '登录', id: 7 }]
+        }
+    },
+    computed: {
+        userInfo(){
+            return this.$store.state.userInfo
         }
     },
     methods: {

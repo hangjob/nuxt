@@ -15,13 +15,17 @@ export default function({ $axios, redirect, context }) {
 
     $axios.interceptors.response.use(
         response => {
-            const res = response.data
-            if (res.code === 1) {
-                return res
+            const res = response;
+            if (res.status === 200) {
+                if (res.data && res.data.code === 1) {
+                    return res.data;
+                } else {
+                    return Promise.reject(res.data)
+                }
             } else {
                 redirect('/404')
             }
-            return Promise.reject(new Error(res.msg || 'Error'))
+            return Promise.reject(res)
         },
         error => {
             console.log('err' + error)
@@ -32,7 +36,6 @@ export default function({ $axios, redirect, context }) {
 
     $axios.onError(error => {
         const code = parseInt(error.response && error.response.status)
-        console.log(code)
         if (code === 400) {
             redirect('/404')
         } else if (code === 500) {

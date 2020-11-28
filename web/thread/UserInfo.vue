@@ -2,9 +2,9 @@
     <div class="userinfo">
         <div class="wp work-details-box-wrap">
             <div class="left-details-head">
-                <h2>什么！？刘一刀！还有大圣出没！！！</h2>
+                <h2>{{detail.it_name}}</h2>
                 <p class="title-time">
-                    <span>1天前</span>发布
+                    <span>{{$dayjs(detail.create_time).format('MM月DD日 YYYY年, dddd hh点mm分ss秒')}}</span> 发布
                 </p>
                 <div class="work-head-box">
                     <div class="head-left">
@@ -14,11 +14,11 @@
                             </span>
                             <i>/</i>
                             <span>
-                                <a>动漫</a>
+                                <a>{{detail.taxonomic.primary.name}}</a>
                             </span>
                             <i>/</i>
                             <span>
-                                <a>其他动漫</a>
+                                <a>{{detail.taxonomic.name}}</a>
                             </span>
                             <i>/</i>
                         </span>
@@ -26,7 +26,15 @@
                     <div class="head-right">
                         <span class="head-data-show">
                             <a href>
-                                <i></i>313
+                                <i class="iconfont icon-chakan"></i>
+                                {{detail.hits}}
+                            </a>
+                            <a href>
+                                <i class="iconfont icon-pinglun1"></i>22
+                            </a>
+                            <a href>
+                                <i class="iconfont icon-dianzan5"></i>
+                                {{detail.like}}
                             </a>
                         </span>
                     </div>
@@ -35,15 +43,15 @@
             <div class="left-details-author">
                 <div class="avatar">
                     <img
-                        src="https://img.zcool.cn/community/0434d357280b30000001797059c050.jpg@80w_80h_1c_1e_1o_100sh.jpg"
+                        :src="detail.member.userhead"
                         alt
                     />
                 </div>
                 <div class="author-info">
                     <p class="author-info-title">
-                        <a href>author-info-title</a>
+                        <a href>{{detail.member.username}}</a>
                     </p>
-                    <p class="position-info">杭州 | 文化娱乐</p>
+                    <p class="position-info">{{detail.member.userhome.city}} | {{detail.member.userhome.occupation}}</p>
                     <div class="btn-area">
                         <button class="js-project-focus-btn">关注</button>
                         <button class="js-project-focus-btn">私信</button>
@@ -55,7 +63,12 @@
 </template>
 <script>
 export default {
-
+    props: {
+        detail: {
+            type: Object,
+            default: () => { }
+        }
+    },
 }
 </script>
 <style lang="less" scoped>
@@ -82,18 +95,40 @@ export default {
             .work-head-box {
                 display: flex;
                 padding-top: 9px;
-                .head-index {
-                    font-size: 14px;
-                    color: #bbb;
-                    display: inline-block;
-                    vertical-align: middle;
-                    zoom: 1;
-                    a {
+                .head-left {
+                    flex: 1;
+                    .head-index {
+                        font-size: 14px;
                         color: #bbb;
+                        display: inline-block;
+                        vertical-align: middle;
+                        zoom: 1;
+                        a {
+                            color: #bbb;
+                        }
+                        i {
+                            color: #ddd;
+                            margin: 0 16px;
+                        }
                     }
-                    i {
-                        color: #ddd;
-                        margin: 0 16px;
+                }
+                .head-right {
+                    .head-data-show {
+                        display: flex;
+                        a {
+                            display: flex;
+                            align-items: center;
+                            zoom: 1;
+                            color: #bbb;
+                            font-size: 14px;
+                            position: relative;
+                            cursor: default;
+                            margin: 0 25px;
+                            i {
+                                margin-right: 8px;
+                                font-size: 18px;
+                            }
+                        }
                     }
                 }
             }
