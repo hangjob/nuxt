@@ -6,7 +6,7 @@
             </div>
             <div class="like-describe">
                 -
-                <span>{{detail.traffic.zan}}</span>位小可爱推荐 -
+                <span>{{detail.zan.length}}</span>位小可爱推荐 -
             </div>
             <div class="like-user">
                 <a href v-for="item in detail.zan" :key="item.id">

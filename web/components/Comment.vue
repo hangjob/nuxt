@@ -6,7 +6,7 @@
                     <el-input
                         type="textarea"
                         placeholder="请输入内容"
-                        v-model="textarea"
+                        v-model="content"
                         maxlength="30"
                         show-word-limit
                         :autosize="{ minRows: 4, maxRows: 6 }"
@@ -14,12 +14,12 @@
                 </div>
                 <div class="expression-box">
                     <span>添加表情</span>
-                    <button class="itnavs-btn itnavs-btn-yellow">评论</button>
+                    <button class="itnavs-btn itnavs-btn-yellow" @click="submitData">评论</button>
                 </div>
             </div>
             <div class="comment-content">
                 <div class="comment-title">全部评论33</div>
-                <div class="comment-list">
+                <div class="comment-list" v-for="item in items" :key="item.id">
                     <div class="comment-info-box">
                         <div class="avatar-img">
                             <a href>
@@ -30,10 +30,10 @@
                             </a>
                         </div>
                         <div class="avatar-container">
-                            <h5>羊先生</h5>
-                            <p>我以为会一刀毙命</p>
+                            <h5>{{item.member.username}}</h5>
+                            <p>{{item.content}}</p>
                             <div class="action">
-                                <div>7小时前</div>
+                                <div>{{item.create_time}}</div>
                                 <div>
                                     <i>评论</i>
                                     <i>赞</i>
@@ -41,7 +41,7 @@
                             </div>
                         </div>
                         <div class="quote-content-wrap">
-                            <div class="list-covers">
+                            <div class="list-covers" v-for="todo in item.revertItems" :key="todo.id">
                                 <div class="covers-quote">
                                     <div class="avatar-img">
                                         <a href>
@@ -52,33 +52,10 @@
                                         </a>
                                     </div>
                                     <div class="avatar-container">
-                                        <h5>羊先生</h5>
-                                        <p>我以为会一刀毙命</p>
+                                        <h5>{{todo.member.username}}</h5>
+                                        <p>{{todo.content}}</p>
                                         <div class="action">
-                                            <div>7小时前</div>
-                                            <div>
-                                                <i>评论</i>
-                                                <i>赞</i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-covers">
-                                <div class="covers-quote">
-                                    <div class="avatar-img">
-                                        <a href>
-                                            <img
-                                                src="https://img.zcool.cn/community/0434d357280b30000001797059c050.jpg@80w_80h_1c_1e_1o_100sh.jpg"
-                                                alt
-                                            />
-                                        </a>
-                                    </div>
-                                    <div class="avatar-container">
-                                        <h5>羊先生</h5>
-                                        <p>我以为会一刀毙命</p>
-                                        <div class="action">
-                                            <div>7小时前</div>
+                                            <div>{{todo.create_time}}</div>
                                             <div>
                                                 <i>评论</i>
                                                 <i>赞</i>
@@ -90,63 +67,47 @@
                         </div>
                     </div>
                 </div>
-                <div class="comment-list">
-                    <div class="comment-info-box">
-                        <div class="avatar-img">
-                            <a href>
-                                <img
-                                    src="https://img.zcool.cn/community/0434d357280b30000001797059c050.jpg@80w_80h_1c_1e_1o_100sh.jpg"
-                                    alt
-                                />
-                            </a>
-                        </div>
-                        <div class="avatar-container">
-                            <h5>羊先生</h5>
-                            <p>我以为会一刀毙命</p>
-                            <div class="action">
-                                <div>7小时前</div>
-                                <div>
-                                    <i>评论</i>
-                                    <i>赞</i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="quote-content-wrap">
-                            <div class="list-covers">
-                                <div class="covers-quote">
-                                    <div class="avatar-img">
-                                        <a href>
-                                            <img
-                                                src="https://img.zcool.cn/community/0434d357280b30000001797059c050.jpg@80w_80h_1c_1e_1o_100sh.jpg"
-                                                alt
-                                            />
-                                        </a>
-                                    </div>
-                                    <div class="avatar-container">
-                                        <h5>羊先生</h5>
-                                        <p>我以为会一刀毙命</p>
-                                        <div class="action">
-                                            <div>7小时前</div>
-                                            <div>
-                                                <i>评论</i>
-                                                <i>赞</i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
 </template>
 <script>
+import { apiDiscussAdd, apiDiscussItems } from '@/api/discuss'
 export default {
+    props: {
+        type: {
+            type: Number,
+            default: 1
+        }
+    },
     data() {
         return {
-            textarea: ''
+            content: '',
+            items: []
+        }
+    },
+    mounted() {
+        this.apiDiscussItems()
+    },
+    methods: {
+        apiDiscussItems() {
+            apiDiscussItems({ fid: this.$route.params.id, type: this.type }).then((res) => {
+                this.items = res.data;
+            })
+        },
+        submitData() {
+            apiDiscussAdd({ fid: this.$route.params.id, type: this.type, content: this.content })
+                .then(res => {
+                    this.$notify({
+                        title: '评论',
+                        message: '评论成功',
+                        type: 'success'
+                    });
+                    this.content = '';
+                }).catch((err) => {
+                    this.$utils.isErrJson(err)
+                })
         }
     }
 }
