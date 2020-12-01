@@ -7,8 +7,12 @@ const apiDiscussItems = (params) => {
 const apiDiscussAdd = (params) => {
     return post('itapi/discuss/add', params)
 }
+const apiDiscussAddRevert = (params) => {
+    return post('itapi/discuss/addRevert', params)
+}
 
 export {
     apiDiscussItems,
-    apiDiscussAdd
+    apiDiscussAdd,
+    apiDiscussAddRevert
 }

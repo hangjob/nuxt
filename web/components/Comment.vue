@@ -7,7 +7,7 @@
                         type="textarea"
                         placeholder="请输入内容"
                         v-model="content"
-                        maxlength="30"
+                        maxlength="2000"
                         show-word-limit
                         :autosize="{ minRows: 4, maxRows: 6 }"
                     ></el-input>
@@ -23,10 +23,7 @@
                     <div class="comment-info-box">
                         <div class="avatar-img">
                             <a href>
-                                <img
-                                    src="https://img.zcool.cn/community/0434d357280b30000001797059c050.jpg@80w_80h_1c_1e_1o_100sh.jpg"
-                                    alt
-                                />
+                                <img :src="item.member.userhead" alt />
                             </a>
                         </div>
                         <div class="avatar-container">
@@ -35,20 +32,33 @@
                             <div class="action">
                                 <div>{{item.create_time}}</div>
                                 <div>
-                                    <i>评论</i>
-                                    <i>赞</i>
+                                    <a href="javascript:;" @click="openReply(item)">
+                                        <i></i>
+                                        评论{{item.revertItems.length}}
+                                    </a>
+                                    <a href="javascript:;">
+                                        <i></i>
+                                        点赞{{item.like}}
+                                    </a>
                                 </div>
                             </div>
+                            <Reply
+                                :visible="item.isShow"
+                                :item="item"
+                                :did="item.id"
+                                :placeholder="` 回复 ${item.member.username}:`"
+                            ></Reply>
                         </div>
                         <div class="quote-content-wrap">
-                            <div class="list-covers" v-for="todo in item.revertItems" :key="todo.id">
+                            <div
+                                class="list-covers"
+                                v-for="todo in item.revertItems"
+                                :key="todo.id"
+                            >
                                 <div class="covers-quote">
                                     <div class="avatar-img">
                                         <a href>
-                                            <img
-                                                src="https://img.zcool.cn/community/0434d357280b30000001797059c050.jpg@80w_80h_1c_1e_1o_100sh.jpg"
-                                                alt
-                                            />
+                                            <img :src="todo.member.userhead" alt />
                                         </a>
                                     </div>
                                     <div class="avatar-container">
@@ -57,29 +67,59 @@
                                         <div class="action">
                                             <div>{{todo.create_time}}</div>
                                             <div>
-                                                <i>评论</i>
-                                                <i>赞</i>
+                                                <a href="javascript:;" @click="openReply(todo)">
+                                                    <i></i>
+                                                    评论{{todo.revertItems && todo.revertItems.length}}
+                                                </a>
+                                                <a href="javascript:;">
+                                                    <i></i>
+                                                    点赞{{todo.like}}
+                                                </a>
                                             </div>
                                         </div>
+                                        <Reply
+                                            :visible="todo.isShow"
+                                            :item="todo"
+                                            :did="item.id"
+                                            :placeholder="` 回复 ${todo.member.username}:`"
+                                        ></Reply>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
             </div>
         </div>
     </div>
 </template>
 <script>
 import { apiDiscussAdd, apiDiscussItems } from '@/api/discuss'
+import Reply from './Reply'
+const disposeItems = (items) => {
+    var handItem = function (item) {
+        item.isShow = false;
+        if (item.revertItems && item.revertItems.length) {
+            item.revertItems.forEach((todo) => {
+                todo.isShow = false;
+                handItem(todo)
+            })
+        }
+    }
+    items.forEach((item) => {
+        handItem(item)
+    })
+    return items;
+}
 export default {
     props: {
         type: {
             type: Number,
             default: 1
         }
+    },
+    components: {
+        Reply
     },
     data() {
         return {
@@ -93,7 +133,8 @@ export default {
     methods: {
         apiDiscussItems() {
             apiDiscussItems({ fid: this.$route.params.id, type: this.type }).then((res) => {
-                this.items = res.data;
+                let data = disposeItems(res.data);
+                this.items = data;
             })
         },
         submitData() {
@@ -108,6 +149,9 @@ export default {
                 }).catch((err) => {
                     this.$utils.isErrJson(err)
                 })
+        },
+        openReply(item) {
+            item.isShow = !item.isShow;
         }
     }
 }
@@ -174,10 +218,13 @@ export default {
                         display: flex;
                         justify-content: space-between;
                     }
+                    p {
+                        margin-top: 10px;
+                    }
                 }
                 .quote-content-wrap {
                     width: 100%;
-                    margin-top: 28px;
+                    margin-top: 20px;
                     background: #f4f4f4;
                     border-radius: 4px;
                     position: relative;
@@ -195,6 +242,10 @@ export default {
                     .list-covers {
                         padding: 20px 30px;
                         box-sizing: border-box;
+                        border-bottom: 1px solid #e5e5ee;
+                        &:last-child {
+                            border-bottom: none;
+                        }
                         .covers-quote {
                             position: relative;
                             padding-left: 68px;
