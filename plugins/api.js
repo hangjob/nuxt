@@ -9,6 +9,9 @@ const api = {
     navtagDetail: (id) => {
         return host + handLastUrl(`itapi/navtag/detail/${id}`)
     },
+    navtagItems: (page) => {
+        return host + handLastUrl(`itapi/navtag/items`) + `?page=${page}`
+    }
 }
 
 

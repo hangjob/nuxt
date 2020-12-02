@@ -4,7 +4,7 @@
         <MainBanner></MainBanner>
         <Toplove></Toplove>
         <div class="wp clearfix">
-            <MainLeft style="float: left;"></MainLeft>
+            <MainLeft :listData="listData" style="float: left;"></MainLeft>
             <MainRight style="float: right;"></MainRight>
         </div>
         <Footer />
@@ -36,17 +36,17 @@ export default {
 
     },
     mounted() {
-       
+        setTimeout(() => {
+            console.log(this.items)
+        }, 3000)
     },
     async asyncData({ $axios, app, store }) {
-        return $axios.post(app.$api.loginUserinfo).then((res) => {
-            store.commit('setUserInfo', res.data)
-            return {
-                userInfo: res.data,
-            }
-        }).catch((err)=>{
-
-        })
+        let [userInfo, listData] = await Promise.all([$axios.post(app.$api.loginUserinfo), $axios.post(app.$api.navtagItems(1))])
+        store.commit('setUserInfo', userInfo.data)
+        return {
+            userInfo: userInfo.data,
+            listData: listData.data
+        }
     },
     methods: {
         add() {

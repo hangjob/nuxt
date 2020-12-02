@@ -8,7 +8,8 @@ export default {
             { hid: 'description', name: 'description', content: '' }
         ],
         link: [
-            { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+            { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+            { rel: 'stylesheet', href: '//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' }
         ],
         script: [
             { src: 'https://cdn.bootcdn.net/ajax/libs/showdown/1.9.1/showdown.min.js' }
@@ -28,7 +29,8 @@ export default {
     styleResources: {
         less: [
             '@/assets/style/theme.less',
-            '@/assets/style/style.less'
+            '@/assets/style/style.less',
+            '@/assets/style/markdown-ui.less'
         ]
     },
     router: {

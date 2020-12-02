@@ -54,7 +54,7 @@
                 </div>
             </div>
             <div class="login-bottom" slot="footer">
-                <button class="itnavs-btn" @click="register" :disabled="disabled">注册</button>
+                <button class="itnavs-button" @click="register" :disabled="disabled">注册</button>
                 <p>
                     你已加入vipbic？马上去
                     <a href="javascript:;" @click="loginOpen">登录</a>

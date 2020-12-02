@@ -3,7 +3,7 @@
         <div class="wp">
             <no-ssr>
                 <mavon-editor
-                    class="detail-md"
+                    class="detail-md itnavs-markdown"
                     :value="detail.content"
                     :subfield="false"
                     :defaultOpen="'preview'"

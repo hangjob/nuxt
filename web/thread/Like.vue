@@ -1,25 +1,30 @@
 <template>
     <div class="like">
         <div class="wp">
-            <div class="like-zan">
-                <i>{{detail.like}}</i>
+            <div class="like-zan" @click="addlike">
+                <i class="iconfont icon-zan"></i>
+                <span v-if="detail.like">{{detail.like}}</span>
             </div>
             <div class="like-describe">
-                -
-                <span>{{detail.zan.length}}</span>位小可爱推荐 -
+                <template v-if="detail.zan.length">
+                    -
+                    <span>{{detail.zan.length}}</span>位小可爱推荐 -
+                </template>
+                <template v-else>
+                    -
+                    <span>你能点点我嘛!</span>-
+                </template>
             </div>
             <div class="like-user">
                 <a href v-for="item in detail.zan" :key="item.id">
-                    <img
-                        :src="item.member.userhead"
-                        alt
-                    />
+                    <img :src="item.member.userhead" alt />
                 </a>
             </div>
         </div>
     </div>
 </template>
 <script>
+import { apiDiscussAddlike } from '@/api/index'
 export default {
     props: {
         detail: {
@@ -27,6 +32,28 @@ export default {
             default: () => { }
         }
     },
+    data() {
+        return {
+            isZan: false
+        }
+    },
+    methods: {
+        addlike() {
+            if (this.isZan) {
+                return false;
+            }
+            apiDiscussAddlike({ id: this.$route.params.id })
+                .then((res) => {
+                    this.$notify({
+                        title: '点赞',
+                        message: '点赞成功',
+                        type: 'success'
+                    });
+                    this.detail.like += 1;
+                    this.isZan = true;
+                })
+        }
+    }
 }
 </script>
 <style lang="less" scoped>
@@ -35,7 +62,7 @@ export default {
     padding: 20px 0;
     border-bottom: 1px solid #eee;
     &-zan {
-        width: 118px;
+        width: 130px;
         height: 72px;
         position: relative;
         display: flex;
@@ -44,8 +71,26 @@ export default {
         background-color: #ffe300;
         margin: 0 auto;
         border-radius: 50px;
+        padding: 5px 0;
         cursor: pointer;
         box-sizing: border-box;
+        justify-content: space-evenly;
+        i {
+            font-size: 28px;
+            line-height: 1;
+            color: #f29555;
+            transition: all 0.3s;
+        }
+        span {
+            font-size: 16px;
+            line-height: 1;
+            color: #282828;
+        }
+        &:hover {
+            i {
+                color: red;
+            }
+        }
     }
     &-describe {
         text-align: center;

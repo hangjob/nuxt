@@ -14,7 +14,7 @@
                 </div>
                 <div class="expression-box">
                     <span>添加表情</span>
-                    <button class="itnavs-btn itnavs-btn-yellow" @click="submitData">评论</button>
+                    <button class="itnavs-button itnavs-button-yellow" @click="submitData">评论</button>
                 </div>
             </div>
             <div class="comment-content">
@@ -28,7 +28,7 @@
                         </div>
                         <div class="avatar-container">
                             <h5>{{item.member.username}}</h5>
-                            <p>{{item.content}}</p>
+                            <p v-html="item.content"></p>
                             <div class="action">
                                 <div>{{item.create_time}}</div>
                                 <div>
@@ -49,7 +49,10 @@
                                 :placeholder="` 回复 ${item.member.username}:`"
                             ></Reply>
                         </div>
-                        <div class="quote-content-wrap">
+                        <div
+                            class="quote-content-wrap before"
+                            v-if="item.revertItems && item.revertItems.length"
+                        >
                             <div
                                 class="list-covers"
                                 v-for="todo in item.revertItems"
@@ -63,7 +66,7 @@
                                     </div>
                                     <div class="avatar-container">
                                         <h5>{{todo.member.username}}</h5>
-                                        <p>{{todo.content}}</p>
+                                        <p v-html="todo.content"></p>
                                         <div class="action">
                                             <div>{{todo.create_time}}</div>
                                             <div>
@@ -138,6 +141,13 @@ export default {
             })
         },
         submitData() {
+            if (!this.content) {
+                this.$message({
+                    message: '小可爱，内容不能为空哦！',
+                    type: 'warning'
+                });
+                return false;
+            }
             apiDiscussAdd({ fid: this.$route.params.id, type: this.type, content: this.content })
                 .then(res => {
                     this.$notify({
@@ -228,16 +238,18 @@ export default {
                     background: #f4f4f4;
                     border-radius: 4px;
                     position: relative;
-                    &::before {
-                        content: '';
-                        display: block;
-                        border-top: none;
-                        border-right: 15px solid transparent;
-                        border-bottom: 15px solid #f4f4f4;
-                        border-left: 15px solid transparent;
-                        position: absolute;
-                        top: -12px;
-                        left: 15px;
+                    &.before {
+                        &::before {
+                            content: '';
+                            display: block;
+                            border-top: none;
+                            border-right: 15px solid transparent;
+                            border-bottom: 15px solid #f4f4f4;
+                            border-left: 15px solid transparent;
+                            position: absolute;
+                            top: -12px;
+                            left: 15px;
+                        }
                     }
                     .list-covers {
                         padding: 20px 30px;

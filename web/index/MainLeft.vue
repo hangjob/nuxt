@@ -1,7 +1,7 @@
 <template>
     <div class="main-left">
         <div class="items">
-            <a href class="item" v-for="(item,index) in items" :key="index">
+            <a href class="item" v-for="(item,index) in listData.data" :key="index">
                 <div
                     class="item-bg"
                     style="background-image: url(https://www.vipbic.com/uploads/20201021/924f51d25d4cffc9bfdbe53e4dfeb532.jpg)"
@@ -25,11 +25,15 @@
 </template>
 <script>
 export default {
+    props: {
+        listData: {
+            type: Object,
+            default: () => {}
+        }
+    },
     data() {
         return {
-            items: [
-                1, 2, 3
-            ]
+
         }
     }
 }
@@ -108,12 +112,12 @@ export default {
                 box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
                 transform: translateY(-4px) scale(1.02);
             }
-            &:last-child{
+            &:last-child {
                 margin-bottom: 30px;
             }
         }
     }
-    .page{
+    .page {
         text-align: right;
     }
 }

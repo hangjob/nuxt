@@ -12,7 +12,7 @@
         </div>
         <div class="expression-box">
             <span>添加表情</span>
-            <button class="itnavs-btn itnavs-btn-yellow" @click="submitData">回复</button>
+            <button class="itnavs-button itnavs-button-yellow" @click="submitData">回复</button>
         </div>
     </div>
 </template>
@@ -29,7 +29,7 @@ export default {
             default: '请输入内容'
         },
         did: {
-            type: String,
+            type: String | Number,
             default: ''
         },
         item: {
@@ -44,13 +44,21 @@ export default {
     },
     methods: {
         submitData() {
-            apiDiscussAddRevert({ did: this.did, content: this.content }).then((res) => {
+            if (!this.content) {
+                this.$message({
+                    message: '小可爱，内容不能为空哦！',
+                    type: 'warning'
+                });
+                return false;
+            }
+            let content = `回复 <a>${this.item.member.username}：</a>${this.content}`
+            apiDiscussAddRevert({ did: this.did, content: content }).then((res) => {
                 this.$notify({
                     title: '评论',
                     message: '评论成功',
                     type: 'success'
                 });
-                this.content = '';
+                // this.content = '';
             }).catch((err) => {
                 this.$utils.isErrJson(err)
             })

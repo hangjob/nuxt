@@ -17,7 +17,7 @@
                 </ul>
             </div>
         </div>
-        <Search :dialogTableVisible.sync="dialogTableVisible" />
+        <Search ref="search" />
         <Login ref="login" @registerOpen="registerOpen" />
         <Registe ref="registe" @loginOpen="loginOpen" />
     </div>
@@ -26,7 +26,6 @@
 export default {
     data() {
         return {
-            dialogTableVisible: false,
             items: [
                 { title: '首页', id: 1 },
                 { title: '主题', id: 2 },
@@ -47,7 +46,7 @@ export default {
     methods: {
         handClickItem(item) {
             if (item.title === '搜索') {
-                this.dialogTableVisible = true;
+                this.$refs.search.openDialogTableVisible();
             }
             if (item.title === '登录') {
                 this.$refs.login.visible = true;

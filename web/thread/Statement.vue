@@ -2,7 +2,7 @@
     <div class="statement">
         <div class="wp">
             <div class="statement-content">
-                <p>声明：站酷（ZCOOL）内网友所发表的所有内容及言论仅代表其本人，并不反映任何站酷（ZCOOL）之意见及观点。</p>
+                <p>声明：温馨提示：部分资源来自网络，使用前请阅读内容免责声明，如有问题联系站长。</p>
                 <div class="three-link">
                     <button class="itnavs-default-secondary">分享</button>
                     <button class="itnavs-default-secondary">收藏</button>

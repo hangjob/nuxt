@@ -59,16 +59,10 @@
 </template>
 <script>
 export default {
-    props: {
-        dialogTableVisible: {
-            type: Boolean,
-            default: false
-        }
-    },
     data() {
         return {
             ks: '',
-            select: 'logo.png',
+            select: 'baidu.png',
             options: [
                 { name: '本站搜索', img: 'logo.png' },
                 { name: '百度', img: 'baidu.png' },
@@ -79,7 +73,8 @@ export default {
                 { name: '好搜', img: 'so.png' },
                 { name: 'Doge', img: 'doge_ico.png' },
                 { name: '淘宝', img: 'taobao.png' }
-            ]
+            ],
+            dialogTableVisible: false
         }
     },
     computed: {
@@ -87,6 +82,11 @@ export default {
             return function (img) {
                 return require('~/assets/images/logo/' + img)
             }
+        },
+    },
+    methods: {
+        openDialogTableVisible() {
+            this.dialogTableVisible = true;
         }
     }
 }
