@@ -17,11 +17,7 @@ export default function({ $axios, redirect, context }) {
         response => {
             const res = response;
             if (res.status === 200) {
-                if (res.data && res.data.code === 1) {
-                    return res.data;
-                } else {
-                    return Promise.reject(res.data)
-                }
+                return res.data;
             } else {
                 redirect('/404')
             }

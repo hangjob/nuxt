@@ -1,18 +1,18 @@
 <template>
     <div class="main-left">
         <div class="items">
-            <a href class="item" v-for="(item,index) in listData.data" :key="index">
+            <a :href="`/thread/${item.id}`" class="item" v-for="(item,index) in listData.data" :key="index">
                 <div
                     class="item-bg"
-                    style="background-image: url(https://www.vipbic.com/uploads/20201021/924f51d25d4cffc9bfdbe53e4dfeb532.jpg)"
+                    :style="{backgroundImage: `url(${item.pic})`}"
                 ></div>
                 <div class="item-mask">
                     <div class="item-mask-container">
-                        <h2>KeyManager - 免费申请证书-支持泛域名</h2>
+                        <h2>{{item.it_name}}・{{item.taxonomic.name}}</h2>
                         <p>
-                            <span>羊先生・</span>
-                            <span>2020年10月24日 08:55・</span>
-                            <span>前端学习</span>
+                            <span>{{item.member.username}}・</span>
+                            <span>{{$dayjs(item.create_time).format('dddd YYYY年MM月DD日 hh:mm:ss')}}・</span>
+                            <span>{{item.taxonomic.primary.name}}</span>
                         </p>
                     </div>
                 </div>
@@ -40,7 +40,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .main-left {
-    width: 800px;
+    width: 850px;
     margin-top: 20px;
     .items {
         position: relative;
@@ -54,7 +54,7 @@ export default {
             transition: all 0.3s ease;
             height: 260px;
             vertical-align: bottom;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             &-bg {
                 display: block;
                 width: 100%;

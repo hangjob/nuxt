@@ -205,6 +205,9 @@ export default {
         .comment-list {
             padding: 30px 0;
             border-bottom: 1px solid #f1f1f1;
+            &:last-child{
+                border-bottom:none;
+            }
             .comment-info-box {
                 padding-left: 68px;
                 position: relative;

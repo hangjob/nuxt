@@ -45,7 +45,7 @@ export default {
 <style lang="less" scoped>
 .main-right {
     margin-top: 20px;
-    width: 460px;
+    width: 410px;
     .right-join {
         background: #fff;
         border-radius: 6px;

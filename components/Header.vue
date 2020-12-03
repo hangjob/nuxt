@@ -1,9 +1,9 @@
 <template>
     <div class="header">
         <div class="header_wap wp">
-            <div class="logo">
+            <a class="logo" href="/">
                 <img src="@/assets/images/logo.png" alt />
-            </div>
+            </a>
             <div class="menus">
                 <ul>
                     <li v-for="item in items" :key="item.id">
@@ -51,6 +51,12 @@ export default {
             if (item.title === '登录') {
                 this.$refs.login.visible = true;
             }
+            if (item.title === '精选') {
+                window.location.href = '/pick'
+            }
+            if (item.title === '主题') {
+                window.open('https://www.vipbic.com/rank.html');
+            }
         },
         registerOpen() {
             this.$refs.login.visible = false;
@@ -79,6 +85,7 @@ export default {
         justify-content: space-between;
     }
     .logo {
+        display: inline-block;
         img {
             height: 60px;
         }
