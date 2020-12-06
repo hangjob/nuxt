@@ -11,7 +11,17 @@ const api = {
     },
     navtagItems: (page) => {
         return host + handLastUrl(`itapi/navtag/items`) + `?page=${page}`
-    }
+    },
+    wxcontentItems: (page) => {
+        return host + handLastUrl(`itapi/wxcontent/items`) + `?page=${page}`
+    },
+    wxcontentDetail: (id) => {
+        return host + handLastUrl(`itapi/wxcontent/detail/${id}`)
+    },
+    taxonomicItems: (id) => {
+        return host + handLastUrl(`itapi/taxonomic/items/${id}`)
+    },
+    wxarticleCorrelation: host + handLastUrl(`itapi/wxarticle/correlation`)
 }
 
 

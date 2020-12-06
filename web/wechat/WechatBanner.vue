@@ -2,13 +2,13 @@
     <div class="wechat-banner">
         <div class="items">
             <a class="item">
-                <img src="https://cdn.uiforus.com/banner/uikit.png" alt />
+                <img src="https://www.ubuuk.com/uploads/articles/thumbnail/201909/b21bb481b0a96801e2cecebd119bb79171f9062d.jpg" alt />
             </a>
             <a class="item">
-                <img src="https://cdn.uiforus.com/banner/sketch-inbetweening.png" alt />
+                <img src="https://www.ubuuk.com/uploads/articles/thumbnail/201909/b21bb481b0a96801e2cecebd119bb79171f9062d.jpg" alt />
             </a>
             <a class="item item-long">
-                <img src="https://cdn.uiforus.com/banner/real.png" alt />
+                <img src="https://www.ubuuk.com/uploads/articles/thumbnail/201909/b21bb481b0a96801e2cecebd119bb79171f9062d.jpg" alt />
             </a>
         </div>
     </div>

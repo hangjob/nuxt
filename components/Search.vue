@@ -62,7 +62,7 @@ export default {
     data() {
         return {
             ks: '',
-            select: 'baidu.png',
+            select: 'logo.png',
             options: [
                 { name: '本站搜索', img: 'logo.png' },
                 { name: '百度', img: 'baidu.png' },
@@ -122,6 +122,9 @@ export default {
 <style lang="less" scoped>
 .search /deep/ .el-input-group__append {
     border-color: #ffd100 !important;
+}
+.search /deep/ .el-input-group__prepend {
+    width: 100px;
 }
 .search {
     &-body {

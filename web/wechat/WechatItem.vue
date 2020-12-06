@@ -1,5 +1,5 @@
 <template>
-    <div class="wechat-item">
+    <a class="wechat-item" :href="`/wechat/${detail.id}`">
         <div class="post-card">
             <div
                 class="blog-background"
@@ -7,20 +7,25 @@
             ></div>
             <div class="post-card-mask">
                 <div class="post-card-container">
-                    <h2 class="post-card-title" itemprop="headline">赚钱靠上班，省钱靠上值值值！</h2>
+                    <h2 class="post-card-title" itemprop="headline">{{detail.ArticleTitle}}</h2>
                     <div class="post-card-info">
-                        <span>不死鸟・</span>
-                        <span>2020 年 09 月 10 日・</span>
-                        <span>每日必看</span>
+                        <span>全栈导航・</span>
+                        <span>{{$dayjs(detail.ArticlePublishDateTime).format('MM月DD日 YYYY年')}}・</span>
+                        <span>{{detail.ArticleType}}</span>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </a>
 </template>
 <script>
 export default {
-
+    props: {
+        detail: {
+            type: Object,
+            default: () => { }
+        }
+    },
 }
 </script>
 <style lang="less" scoped>
@@ -31,6 +36,8 @@ export default {
     background-size: cover;
     position: relative;
     transition: 0.3s ease all;
+    margin-bottom: 40px;
+    display: block;
     .blog-background {
         display: block;
         width: 100%;
@@ -53,7 +60,7 @@ export default {
         vertical-align: middle;
         width: 100%;
         height: 250px;
-        .post-card-container{
+        .post-card-container {
             padding: 2rem 2rem;
             text-align: center;
             display: table-cell;

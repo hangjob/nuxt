@@ -4,7 +4,7 @@
             <no-ssr>
                 <mavon-editor
                     class="detail-md itnavs-markdown"
-                    :value="detail.content"
+                    :value="detail[keyName]"
                     :subfield="false"
                     :defaultOpen="'preview'"
                     :toolbarsFlag="false"
@@ -20,6 +20,10 @@ export default {
         detail: {
             type: Object,
             default: () => { }
+        },
+        keyName: {
+            type: String,
+            default: 'content'
         }
     },
     data() {

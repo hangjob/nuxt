@@ -57,6 +57,9 @@ export default {
             if (item.title === '主题') {
                 window.open('https://www.vipbic.com/rank.html');
             }
+            if (item.title === '公众号') {
+                window.location.href = '/wechat'
+            }
         },
         registerOpen() {
             this.$refs.login.visible = false;

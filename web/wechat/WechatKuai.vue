@@ -7,13 +7,19 @@
             <a href>绘画</a>
         </div>
         <div class="tab-items">
-            <WechatItem />
+            <WechatItem :detail="item" v-for="item in listData" :key="item.id" />
         </div>
     </div>
 </template>
 <script>
 import WechatItem from '@/web/wechat/WechatItem'
 export default {
+    props: {
+        listData: {
+            type: Array,
+            default: () => []
+        }
+    },
     components: {
         WechatItem
     }
@@ -48,7 +54,7 @@ export default {
             background-color: #ffd102;
         }
     }
-    .tab-items{
+    .tab-items {
         margin-top: 20px;
     }
 }

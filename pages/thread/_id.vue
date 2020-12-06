@@ -53,7 +53,7 @@ export default {
         }).catch((err) => {
 
         })
-    }
+    },
 }
 </script>
 <style lang="less" scoped>
