@@ -1,5 +1,5 @@
 <template>
-    <div class="wechat-kuai">
+    <div class="article-kuai">
         <div class="tab-nav">
             <a href class="active">全部</a>
             <a href>设计</a>
@@ -7,12 +7,12 @@
             <a href>绘画</a>
         </div>
         <div class="tab-items">
-            <WechatItem :detail="item" v-for="item in listData" :key="item.id" />
+            <ArticleItem :detail="item" v-for="item in listData" :key="item.id" />
         </div>
     </div>
 </template>
 <script>
-import WechatItem from '@/web/wechat/WechatItem'
+import ArticleItem from '@/web/article/ArticleItem'
 export default {
     props: {
         listData: {
@@ -21,12 +21,12 @@ export default {
         }
     },
     components: {
-        WechatItem
+        ArticleItem
     }
 }
 </script>
 <style lang="less" scoped>
-.wechat-kuai {
+.article-kuai {
     .tab-nav {
         background-color: white;
         margin-top: 24px;

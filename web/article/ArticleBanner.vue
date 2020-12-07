@@ -1,5 +1,5 @@
 <template>
-    <div class="wechat-banner">
+    <div class="article-banner">
         <div class="items">
             <a class="item">
                 <img src="https://www.ubuuk.com/uploads/articles/thumbnail/201909/b21bb481b0a96801e2cecebd119bb79171f9062d.jpg" alt />
@@ -19,7 +19,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.wechat-banner {
+.article-banner {
     .items {
         font-size: 0;
         .item {

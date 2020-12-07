@@ -2,37 +2,35 @@
     <div class="wechat">
         <Header />
         <div class="wp clearfix">
-            <WechatBanner></WechatBanner>
-            <WechatKuai :listData="listData.data"/>
+            <div class="list">
+                <WechatItem class="list-item" />
+                <WechatItem class="list-item" />
+                <WechatItem class="list-item" />
+            </div>
         </div>
         <Footer />
     </div>
 </template>
 <script>
-import WechatBanner from '@/web/wechat/WechatBanner'
-import WechatKuai from '@/web/wechat/WechatKuai'
+import WechatItem from '@/web/wechat/WechatItem'
 export default {
     components: {
-        WechatKuai,
-        WechatBanner
+        WechatItem
     },
     async asyncData({ $axios, app, store }) {
-        return Promise.all([$axios.post(app.$api.loginUserinfo), $axios.post(app.$api.wxcontentItems(1))]).then((res) => {
-            const userInfo = res[0];
-            const listData = res[1];
-            store.commit('setUserInfo', userInfo.data)
-            return {
-                userInfo: userInfo.data,
-                listData: listData.data
-            }
-        }).catch((err) => {
-            console.log(err)
-        })
+
     },
 }
 </script>
 <style lang="less" scoped>
-.wechat{
-    
+.wechat {
+    .list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        &-item {
+            width: 49.5%;
+        }
+    }
 }
 </style>

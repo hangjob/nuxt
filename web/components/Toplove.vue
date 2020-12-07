@@ -19,7 +19,7 @@ export default {
                 { value: '效率工具', icon: 'icon-caozuojiemiantubiao---_gongju', color: '#f9be00', url: '/category/1' },
                 { value: 'Web前端', icon: 'icon-kaifaguanli', color: '#6869dc', url: '/category/8' },
                 { value: '全栈主题', icon: 'icon-tansuoxuanzhong', color: '#ffc107', url: '/category' },
-                { value: '精选文章', icon: 'icon-wenzhangguanli', color: '#cddc39', url: 'https://www.vipbic.com/index.html' },
+                { value: '精选文章', icon: 'icon-wenzhangguanli', color: '#cddc39', url: '/article' },
                 { value: 'UI设计', icon: 'icon-shejishi2', color: '#e91e63', url: '/category/1' },
                 { value: '学习社区', icon: 'icon-xuexizhongxin', color: '#03a9f4', url: '/category/10' },
                 { value: '后端开发', icon: 'icon-_qianduankaifa', color: '#2196f3', url: '/category/9' },
