@@ -2,16 +2,25 @@
     <div class="wp toplove">
         <ul>
             <li v-for="(item,index) in items" :key="index">
-                <a :href="item.url" target="_blank">
+                <a :href="item.url" target="_blank" v-if="!item.isClick">
+                    <i :class="['iconfont',item.icon]" :style="{color:item.color}"></i>
+                    <span>{{item.value}}</span>
+                </a>
+                <a href="javascript:;"  @click="handClick(item)" v-else>
                     <i :class="['iconfont',item.icon]" :style="{color:item.color}"></i>
                     <span>{{item.value}}</span>
                 </a>
             </li>
         </ul>
+        <Attention ref="attention" />
     </div>
 </template>
 <script>
+import Attention from '@/web/components/Attention'
 export default {
+    components: {
+        Attention
+    },
     data() {
         return {
             items: [
@@ -26,8 +35,15 @@ export default {
                 { value: 'Top热榜', icon: 'icon-redu', color: '#f56c6c', url: '/category' },
                 { value: '产品经理', icon: 'icon-chanpinxiangqingsheji', color: '#67c23a', url: '/category/3' },
                 { value: '共享会员', icon: 'icon-changyonglogo45', color: '#66b1ff', url: '/category' },
-                { value: '公众号', icon: 'icon-weixin', color: '#67c23a', url: '/category' },
+                { value: '公众号', icon: 'icon-weixin', color: '#67c23a', url: '', isClick: true },
             ]
+        }
+    },
+    methods: {
+        handClick(item) {
+            if (item.value === '公众号') {
+                this.$refs.attention.visible = true;
+            }
         }
     }
 }

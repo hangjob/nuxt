@@ -21,7 +21,8 @@ const api = {
     taxonomicItems: (id) => {
         return host + handLastUrl(`itapi/taxonomic/items/${id}`)
     },
-    wxarticleCorrelation: host + handLastUrl(`itapi/wxarticle/correlation`)
+    wxarticleCorrelation: host + handLastUrl(`itapi/wxarticle/correlation`),
+    wxcontentGroups: host + handLastUrl(`itapi/wxcontent/groups`)
 }
 
 

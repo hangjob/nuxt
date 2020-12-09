@@ -17,8 +17,12 @@
             </div>
         </div>
         <div class="pick-sub">
-            <a class="item"><img :src="dataImage[0].imgUrl" alt=""></a>
-            <a class="item"><img :src="dataImage[1].imgUrl" alt=""></a>
+            <a class="item">
+                <img :src="dataImage[0].imgUrl" alt />
+            </a>
+            <a class="item">
+                <img :src="dataImage[1].imgUrl" alt />
+            </a>
         </div>
     </div>
 </template>
@@ -71,14 +75,14 @@ export default {
 }
 .pick-sub {
     width: 300px;
-    .item{
+    .item {
         height: 195px;
         width: 100%;
         display: block;
         margin-bottom: 10px;
         border-radius: 6px;
         overflow: hidden;
-        &:last-child{
+        &:last-child {
             margin-bottom: 0;
         }
     }

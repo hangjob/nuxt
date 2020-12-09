@@ -2,51 +2,18 @@
     <div class="wechat-item">
         <div class="title">
             <div class="title-logo"></div>
-            <div class="title-name">微博</div>
+            <div class="title-name">{{detail.type.name}}</div>
             <div class="title-sg">热搜</div>
         </div>
         <div class="content">
             <ul>
-                <li>
-                    <a href>
-                        <span class="content-idx">1</span>
-                        <span class="content-title">美术老师9万颗钉子复原宋代山水画</span>
-                        <span class="content-time"></span>
-                    </a>
-                </li>
-                <li>
-                    <a href>
-                        <span class="content-idx">1</span>
-                        <span class="content-title">美术老师9万颗钉子复原宋代山水画</span>
-                        <span class="content-time">2020-02-21 22:31:31</span>
-                    </a>
-                </li>
-                <li>
-                    <a href>
-                        <span class="content-idx">1</span>
-                        <span class="content-title">美术老师9万颗钉子复原宋代山水画</span>
-                        <span class="content-time"></span>
-                    </a>
-                </li>
-                <li>
-                    <a href>
-                        <span class="content-idx">1</span>
-                        <span class="content-title">美术老师9万颗钉子复原宋代山水画</span>
-                        <span class="content-time">2020-02-21 22:31:31</span>
-                    </a>
-                </li>
-                <li>
-                    <a href>
-                        <span class="content-idx">1</span>
-                        <span class="content-title">美术老师9万颗钉子复原宋代山水画</span>
-                        <span class="content-time"></span>
-                    </a>
-                </li>
-                <li>
-                    <a href>
-                        <span class="content-idx">1</span>
-                        <span class="content-title">美术老师9万颗钉子复原宋代山水画</span>
-                        <span class="content-time">2020-02-21 22:31:31</span>
+                <li v-for="(item,index) in detail.lists" :key="item.id">
+                    <a :href="`wechat/${item.id}`" target="_blank">
+                        <span class="content-idx">{{index+1}}</span>
+                        <span class="content-title">{{item.ArticleTitle}}</span>
+                        <span
+                            class="content-time"
+                        >{{$dayjs(item.ArticlePublishDateTime).format('MM月DD日 YYYY年, dddd hh点mm分ss秒')}}</span>
                     </a>
                 </li>
             </ul>
@@ -55,7 +22,12 @@
 </template>
 <script>
 export default {
-
+    props: {
+        detail: {
+            type: Object,
+            default: () => { }
+        }
+    },
 }
 </script>
 <style lang="less" scoped>
@@ -80,6 +52,9 @@ export default {
     .content {
         ul {
             li {
+                &:first-child {
+                    margin-top: 10px;
+                }
                 a {
                     display: flex;
                     justify-content: left;
@@ -90,6 +65,7 @@ export default {
                     span {
                         line-height: 1;
                     }
+
                     .content-idx {
                         display: inline-block;
                         width: 20px;
@@ -99,8 +75,10 @@ export default {
                         background-color: #b0b0b0;
                         border-radius: 50%;
                         color: #fff;
-                        margin-right: 5px;
+                        margin-right: 10px;
+                        font-size: 14px;
                     }
+
                     .content-title {
                         flex: 1;
                     }
@@ -110,6 +88,27 @@ export default {
                         height: 22px;
                         line-height: 22px;
                         overflow: hidden;
+                        text-align: right;
+                    }
+                }
+                &:hover{
+                   .content-title{
+                       color: #19F;
+                   } 
+                }
+                &:nth-of-type(1) {
+                    .content-idx {
+                        background-color: #fd9800;
+                    }
+                }
+                &:nth-of-type(2) {
+                    .content-idx {
+                        background-color: #ff3366;
+                    }
+                }
+                &:nth-of-type(3) {
+                    .content-idx {
+                        background-color: #469bfa;
                     }
                 }
             }
