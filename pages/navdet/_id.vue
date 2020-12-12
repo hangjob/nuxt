@@ -1,29 +1,26 @@
 <template>
-    <div class="aritcle-detail">
+    <div class="navdet">
         <Header />
         <div class="wp clearfix">
-             <Detail :detail="detailData" keyName="ArticleContentWithTags"></Detail>
+            <paged />
         </div>
         <Footer />
     </div>
 </template>
 <script>
-import Detail from '@/web/thread/Detail'
+import paged from '@/web/navdet/paged'
 export default {
     components: {
-        Detail
+        paged
     },
     async asyncData({ $axios, app, store, params }) {
         return Promise.all([
-            $axios.post(app.$api.loginUserinfo), 
-            $axios.post(app.$api.wxcontentDetail(params.id))
-            ]).then((res) => {
+            $axios.post(app.$api.loginUserinfo),
+        ]).then((res) => {
             const userInfo = res[0];
-            const detailData = res[1];
             store.commit('setUserInfo', userInfo.data)
             return {
                 userInfo: userInfo.data,
-                detailData: detailData.data
             }
         }).catch((err) => {
             console.log(err)
@@ -32,6 +29,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.aritcle-detail {
+.navdet{
+    
 }
 </style>
