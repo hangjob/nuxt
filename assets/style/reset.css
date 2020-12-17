@@ -323,3 +323,10 @@ i {
 .clearfix::after {
     clear: both;
 }
+
+.ellipsis {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

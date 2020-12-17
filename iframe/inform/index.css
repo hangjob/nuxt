@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+}
+
+body {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    line-height: 1.7;
+    position: relative;
+    height: 100vh;
+    background-color: #ffc107;
+}
+
+.container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 150px;
+    border-radius: 40px;
+    background-color: #ffffff;
+    display: flex;
+    transform-origin: left;
+    box-shadow: 0px 5px 15px 2px #ffa000;
+}
+
+.container svg {
+    height: 90px;
+    width: 90px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    fill: #1e88e5;
+}
+
+.container .dots {
+    display: flex;
+    position: absolute;
+    left: 50%;
+    top: 52%;
+    transform: translate(-50%, -50%);
+}
+
+.container .dots .dot {
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 1000px;
+    margin-right: 6px;
+}
+
+.container .dots .dot:last-child {
+    margin-right: 0;
+}
+
+.container .message {
+    width: 120px;
+    height: 36px;
+    background-color: #f44336;
+    overflow: hidden;
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    border-radius: 50px;
+    display: flex;
+    padding: 5px 0;
+    flex-wrap: nowrap;
+    box-shadow: 0px 5px 15px 2px #d32f2f62;
+}
+
+.container .message marquee {
+    color: white;
+}

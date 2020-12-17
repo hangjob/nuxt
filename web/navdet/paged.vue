@@ -52,7 +52,7 @@ export default {
         color: #fff;
         background-size: cover;
         background-position: 50%;
-        border-radius: 3px;
+        border-radius: 6px;
         overflow: hidden;
         height: 120px;
         box-sizing: border-box;

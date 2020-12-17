@@ -36,6 +36,7 @@ export default {
                 { value: '产品经理', icon: 'icon-chanpinxiangqingsheji', color: '#67c23a', url: '/category/3' },
                 { value: '共享会员', icon: 'icon-changyonglogo45', color: '#66b1ff', url: '/category' },
                 { value: '公众号', icon: 'icon-weixin', color: '#67c23a', url: '', isClick: true },
+                { value: '发送邮件', icon: 'icon-weixin', color: '#67c23a', url: '', isClick: true }, // 弹个窗 然后 发送邮件， 填写用户邮箱，我回复
             ]
         }
     },
@@ -62,7 +63,7 @@ export default {
         li {
             a {
                 display: flex;
-                min-width: 80px;
+                min-width: 75px;
                 margin: 15px 10px 20px;
                 flex-direction: column;
                 align-items: center;
