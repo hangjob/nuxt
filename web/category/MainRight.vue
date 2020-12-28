@@ -26,7 +26,7 @@
                 </ul>
             </div>
         </div>
-        <div class="main-right-items">
+        <div class="main-right-items" v-if="detailObject.wx">
             <h4>公众号文章</h4>
             <div class="list">
                 <ul>
@@ -39,7 +39,7 @@
                 </ul>
             </div>
         </div>
-        <div class="main-right-items">
+        <div class="main-right-items" v-if="detailObject.wxsj">
             <h4>相关资讯</h4>
             <div class="list">
                 <ul>

@@ -2,16 +2,10 @@
     <div class="thread-banner">
         <div class="items wp">
             <div class="item">
-                <img
-                    src="https://reviveimg.hellorf.com/www/images/95d7ce87070fbb3f120fcf08be07e73b.jpg"
-                    alt
-                />
+                <img src="@/assets/images/guanggao/2.jpg" alt />
             </div>
             <div class="item">
-                <img
-                    src="https://reviveimg.hellorf.com/www/images/0cdee08af7e1847abe9462a6eb50f92d.png"
-                    alt
-                />
+                <img src="@/assets/images/guanggao/3.jpg" alt />
             </div>
         </div>
     </div>
@@ -31,12 +25,13 @@ export default {
         justify-content: space-between;
         .item {
             width: 49%;
-            height: 120px;
+            height: 180px;
             border-radius: 6px;
             overflow: hidden;
             img {
                 width: 100%;
                 height: 100%;
+                object-fit: cover;
             }
         }
     }

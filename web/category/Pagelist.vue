@@ -6,6 +6,7 @@
                     <div class="item" v-for="todo in item.navtag" :key="todo.id">
                         <div class="item-thumb hidden-xs">
                             <a
+                                :href="'/navdet/'+todo.id"
                                 v-if="!todo.pic"
                                 class="big"
                                 :style="{backgroundColor:todo.author.color}"
@@ -17,7 +18,7 @@
                             </a>
                         </div>
                         <div class="item-content">
-                            <a href class="a_block">
+                            <a class="a_block" :href="'/navdet/'+todo.id">
                                 <h2 class="title">{{todo.it_name}}</h2>
                                 <p>{{todo.describe}}</p>
                             </a>

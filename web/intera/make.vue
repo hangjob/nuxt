@@ -14,19 +14,13 @@
         </div>
         <div class="input_ok clearfix">
             <div class="input_submit">
-                <input
-                    type="submit"
-                    class="itnavs-button botton"
-                    onclick="return checkdata();"
-                    value="发 布"
-                />
+                <button class="itnavs-button">发布</button>
             </div>
             <div class="input_name">
                 <input
                     name="username"
                     type="text"
-                    class="itnavs-button name"
-                    id="username"
+                    class="name"
                     value="你的名字"
                     onpropertychange="textCounter(this, 6)"
                     onfocus="if (value =='你的名字'){value =''}"
@@ -68,52 +62,30 @@ export default {
         height: 45px;
         width: 100%;
         .input_submit {
-            height: 40px;
             float: right;
-            width: 100px;
             padding-right: 10px;
             padding-left: 7px;
-            .button {
-                height: 40px;
-                width: 100px;
-                font-size: 14px;
-                line-height: 40px;
-                background-color: #333;
-                text-align: center;
-                color: #ffffff;
-                border-radius: 20px;
-                border-top-style: none;
-                border-right-style: none;
-                border-bottom-style: none;
-                border-left-style: none;
+            button {
+                height: 34px;
+                color: #333333;
                 cursor: pointer;
-                transition: all 0.3s ease-in-out;
-                transform: rotate(0deg);
-                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
             }
         }
         .input_name {
-            height: 19px;
-            width: 123px;
-            background-size: 18px 18px;
             float: right;
-            padding-right: 17px;
-            padding-left: 35px;
-            background-repeat: no-repeat;
-            background-position: 13px 11px;
-            padding-top: 10px;
-            padding-bottom: 11px;
-            background-color: #eeeeee;
-            border-radius: 20px;
+            padding-right: 10px;
+            padding-left: 7px;
             .name {
-                height: 18px;
-                width: 120px;
+                height: 34px;
+                line-height: 34px;
+                width: 175px;
                 font-size: 14px;
-                line-height: 18px;
                 color: #999999;
                 border: 1px solid #eeeeee;
                 background-color: #eeeeee;
                 outline: none;
+                border-radius: 4px;
+                text-indent: 14px;
             }
         }
     }
