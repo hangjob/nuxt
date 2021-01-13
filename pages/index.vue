@@ -36,9 +36,7 @@ export default {
 
     },
     mounted() {
-        setTimeout(() => {
-            console.log(this.items)
-        }, 3000)
+        
     },
     async asyncData({ $axios, app, store }) {
         return Promise.all([$axios.post(app.$api.loginUserinfo), $axios.post(app.$api.navtagItems(1))]).then((res) => {
