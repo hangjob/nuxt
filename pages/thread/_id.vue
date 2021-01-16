@@ -2,9 +2,9 @@
     <div class="thread">
         <Header />
         <Banner />
-        <UserInfo :detail="detail"/>
+        <UserInfo :detail="detail" />
         <Detail :detail="detail" />
-        <Like :detail="detail"/>
+        <Like :detail="detail" />
         <Statement />
         <SpaceSwiper />
         <Folder />
@@ -21,6 +21,7 @@ import Statement from '@/web/thread/Statement'
 import SpaceSwiper from '@/web/components/SpaceSwiper'
 import Folder from '@/web/thread/Folder'
 import Comment from '@/web/components/Comment'
+import { apiNavtagDetail } from '@/api/thread'
 export default {
     components: {
         Banner,
@@ -32,27 +33,11 @@ export default {
         Folder,
         Comment
     },
-    mounted() {
-        console.log(this.detail)
-    },
-    async fetch({ $axios, store, app }) {
-        return $axios.post(app.$api.loginUserinfo).then((res) => {
-            store.commit('setUserInfo', res.data)
-            return {
-                userInfo: res.data,
-            }
-        }).catch((err) => {
-
-        })
-    },
     async asyncData({ $axios, app, store, params }) {
-        return $axios.post(app.$api.navtagDetail(params.id)).then((res) => {
-            return {
-                detail: res.data
-            }
-        }).catch((err) => {
-
-        })
+        const detail = await apiNavtagDetail({ id: params.id });
+        return {
+            detail: detail.data
+        }
     },
 }
 </script>

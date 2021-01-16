@@ -3,9 +3,14 @@ const handLastUrl = (url) => {
 }
 
 const baseUrl = () => {
-
+    if (process.server) {
+        return 'http://127.0.0.1:8000'
+    } else {
+        return '/api'
+    }
 }
 
 export {
-    handLastUrl
+    handLastUrl,
+    baseUrl
 }

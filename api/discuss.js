@@ -1,4 +1,4 @@
-import { post } from '@/http/request.js'
+import { post } from '@/http/request'
 
 const apiDiscussItems = (params) => {
     return post('itapi/discuss/items', params)

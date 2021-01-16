@@ -17,8 +17,7 @@ import MainRight from '@/web/index/MainRight'
 import MainBanner from '@/web/components/MainBanner'
 import { mapMutations } from 'vuex'
 import Toplove from '@/web/components/Toplove'
-import axios from 'axios';
-
+import { apiNavtagItems } from '@/api/index'
 export default {
     layout: 'theme_one',
     components: {
@@ -36,20 +35,13 @@ export default {
 
     },
     mounted() {
-        
+
     },
-    async asyncData({ $axios, app, store }) {
-        return Promise.all([$axios.post(app.$api.loginUserinfo), $axios.post(app.$api.navtagItems(1))]).then((res) => {
-            const userInfo = res[0];
-            const listData = res[1];
-            store.commit('setUserInfo', userInfo.data)
-            return {
-                userInfo: userInfo.data,
-                listData: listData.data
-            }
-        }).catch((err) => {
-            console.log(err)
-        })
+    async asyncData({ store }) {
+        const listData = await apiNavtagItems({ page: 1 })
+        return {
+            listData: listData.data
+        }
     },
     methods: {
         add() {

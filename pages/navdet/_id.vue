@@ -26,6 +26,7 @@ import recommend from '@/web/navdet/recommend'
 import animationEmotion from '@/animation/emotion/index.vue'
 import animationHouse from '@/animation/house/index.vue'
 import animationPinwheel from '@/animation/pinwheel/index.vue'
+import { apiNavtagDetail } from '@/api/thread'
 export default {
     components: {
         paged,
@@ -37,20 +38,10 @@ export default {
         animationPinwheel
     },
     async asyncData({ $axios, app, store, params }) {
-        return Promise.all([
-            $axios.post(app.$api.loginUserinfo),
-            $axios.post(app.$api.navtagDetail(params.id)),
-        ]).then((res) => {
-            const userInfo = res[0];
-            const detail = res[1];
-            store.commit('setUserInfo', userInfo.data)
-            return {
-                userInfo: userInfo.data,
-                detail: detail.data
-            }
-        }).catch((err) => {
-            console.log(err)
-        })
+        const detail = await apiNavtagDetail({ id: params.id });
+        return {
+            detail: detail.data
+        }
     },
 }
 </script>

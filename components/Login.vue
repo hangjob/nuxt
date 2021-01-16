@@ -54,7 +54,7 @@
 </template>
 <script>
 import randomNickname from '@/utils/name.js'
-import { apiLogin } from '@/api/login'
+import { apiLogin, apiLoginUserinfo } from '@/api/login'
 export default {
     data() {
         return {
@@ -66,6 +66,9 @@ export default {
             disabled: false,
             visible: false
         }
+    },
+    created() {
+        this.apiLoginUserinfo();
     },
     methods: {
         randomNickname() {
@@ -98,15 +101,15 @@ export default {
                         type: 'success'
                     });
                     this.visible = false;
-                    this.$store.commit('setUserInfo',res.data)
+                    this.$store.commit('setUserInfo', res.data)
                 }).catch((err) => {
                     this.$utils.isErrJson(err)
                 })
         },
-        apiUserinfo() {
-            apiUserinfo()
+        apiLoginUserinfo() {
+            apiLoginUserinfo()
                 .then((res) => {
-                    console.log(res);
+                    this.$store.commit('setUserInfo', res.data)
                 })
         }
     }

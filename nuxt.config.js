@@ -42,14 +42,13 @@ export default {
      * mode: 'client'   表示是仅在前端客户端生效
      * mode: 'server'   表示是仅在前端服务端生效
      */
+    cache: true,
+
     plugins: [
         '@/plugins/element-ui',
         { src: '@/plugins/swiper.js', ssr: false },
-        { src: '@/plugins/axios.js', mode: 'server' },
         { src: '@/plugins/utils.js', mode: 'client' },
-        { src: '@/componentsFication/notify/index.js', mode: 'client' },
         { src: '@/plugins/vue-mavon-editor', ssr: false },
-        { src: '@/plugins/api.js' }
     ],
 
     // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -63,19 +62,20 @@ export default {
     // Modules (https://go.nuxtjs.dev/config-modules)
     modules: [
         '@nuxtjs/style-resources',
-        '@nuxtjs/axios',
         'cookie-universal-nuxt',
         '@nuxtjs/dayjs',
+        '@nuxtjs/axios'
     ],
-    dayjs: {
-        locales: ['en', 'ja'],
-        defaultLocale: 'en'
-    },
+
     axios: {
         proxy: true, // 表示开启代理
         prefix: '/api', // 表示给请求url加个前缀 /api
-        credentials: true, // 表示跨域请求时是否需要使用凭证
-        // baseUrl: 'http://127.0.0.1:8000/'
+        credentials: true // 表示跨域请求时是否需要使用凭证
+    },
+
+    dayjs: {
+        locales: ['en', 'ja'],
+        defaultLocale: 'en'
     },
 
     proxy: {
@@ -90,6 +90,6 @@ export default {
 
     // Build Configuration (https://go.nuxtjs.dev/config-build)
     build: {
-        transpile: [/^element-ui/],
+        transpile: [/^element-ui/]
     }
 }

@@ -1,18 +1,23 @@
-import { post } from '@/http/request.js'
+import { post } from '@/http/request'
+const prefix = '/itapi';
 
+// 登录
 const apiLogin = (params) => {
-    return post('itapi/login', params)
+    return post(`${prefix}/login`, params)
 }
 
-const apiUserinfo = (optons) => {
-    return post('itapi/login/userinfo', optons)
+// 用户信息
+const apiLoginUserinfo = (params) => {
+    return post(`${prefix}/login/userinfo`);
 }
 const apiRegister = (params) => {
-    return post('itapi/login/register', params)
+    return post(`${prefix}/login/register`, params)
 }
+
+
 
 export {
     apiLogin,
-    apiUserinfo,
+    apiLoginUserinfo,
     apiRegister
 }
