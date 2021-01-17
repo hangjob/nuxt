@@ -11,7 +11,16 @@
                             <a>{{userInfo.username}}</a>
                         </template>
                         <template v-else>
-                            <a href @click.prevent="handClickItem(item)">{{item.title}}</a>
+                            <a
+                                v-if="item.url==='javascript:;'"
+                                :href="item.url"
+                                @click.prevent="handClickItem(item)"
+                            >{{item.title}}</a>
+                            <a
+                                v-else
+                                :target="item.target"
+                                :href="item.url"
+                            >{{item.title}}</a>
                         </template>
                     </li>
                 </ul>
@@ -27,19 +36,19 @@ export default {
     data() {
         return {
             items: [
-                { title: '首页', id: 1 },
-                { title: '主题', id: 2 },
-                { title: '社区', id: 3 },
-                { title: '搜索', id: 9 },
-                { title: '精选', id: 10 },
-                { title: '公众号', id: 6 },
-                { title: '开源', id: 12 },
-                { title: '联系我们', id: 5 },
-                { title: '登录', id: 7 }]
+                { title: '首页', id: 1, url: '/', target: '_self' },
+                { title: '主题', id: 2, url: 'https://www.vipbic.com/rank.html', target: '_blank' },
+                { title: '社区', id: 3, url: 'javascript:;', target: '_self' },
+                { title: '搜索', id: 9, url: 'javascript:;', target: '_self' },
+                { title: '精选', id: 10, url: '/pick', target: '_self' },
+                { title: '公众号', id: 6, url: '/wechat', target: '_self' },
+                { title: '开源', id: 12, url: 'https://github.com/hangjob', target: '_blank' },
+                { title: '联系我们', id: 5, url: '/join', target: '_self' },
+                { title: '登录', id: 7, url: 'javascript:;', target: '_self' }]
         }
     },
     computed: {
-        userInfo(){
+        userInfo() {
             return this.$store.state.userInfo
         }
     },
@@ -50,15 +59,6 @@ export default {
             }
             if (item.title === '登录') {
                 this.$refs.login.visible = true;
-            }
-            if (item.title === '精选') {
-                window.location.href = '/pick'
-            }
-            if (item.title === '主题') {
-                window.open('https://www.vipbic.com/rank.html');
-            }
-            if (item.title === '公众号') {
-                window.location.href = '/wechat'
             }
         },
         registerOpen() {

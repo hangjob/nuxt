@@ -1,11 +1,13 @@
 <template>
     <div class="main-left">
         <div class="items">
-            <a :href="`/thread/${item.id}`" class="item" v-for="(item,index) in listData.data" :key="index">
-                <div
-                    class="item-bg"
-                    :style="{backgroundImage: `url(${item.pic})`}"
-                ></div>
+            <a
+                :href="`/thread/${item.id}`"
+                class="item"
+                v-for="(item,index) in listData.data"
+                :key="index"
+            >
+                <div class="item-bg" :style="{backgroundImage: `url(${item.pic})`}"></div>
                 <div class="item-mask">
                     <div class="item-mask-container">
                         <h2>{{item.it_name}}・{{item.taxonomic.name}}</h2>
@@ -19,7 +21,13 @@
             </a>
         </div>
         <div class="page">
-            <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+            <el-pagination
+                @current-change="currentChange"
+                background
+                layout="prev, pager, next"
+                :total="total"
+                :page-size="12"
+            ></el-pagination>
         </div>
     </div>
 </template>
@@ -28,12 +36,21 @@ export default {
     props: {
         listData: {
             type: Object,
-            default: () => {}
+            default: () => { }
+        },
+        total: {
+            type: Number,
+            default: 0
         }
     },
     data() {
         return {
 
+        }
+    },
+    methods: {
+        currentChange(page) {
+            this.$emit('apiNavtagItems', {page})
         }
     }
 }

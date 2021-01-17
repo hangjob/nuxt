@@ -10,7 +10,14 @@ const apiNavtagItems = (params) => {
     return post(`${prefix}/navtag/items`, params)
 }
 
+
+// 数量
+const apiConfigurationNavcount = (params) => {
+    return post(`${prefix}/configuration/navcount`, params)
+}
+
 export {
     apiDiscussAddlike,
-    apiNavtagItems
+    apiNavtagItems,
+    apiConfigurationNavcount
 }

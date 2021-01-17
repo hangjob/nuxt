@@ -4,7 +4,7 @@
         <MainBanner></MainBanner>
         <Toplove></Toplove>
         <div class="wp clearfix">
-            <MainLeft :listData="listData" style="float: left;"></MainLeft>
+            <MainLeft :listData="listData" style="float: left;" :total="total" @apiNavtagItems="apiNavtagItems"></MainLeft>
             <MainRight style="float: right;"></MainRight>
         </div>
         <Footer />
@@ -29,18 +29,22 @@ export default {
     data() {
         return {
             msg: '',
+            page: 1
         }
     },
     computed: {
 
     },
     mounted() {
-
+        setTimeout(() => {
+            console.log(this.listData)
+        }, 3000)
     },
     async asyncData({ store }) {
-        const listData = await apiNavtagItems({ page: 1 })
+        const listData = await apiNavtagItems({ page: 1 });
         return {
-            listData: listData.data
+            listData: listData.data,
+            total: listData.data.total
         }
     },
     methods: {
@@ -50,6 +54,11 @@ export default {
         formatDate(date) {
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
             return new Date(date).toLocaleDateString('en-US', options)
+        },
+        async apiNavtagItems({ page }) {
+            const listData = await apiNavtagItems({ page: page })
+            this.listData = listData.data;
+            this.total =  listData.data.total;
         }
     }
 }

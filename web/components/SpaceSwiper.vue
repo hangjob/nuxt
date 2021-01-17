@@ -57,11 +57,11 @@ export default {
         }
     },
     methods: {
-        prev() {
-
-        },
         next() {
-
+            this.$refs.bannerSwiper.swiper.slideNext()
+        },
+        prev() {
+            this.$refs.bannerSwiper.swiper.slidePrev()
         }
     }
 }

@@ -1,5 +1,5 @@
 const handLastUrl = (url) => {
-    return `${url}.html`
+    return `${url}`
 }
 
 const baseUrl = () => {

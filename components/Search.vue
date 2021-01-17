@@ -11,12 +11,14 @@
         >
             <div class="search-body">
                 <h2>搜索</h2>
-                <el-input
+                <el-autocomplete
                     placeholder="输入你需要的站点类型或名称（点击热门关键字可以进行快捷搜索）"
                     v-model="ks"
                     class="input-with-select"
+                    :fetch-suggestions="querySearch"
+                    @select="handleSelect"
                 >
-                    <el-select v-model="select" slot="prepend" placeholder="请选择">
+                    <el-select v-model="select" slot="prepend" placeholder="请选择" @change="change">
                         <el-option
                             :label="item.name"
                             :value="item.img"
@@ -28,16 +30,11 @@
                         </el-option>
                     </el-select>
                     <el-button class="custom-search-btn" slot="append" icon="el-icon-search">搜索</el-button>
-                </el-input>
+                </el-autocomplete>
                 <div class="keywords">
-                    <a>优设标题黑</a>
-                    <a>优设标题黑</a>
-                    <a>优设标题黑</a>
-                    <a>优设标题黑</a>
-                    <a>优设标题黑</a>
-                    <a>优设标题黑</a>
-                    <a>优设标题黑</a>
-                    <a>优设标题黑</a>
+                    <template v-for="(item,index) in keywords">
+                        <a :key="index" :style="{backgroundColor:colour[index].color}">#{{item}}</a>
+                    </template>
                 </div>
                 <div class="manuscript">
                     <div class="manuscript-feft">
@@ -58,23 +55,32 @@
     </div>
 </template>
 <script>
+import { baidu, sougou, haosou } from '@/api/search'
+import colour from '@/color/colour'
+let findKey = (key, str) => {
+    return function objFn(obj, objIndex, objs) {
+        return obj[key] === str;
+    }
+}
 export default {
     data() {
         return {
             ks: '',
-            select: 'logo.png',
+            select: 'baidu.png',
             options: [
                 { name: '本站搜索', img: 'logo.png' },
-                { name: '百度', img: 'baidu.png' },
+                { name: '百度', img: 'baidu.png', url: 'https://www.baidu.com/s?wd=' },
+                { name: '搜狗', img: 'sogou.png', url: 'https://www.sogou.com/web?query=' },
+                { name: '好搜', img: 'so.png', url: 'https://www.so.com/s?q=' },
                 { name: '谷歌', img: 'google.png' },
                 { name: '必应', img: 'bing.png' },
                 { name: 'GitHub', img: 'github.png' },
-                { name: '搜狗', img: 'sogou.png' },
-                { name: '好搜', img: 'so.png' },
                 { name: 'Doge', img: 'doge_ico.png' },
                 { name: '淘宝', img: 'taobao.png' }
             ],
-            dialogTableVisible: false
+            dialogTableVisible: false,
+            colour: colour,
+            keywords: ['搜索', '图库', '视频', '效率', '前端', '开发', '工具', '资源', '素材', '阅读']
         }
     },
     computed: {
@@ -84,10 +90,57 @@ export default {
             }
         },
     },
+    created() {
+        this.change();
+    },
     methods: {
         openDialogTableVisible() {
             this.dialogTableVisible = true;
-        }
+        },
+        change() {
+            let index = this.options.findIndex(findKey('img', this.select));
+            this.selectItem = this.options[index];
+        },
+        querySearch(queryString, cb) {
+            let arr = [];
+            if (this.ks) {
+                if (this.select === 'baidu.png') {
+                    baidu({ wd: this.ks }).then((res) => {
+                        let { s } = res;
+                        if (s && s.length) {
+                            s.map((item, idx) => {
+                                arr.push({ value: item })
+                            })
+                        }
+                        cb(arr)
+                    })
+                }
+                if (this.select === 'sogou.png') {
+                    sougou({ key: this.ks }).then((res) => {
+                        res[1].map((item) => {
+                            arr.push({ value: item })
+                        })
+                        cb(arr)
+                    })
+                }
+                if (this.select === 'so.png') {
+                    haosou({ word: this.ks }).then((res) => {
+                        res.result.map((item) => {
+                            arr.push({ value: item.word })
+                        })
+                        cb(arr)
+                    })
+                }
+            } else {
+                cb(arr)
+            }
+        },
+        handleSelect(item) {
+            if (this.selectItem.url) {
+                let url = this.selectItem.url + this.ks;
+                window.open(url)
+            }
+        },
     }
 }
 </script>
@@ -123,6 +176,9 @@ export default {
 .search /deep/ .el-input-group__append {
     border-color: #ffd100 !important;
 }
+.search /deep/ .el-autocomplete {
+    display: block;
+}
 .search /deep/ .el-input-group__prepend {
     width: 100px;
 }
@@ -143,13 +199,14 @@ export default {
                 margin: 0 10px;
                 color: #888;
                 background-color: #fafafa;
-                padding: 10px 15px;
-                margin-right: 15px;
+                padding: 8px 20px;
+                margin-right: 20px;
                 margin-bottom: 15px;
                 font-size: 14px;
                 line-height: 14px;
-                color: #202020;
+                color: #ffffff;
                 cursor: pointer;
+                border-radius: 15px;
             }
         }
         .manuscript {

@@ -27,31 +27,33 @@
                         <span class="head-data-show">
                             <a href>
                                 <i class="iconfont icon-chakan"></i>
-                                {{detail.hits}}
+                                {{detail.hits}}次浏览
                             </a>
                             <a href>
-                                <i class="iconfont icon-pinglun1"></i>22
+                                <i class="iconfont icon-pinglun1"></i>22个评论
                             </a>
                             <a href>
                                 <i class="iconfont icon-dianzan5"></i>
-                                {{detail.like}}
+                                {{detail.like}}个点赞
                             </a>
                         </span>
                     </div>
                 </div>
+                <div class="link">
+                    <a href>立即访问<i class="el-icon-right"></i></a>
+                </div>
             </div>
             <div class="left-details-author">
                 <div class="avatar">
-                    <img
-                        :src="detail.member.userhead"
-                        alt
-                    />
+                    <img :src="detail.member.userhead" alt />
                 </div>
                 <div class="author-info">
                     <p class="author-info-title">
                         <a href>{{detail.member.username}}</a>
                     </p>
-                    <p class="position-info">{{detail.member.userhome.city}} | {{detail.member.userhome.occupation}}</p>
+                    <p
+                        class="position-info"
+                    >{{detail.member.userhome.city}} | {{detail.member.userhome.occupation}}</p>
                     <div class="btn-area">
                         <button class="js-project-focus-btn">关注</button>
                         <button class="js-project-focus-btn">私信</button>
@@ -81,10 +83,11 @@ export default {
             flex: 1;
             border-right: 1px solid #eee;
             padding: 20px 0;
+            position: relative;
             > h2 {
                 color: #333;
                 font-size: 24px;
-                font-weight: 400;
+                font-weight: bold;
                 display: inline-block;
             }
             .title-time {
@@ -108,7 +111,7 @@ export default {
                         }
                         i {
                             color: #ddd;
-                            margin: 0 16px;
+                            margin: 0 10px;
                         }
                     }
                 }
@@ -123,13 +126,28 @@ export default {
                             font-size: 14px;
                             position: relative;
                             cursor: default;
-                            margin: 0 25px;
+                            margin: 0 15px;
                             i {
-                                margin-right: 8px;
+                                margin-right: 6px;
                                 font-size: 18px;
                             }
                         }
                     }
+                }
+            }
+            .link {
+                position: absolute;
+                right: 10px;
+                top: 10px;
+                a {
+                    color: #fff;
+                    display: inline-block;
+                    padding: 8px 20px;
+                    font-size: 14px;
+                    border-radius: 4px;
+                    background-color: #ffd100;
+                    border-color: #ffd100;
+                    color: #fff;
                 }
             }
         }

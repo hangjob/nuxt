@@ -12,32 +12,38 @@
                 </p>
             </div>
             <div class="join-action">
-                <a href>订阅公众号</a>
-                <a class>发表收录</a>
+                <a href="https://www.vipbic.com/weixin.html" target="_blank">订阅公众号</a>
+                <a target="_blank" href="/write" class>发表收录</a>
             </div>
         </div>
         <div class="right-activity">
-            <img
-                src="https://reviveimg.hellorf.com/www/images/44f41f9110381f25067a1c830ff3e5cc.jpg"
-                alt
-            />
-            <img
-                src="https://www.vipbic.com/uploads/20191219/61ffd5059414a6c62635407909912304.jpg"
-                alt
-            />
+            <a :href="item.url" target="_blank" v-for="item in items" :key="item.id">
+                <img :src="item.img" :alt="item.kl" />
+            </a>
         </div>
         <Tags></Tags>
     </div>
 </template>
 <script>
 import Tags from './components/Tags'
+import { apiTaobaoItems } from '@/api/taobao'
 export default {
     components: {
         Tags
     },
     data() {
         return {
-
+            items: []
+        }
+    },
+    created() {
+        this.apiTaobaoItems();
+    },
+    methods: {
+        apiTaobaoItems() {
+            apiTaobaoItems().then((res) => {
+                this.items = res.data;
+            })
         }
     }
 }
@@ -67,6 +73,7 @@ export default {
                 width: 45px;
                 border-radius: 5px;
                 margin-right: 10px;
+                cursor: pointer;
             }
             h1 {
                 font-size: 16px;
@@ -97,16 +104,24 @@ export default {
                 border: 1px solid rgba(0, 0, 0, 0.05);
                 border-radius: 5px;
                 color: #777;
+                transition: all 0.3s;
+                &:hover {
+                    color: #fff;
+                    background-color: #f56c6c;
+                }
             }
         }
     }
     .right-activity {
-        img {
-            width: 100%;
-            height: 115px;
-            object-fit: cover;
-            border-radius: 6px;
+        a {
+            display: block;
             margin-bottom: 10px;
+            img {
+                width: 100%;
+                height: 130px;
+                object-fit: cover;
+                border-radius: 6px;
+            }
             &:last-child {
                 margin-bottom: 0;
             }

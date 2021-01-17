@@ -6,7 +6,9 @@
         </div>
         <div class="banner-ib">
             <i class="iconfont icon-qushi"></i>
-            <h3>221580</h3>
+            <h3>
+                <countTo :startVal="0" :endVal="obj.all" :duration="3000"></countTo>
+            </h3>
             <p style="margin-bottom: 20px;">资源总数</p>
             <p>互联网职员，找导航，就上全栈导航</p>
             <div class="banner-more">
@@ -17,10 +19,15 @@
         <div class="banner-ic">
             <div class="update-number">
                 <div class="number-top">
-                    <div class="total">30</div>
+                    <div class="total">
+                        <countTo :startVal="0" :endVal="obj.lastmonth" :duration="2500"></countTo>
+                    </div>
                     <div class="change">
                         <p>
-                            <span>+10</span>
+                            <span>
+                                +
+                                <countTo :startVal="0" :endVal="obj.lastweek" :duration="1800"></countTo>
+                            </span>
                         </p>
                         <p class="new-work">上一周新增</p>
                     </div>
@@ -32,10 +39,15 @@
             </div>
             <div class="update-number">
                 <div class="number-top">
-                    <div class="total">313</div>
+                    <div class="total">
+                        <countTo :startVal="0" :endVal="obj.userall" :duration="2500"></countTo>
+                    </div>
                     <div class="change">
                         <p>
-                            <span>+32</span>
+                            <span>
+                                +
+                                <countTo :startVal="0" :endVal="obj.userlastmonth" :duration="1800"></countTo>
+                            </span>
                         </p>
                         <p class="new-work">注册用户</p>
                     </div>
@@ -49,8 +61,28 @@
     </div>
 </template>
 <script>
+import countTo from 'vue-count-to'
+import { apiConfigurationNavcount } from '@/api/index'
 export default {
-
+    components: {
+        countTo
+    },
+    data() {
+        return {
+            obj: {
+                all: 0,
+                lastmonth: 0,
+                userall: 0,
+                userlastmonth: 0,
+                lastweek: 0
+            }
+        }
+    },
+    mounted() {
+        apiConfigurationNavcount().then((res) => {
+            this.obj = res.data;
+        })
+    }
 }
 </script>
 <style lang="less" scoped>
@@ -59,7 +91,8 @@ export default {
     .banner-ia {
         width: 590px;
         height: 300px;
-        background: #fff url(~@/assets/images/adEBooks.png) no-repeat center bottom;
+        background: #fff url(~@/assets/images/adEBooks.png) no-repeat center
+            bottom;
         text-align: center;
         border-radius: 6px;
         margin-right: 20px;

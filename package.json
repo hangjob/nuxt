@@ -15,12 +15,15 @@
     "cookie-universal-nuxt": "^2.1.4",
     "core-js": "^3.6.5",
     "element-ui": "^2.13.2",
+    "jsonp": "^0.2.1",
     "less": "^3.12.2",
     "less-loader": "^7.0.1",
     "mavon-editor": "^2.9.0",
     "nuxt": "^2.14.6",
+    "querystring": "^0.2.0",
     "swiper": "^5.4.5",
     "vue-awesome-swiper": "^4.1.1",
+    "vue-count-to": "^1.0.13",
     "vuex": "^3.6.0"
   },
   "devDependencies": {

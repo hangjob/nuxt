@@ -4,7 +4,11 @@
             <img src="@/assets/images/fire.png" />热门标签
         </h4>
         <div class="tags-items clearfix">
-            <a v-for="(item,index) in items" :key="index" :style="{backgroundColor:colors[index+50].color}">视频</a>
+            <a
+                v-for="(item,index) in items"
+                :key="index"
+                :style="{backgroundColor:colors[index+10].color}"
+            >{{item}}</a>
         </div>
     </div>
 </template>
@@ -14,7 +18,8 @@ export default {
     data() {
         return {
             colors: color,
-            items:50
+            items: ['前端', '文档', 'Vue', 'React', '在线工具', 'PPT', '图床', 'Node.js', 'Java', 'JavaScript', 'PHP', 'Redis', 'Nginx', 'ThinkPHP',
+                '面试', '后台管理', '桌面工具', '设计工具', '截图', 'Linux', 'Windows', '字体下载', '免费素材', 'App', '混合开发', 'Icon', '产品经理', '在线Logo', '实用工具', '如何建站', 'UI框架']
         }
     }
 }
@@ -38,9 +43,9 @@ export default {
         a {
             color: #fff;
             float: left;
-            margin: 0 7px 7px 0;
+            margin: 0 10px 10px 0;
             font-size: 13px;
-            padding: 2px 5px;
+            padding: 3px 8px;
             border-radius: 3px;
             opacity: 0.75;
             background-color: rgb(255, 100, 100);
