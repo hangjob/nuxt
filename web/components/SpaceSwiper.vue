@@ -7,14 +7,14 @@
                         <div v-for="(item, index) in dataImage" :key="index" class="swiper-slide">
                             <div class="item">
                                 <div class="item-card-img">
-                                    <a href>
-                                        <img :src="item.imgUrl" />
+                                    <a href="/figure" target="_blank">
+                                        <img :src="item.img" />
                                     </a>
                                 </div>
-                                <div class="item-card-title">
-                                    <a href>天气冷了，老妈喊你穿秋裤了吗？</a>
+                                <!-- <div class="item-card-title">
+                                    <a href="/figure">{{item.title}}</a>
                                     <span></span>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -30,17 +30,11 @@
     </div>
 </template>
 <script>
+import { apiFigureBans } from '@/api/figure'
 export default {
     data() {
         return {
             dataImage: [
-                { imgUrl: 'https://images.wallpaperscraft.com/image/girl_shell_hare_167320_1600x1200.jpg' },
-                { imgUrl: 'https://images.wallpaperscraft.com/image/girl_kimono_anime_182197_1600x1200.jpg' },
-                { imgUrl: 'https://images.wallpaperscraft.com/image/girl_anime_toy_183017_1600x1200.jpg' },
-                { imgUrl: 'https://w.wallhaven.cc/full/ym/wallhaven-ymzz6l.jpg' },
-                { imgUrl: 'https://w.wallhaven.cc/full/9m/wallhaven-9mxom8.jpg' },
-                { imgUrl: 'https://w.wallhaven.cc/full/m9/wallhaven-m9q3q8.jpg' },
-                { imgUrl: 'https://w.wallhaven.cc/full/8o/wallhaven-8o77d1.jpg' }
             ],
             swiperOption: {
                 slidesPerView: 5,
@@ -56,24 +50,32 @@ export default {
             }
         }
     },
+    created() {
+        this.apiFigureBans();
+    },
     methods: {
         next() {
             this.$refs.bannerSwiper.swiper.slideNext()
         },
         prev() {
             this.$refs.bannerSwiper.swiper.slidePrev()
+        },
+        apiFigureBans() {
+            apiFigureBans().then((res) => {
+                this.dataImage = res.data;
+            })
         }
     }
 }
 </script>
 <style lang="less" scoped>
 .space-swiper {
-    height: 240px;
+    height: 200px;
     margin-top: 20px;
     &-banner {
         position: relative;
         .item {
-            height: 240px;
+            height: 200px;
             .item-card-img {
                 height: 200px;
                 font-size: 0;
@@ -84,8 +86,9 @@ export default {
                         object-fit: cover;
                         width: 100%;
                         height: 100%;
-                        border-top-right-radius: 6px;
-                        border-top-left-radius: 6px;
+                        // border-top-right-radius: 6px;
+                        // border-top-left-radius: 6px;
+                        border-radius: 6px;
                     }
                 }
             }

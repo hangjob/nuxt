@@ -2,13 +2,10 @@
     <div class="figure-detail">
         <Header />
         <div class="wp clearfix">
-            <div class="items">
+            <div class="items images" v-viewer="{movable: false}">
                 <div class="item" v-for="(item,index) in items" :key="index">
-                    <a href>
-                        <img
-                            src="https://reviveimg.hellorf.com/www/images/b9cc14e76a93dccaedfa0aa16a672971.jpg"
-                            alt
-                        />
+                    <a @click="show" href="javascript:;">
+                        <img :src="item.img" :key="item.img" />
                     </a>
                 </div>
             </div>
@@ -17,10 +14,23 @@
     </div>
 </template>
 <script>
+import { apiFigureItems } from '@/api/figure'
 export default {
     data() {
         return {
-            items: 6
+        }
+    },
+    async asyncData() {
+        const data = await apiFigureItems();
+        console.log(data)
+        return {
+            items: data.data.data
+        }
+    },
+    methods: {
+        show() {
+            const viewer = this.$el.querySelector('.images').$viewer
+            viewer.show()
         }
     }
 }
@@ -34,11 +44,14 @@ export default {
             width: 20%;
             padding: 10px 5px;
             box-sizing: border-box;
-            a{
+            a {
                 display: block;
-                img{
+                height: 100%;
+                img {
                     width: 100%;
                     height: 100%;
+                    object-fit: cover;
+                    border-radius: 5px;
                 }
             }
         }

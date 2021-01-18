@@ -7,7 +7,7 @@
         <Like :detail="detail" />
         <Statement />
         <SpaceSwiper />
-        <Folder />
+        <Folder :taxonomic="detail.taxonomic" />
         <Comment />
         <Footer />
     </div>

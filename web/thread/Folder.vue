@@ -3,83 +3,23 @@
         <div class="wp">
             <div class="folder-wrap">
                 <div class="title">
-                    <span>收录收藏夹</span>
+                    <span>知道你喜欢</span>
                 </div>
                 <div class="folder-album">
-                    <div class="album-card">
+                    <div class="album-card" v-for="item in items" :key="item.id">
                         <div class="album-aspect">
-                            <a href>
-                                <img src="https://w.wallhaven.cc/full/pk/wallhaven-pk3pv3.jpg" alt />
-                            </a>
-                            <a href>
-                                <img src="https://w.wallhaven.cc/full/pk/wallhaven-pk3pv3.jpg" alt />
-                            </a>
-                            <a href>
-                                <img src="https://w.wallhaven.cc/full/pk/wallhaven-pk3pv3.jpg" alt />
-                            </a>
-                            <a href>
-                                <img src="https://w.wallhaven.cc/full/pk/wallhaven-pk3pv3.jpg" alt />
+                            <a
+                                href
+                                :style="{backgroundColor:todo.author.color}"
+                                v-for="todo in item.navtag"
+                                :key="todo.id"
+                            >
+                                <img class="pic" v-if="todo.pic" :src="todo.pic" alt />
+                                <img class="icon" v-else :src="todo.icon" />
                             </a>
                         </div>
                         <div class="album-aspect-title">
-                            <span>动画</span>
-                        </div>
-                    </div>
-                    <div class="album-card">
-                        <div class="album-aspect">
-                            <a href>
-                                <img src="https://w.wallhaven.cc/full/pk/wallhaven-pk3pv3.jpg" alt />
-                            </a>
-                            <a href>
-                                <img src="https://w.wallhaven.cc/full/pk/wallhaven-pk3pv3.jpg" alt />
-                            </a>
-                            <a href>
-                                <img src="https://w.wallhaven.cc/full/pk/wallhaven-pk3pv3.jpg" alt />
-                            </a>
-                            <a href>
-                                <img src="https://w.wallhaven.cc/full/pk/wallhaven-pk3pv3.jpg" alt />
-                            </a>
-                        </div>
-                        <div class="album-aspect-title">
-                            <span>动画</span>
-                        </div>
-                    </div>
-                    <div class="album-card">
-                        <div class="album-aspect">
-                            <a href>
-                                <img src="https://w.wallhaven.cc/full/pk/wallhaven-pk3pv3.jpg" alt />
-                            </a>
-                            <a href>
-                                <img src="https://w.wallhaven.cc/full/pk/wallhaven-pk3pv3.jpg" alt />
-                            </a>
-                            <a href>
-                                <img src="https://w.wallhaven.cc/full/pk/wallhaven-pk3pv3.jpg" alt />
-                            </a>
-                            <a href>
-                                <img src="https://w.wallhaven.cc/full/pk/wallhaven-pk3pv3.jpg" alt />
-                            </a>
-                        </div>
-                        <div class="album-aspect-title">
-                            <span>动画</span>
-                        </div>
-                    </div>
-                    <div class="album-card">
-                        <div class="album-aspect">
-                            <a href>
-                                <img src="https://w.wallhaven.cc/full/pk/wallhaven-pk3pv3.jpg" alt />
-                            </a>
-                            <a href>
-                                <img src="https://w.wallhaven.cc/full/pk/wallhaven-pk3pv3.jpg" alt />
-                            </a>
-                            <a href>
-                                <img src="https://w.wallhaven.cc/full/pk/wallhaven-pk3pv3.jpg" alt />
-                            </a>
-                            <a href>
-                                <img src="https://w.wallhaven.cc/full/pk/wallhaven-pk3pv3.jpg" alt />
-                            </a>
-                        </div>
-                        <div class="album-aspect-title">
-                            <span>动画</span>
+                            <span>{{item.name}}</span>
                         </div>
                     </div>
                 </div>
@@ -88,8 +28,29 @@
     </div>
 </template>
 <script>
+import { apiTaxonomicYoulike } from '@/api/taxonomic'
 export default {
-
+    props: {
+        taxonomic: {
+            type: Object,
+            default: () => { }
+        }
+    },
+    data() {
+        return {
+            items: []
+        }
+    },
+    created() {
+        this.apiTaxonomicYoulike();
+    },
+    methods: {
+        apiTaxonomicYoulike() {
+            apiTaxonomicYoulike({ id: this.taxonomic.parentid }).then((res) => {
+                this.items = res.data;
+            })
+        }
+    }
 }
 </script>
 <style lang="less" scoped>
@@ -115,19 +76,36 @@ export default {
             display: flex;
             justify-content: space-between;
             .album-card {
-                width: 280px;
+                width: 290px;
                 .album-aspect {
                     display: flex;
                     flex-wrap: wrap;
                     border-radius: 6px;
                     overflow: hidden;
                     a {
-                        display: block;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        height: 100%;
+                        overflow: hidden;
+                        position: relative;
                         width: 50%;
+                        height: 100px;
+                        max-height: 100px;
+                        min-height: 100px;
                         img {
-                            width: 100%;
                             object-fit: cover;
+                        }
+                        .pic {
+                            width: 100%;
                             height: 100%;
+                        }
+                        .icon {
+                            width: auto;
+                            height: auto;
+                            max-width: 85%;
+                            max-height: 85%;
+                            border-radius: 5px;
                         }
                     }
                 }

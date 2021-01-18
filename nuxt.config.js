@@ -47,6 +47,7 @@ export default {
     plugins: [
         '@/plugins/element-ui',
         { src: '@/plugins/swiper.js', ssr: false },
+        { src: '@/plugins/viewer.js', ssr: false },
         { src: '@/plugins/utils.js', mode: 'client' },
         { src: '@/plugins/vue-mavon-editor', ssr: false },
     ],
