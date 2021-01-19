@@ -2,7 +2,7 @@
     <div class="header">
         <div class="header_wap wp">
             <a class="logo" href="/">
-                <img src="@/assets/images/logo.png" alt />
+                <img src="@/assets/images/logo.png" alt="全栈导航" />
             </a>
             <div class="menus">
                 <ul>

@@ -6,19 +6,20 @@
                     <div class="item" v-for="todo in item.navtag" :key="todo.id">
                         <div class="item-thumb hidden-xs">
                             <a
-                                :href="'/navdet/'+todo.id"
+                                :href="$utils.navLink(todo)"
                                 v-if="!todo.pic"
                                 class="big"
+                                target="_blank"
                                 :style="{backgroundColor:todo.author.color}"
                             >
-                                <img :src="todo.icon" alt title />
+                                <img :src="todo.icon" :alt="todo.describe" :title="todo.title" />
                             </a>
-                            <a v-else>
-                                <img :src="todo.pic" alt title />
+                            <a  target="_blank" :href="$utils.navLink(todo)" v-else>
+                                <img :src="todo.pic" :alt="todo.describe" :title="todo.title" />
                             </a>
                         </div>
                         <div class="item-content">
-                            <a class="a_block" :href="'/navdet/'+todo.id">
+                            <a  target="_blank" class="a_block" :href="$utils.navLink(todo)">
                                 <h2 class="title">{{todo.it_name}}</h2>
                                 <p>{{todo.describe}}</p>
                             </a>

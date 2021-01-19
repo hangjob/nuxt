@@ -8,13 +8,13 @@
                             <div class="item">
                                 <div class="item-card-img">
                                     <a href="/figure" target="_blank">
-                                        <img :src="item.img" />
+                                        <img :src="item.img" :alt="item.title" />
                                     </a>
                                 </div>
                                 <!-- <div class="item-card-title">
                                     <a href="/figure">{{item.title}}</a>
                                     <span></span>
-                                </div> -->
+                                </div>-->
                             </div>
                         </div>
                     </div>
@@ -43,10 +43,15 @@ export default {
                 lazy: {
                     loadPrevNext: true
                 },
+                autoplay: {
+                    delay: 2500,
+                    disableOnInteraction: false,
+                },
                 navigation: {
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
-                }
+                },
+                loop:true
             }
         }
     },

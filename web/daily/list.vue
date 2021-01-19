@@ -2,44 +2,44 @@
     <div class="list">
         <div class="vol">
             <i class="iconfont vm iconfont-speak"></i>
-            <span class="vm">讨论VOL</span>
+            <span class="vm">{{item.taxonomic.primary.mark}}</span>
         </div>
-        <div class="title">你会考虑购买次世代主机吗？</div>
-        <div
-            class="des"
-        >次世代主机（即将发售或发售不久的游戏主机）之争：索尼 PS5 与微软 Xbox Series X，你会考虑购买吗？会购买哪一台还是「我都要」？为什么？ 欢迎大家来聊聊自己的看法，有理有据，友好发言。</div>
-        <div data-v-96510ae2 class="content-bottom">
-            <div data-v-96510ae2 class="join">
-                <span data-v-96510ae2 class="vm">现在参与</span>
-                <i data-v-96510ae2 class="iconfont iconfont-arrow-right vm"></i>
+        <div class="title">{{item.it_name}}</div>
+        <div class="des">{{item.describe}}</div>
+        <div class="content-bottom">
+            <div class="join">
+                <span class="vm">
+                    立即访问
+                    <i class="el-icon-right"></i>
+                </span>
             </div>
-            <div data-v-96510ae2 class="avatar-box">
+            <div class="avatar-box">
                 <img
-                    data-v-96510ae2
                     src="https://cdn.sspai.com/2020/07/25/avatar/e09029e88e6f1f55a84b2769d2853726.jpg?imageMogr2/auto-orient/quality/95/thumbnail/!40x40r/gravity/Center/crop/40x40/interlace/1"
                     alt
                     class="avatar"
                 />
                 <img
-                    data-v-96510ae2
                     src="https://cdn.sspai.com/2019/12/30/avatar/f8aabc2d905c8a2f5ac5b6911fe9638d.jpg?imageMogr2/auto-orient/quality/95/thumbnail/!40x40r/gravity/Center/crop/40x40/interlace/1"
                     alt
                     class="avatar"
                 />
-                <span data-v-96510ae2 class="participant vm">30 位少数派已参与</span>
+                <span class="participant vm">30 位少数派已参与</span>
             </div>
         </div>
-        <div data-v-96510ae2 class="cover">
-            <img
-                data-v-96510ae2
-                src="https://cdn.sspai.com/article/ba406d41-b401-ed63-1ca1-7a964f03a0e6.png?imageMogr2/auto-orient/quality/95/thumbnail/!692x476r/gravity/Center/crop/692x476/interlace/1"
-            />
+        <div class="cover">
+            <img :src="item.pic" :alt="item.describe" :title="item.it_name" />
         </div>
     </div>
 </template>
 <script>
 export default {
-
+    props: {
+        item: {
+            type: Object,
+            default: () => { }
+        }
+    },
 }
 </script>
 <style lang="less" scoped>
@@ -97,6 +97,8 @@ export default {
             margin-right: 24px;
             .vm {
                 margin-left: auto;
+                display: flex;
+                align-items: center;
             }
             i {
                 font-size: 20px;
@@ -134,6 +136,8 @@ export default {
             width: 100%;
             border-radius: 16px;
             vertical-align: middle;
+            height: 200px;
+            object-fit: cover;
         }
     }
 }

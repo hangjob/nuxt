@@ -5,7 +5,7 @@
             <info :detail="detail" />
             <study :detail="detail" />
             <recommend :detail="detail" />
-            <paged :detail="detail" />
+            <paged :transmit="transmit" />
             <div class="animatepln">
                 <h3>动画</h3>
                 <div class="animatepln-item">
@@ -37,10 +37,28 @@ export default {
         animationHouse,
         animationPinwheel
     },
-    async asyncData({ $axios, app, store, params }) {
-        const detail = await apiNavtagDetail({ id: params.id });
+    head() {
         return {
-            detail: detail.data
+            title: this.detail.it_name,
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: this.detail.describe
+                },
+                {
+                    hid: 'keywords',
+                    name: 'keywords',
+                    content: this.detail.keywords.join(',')
+                }
+            ]
+        }
+    },
+    async asyncData({ $axios, app, store, params }) {
+        const res = await apiNavtagDetail({ id: params.id });
+        return {
+            detail: res.data.detail,
+            transmit: { prv: res.data.prv, nxet: res.data.nxet }
         }
     },
 }

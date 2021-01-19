@@ -16,8 +16,21 @@ const apiConfigurationNavcount = (params) => {
     return post(`${prefix}/configuration/navcount`, params)
 }
 
+
+// 热门网站
+const apiNavtagPopularIt = (params) => {
+    return post(`${prefix}/navtag/popularIt`, params)
+}
+
+// 每日推荐
+const apiNactagDaily = (params) => {
+    return post(`${prefix}/navtag/daily`, params)
+}
+
 export {
     apiDiscussAddlike,
     apiNavtagItems,
-    apiConfigurationNavcount
+    apiConfigurationNavcount,
+    apiNavtagPopularIt,
+    apiNactagDaily
 }

@@ -23,17 +23,59 @@
             </div>
             <div class="huo">
                 <i class="iconfont icon-huo"></i>
-                <span>44274°</span>
+                <span>
+                    <countTo :startVal="0" :endVal="fire(detail.hits)" :duration="2500"></countTo>°
+                </span>
             </div>
         </div>
     </div>
 </template>
 <script>
+import countTo from 'vue-count-to'
 export default {
+    components: {
+        countTo
+    },
     props: {
         detail: {
             type: Object,
             default: () => { }
+        }
+    },
+    computed: {
+        fire() {
+            return function (str) {
+                let num = parseInt(str);
+                let cardinal = function (a, b, c, d) {
+                    return parseInt((a / b * c) + d)
+                }
+                if (num > 0) {
+                    if (num >= 1000) {
+                        return cardinal(num, 3, 4.2, 100)
+                    }
+                    if (num >= 800) {
+                        return cardinal(num, 4.5, 5.8, 400)
+                    }
+                    if (num >= 600) {
+                        return cardinal(num, 1.4, 1.8, 200)
+                    }
+                    if (num >= 400) {
+                        return cardinal(num, 6, 2, 120)
+                    }
+                    if (num >= 300) {
+                        return cardinal(num, 3, 4, 100)
+                    }
+                    if (num >= 100) {
+                        return cardinal(num, 5, 2, 50)
+                    }
+                    if (num >= 30) {
+                        return cardinal(num, 3, 2, 8)
+                    }
+                    return num;
+                } else {
+                    return 1;
+                }
+            }
         }
     },
 }
@@ -52,7 +94,7 @@ export default {
         font-size: 20px;
         line-height: 50px;
         font-weight: 700;
-        text-transform:capitalize
+        text-transform: capitalize;
     }
     .tag {
         display: flex;

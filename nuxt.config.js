@@ -1,11 +1,12 @@
 export default {
     // Global page headers (https://go.nuxtjs.dev/config-head)
     head: {
-        title: 'nuxt-itnavs',
+        title: '全栈导航——找工具，就上全栈导航',
         meta: [
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-            { hid: 'description', name: 'description', content: '' }
+            { hid: 'keywords', content: '全栈导航,互联网职员导航,运营导航,产品经理导航,UI设计导航,前端开发导航,后端开发导航,工具导航,学习导航' },
+            { hid: 'description', name: 'description', content: '全栈导航一个分享互联网优秀资源的导航网站，专注分享产品运营、产品经理、UI设计师、前端开发工程师、后端开发工程师，为互联网职员收录国内外优质网站。互联网职员，找工具，就上 全栈导航' }
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -48,7 +49,8 @@ export default {
         '@/plugins/element-ui',
         { src: '@/plugins/swiper.js', ssr: false },
         { src: '@/plugins/viewer.js', ssr: false },
-        { src: '@/plugins/utils.js', mode: 'client' },
+        { src: '@/plugins/utils.js' },
+        { src: '@/plugins/tool.js', mode: 'server' },
         { src: '@/plugins/vue-mavon-editor', ssr: false },
     ],
 

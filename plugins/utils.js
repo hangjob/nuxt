@@ -45,10 +45,17 @@ utils.isEmail = (str) => {
     return pattern.test(str)
 }
 
+utils.navLink = (item) => {
+    if (item.pic) {
+        return `/thread/${item.id}`
+    } else {
+        return `/navdet/${item.id}`
+    }
+}
+
 // 挂载到全局Vue实例
 Vue.use({
     install(Vue) {
         Vue.prototype.$utils = {...utils };
-        window.vm = Vue.prototype;
     }
 });

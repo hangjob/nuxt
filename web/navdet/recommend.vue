@@ -5,48 +5,36 @@
             <a href class="more">...</a>
         </div>
         <div class="recommend-body">
-            <a href>
+            <a :href="$utils.navLink(item)" target="_blank" v-for="item in items" :key="item.id">
                 <div class="icon">
-                    <img
-                        src="https://www.vipbic.com/uploads/20180725/2e8aa01c9ab8fdbc91c48c68218adb8e.jpg"
-                        alt
-                    />
+                    <img :alt="item.describe" :title="item.it_name" :src="item.icon" />
                 </div>
                 <div class="metas">
-                    <h5>icons8</h5>
-                    <p>75,400 个免费的平面图标，在 20 秒内生成任何格式、大小和颜色的图标保证有所有你需要的图标，毫无疑问，我们有社交媒体图标，例如微信，微博，QQ，和各种类型的箭头。当然也有基本的图标如 电话， 主页， 和 设置。然而如果你想要一些更加非正统的东西 ，只需发出请求。保证不收费。</p>
-                </div>
-            </a>
-            <a href>
-                <div class="icon">
-                    <img
-                        src="https://www.vipbic.com/uploads/20180725/2e8aa01c9ab8fdbc91c48c68218adb8e.jpg"
-                        alt
-                    />
-                </div>
-                <div class="metas">
-                    <h5>icons8</h5>
-                    <p>75,400 个免费的平面图标，在 20 秒内生成任何格式、大小和颜色的图标保证有所有你需要的图标，毫无疑问，我们有社交媒体图标，例如微信，微博，QQ，和各种类型的箭头。当然也有基本的图标如 电话， 主页， 和 设置。然而如果你想要一些更加非正统的东西 ，只需发出请求。保证不收费。</p>
-                </div>
-            </a>
-            <a href>
-                <div class="icon">
-                    <img
-                        src="https://www.vipbic.com/uploads/20180725/2e8aa01c9ab8fdbc91c48c68218adb8e.jpg"
-                        alt
-                    />
-                </div>
-                <div class="metas">
-                    <h5>icons8</h5>
-                    <p>75,400 个免费的平面图标，在 20 秒内生成任何格式、大小和颜色的图标保证有所有你需要的图标，毫无疑问，我们有社交媒体图标，例如微信，微博，QQ，和各种类型的箭头。当然也有基本的图标如 电话， 主页， 和 设置。然而如果你想要一些更加非正统的东西 ，只需发出请求。保证不收费。</p>
+                    <h5>{{item.it_name}}</h5>
+                    <p>{{item.describe}}</p>
                 </div>
             </a>
         </div>
     </div>
 </template>
 <script>
+import { apiNavtagPopularIt } from '@/api/index'
 export default {
-
+    data() {
+        return {
+            items: []
+        }
+    },
+    created() {
+        this.apiNavtagPopularIt();
+    },
+    methods: {
+        apiNavtagPopularIt() {
+            apiNavtagPopularIt().then((res) => {
+                this.items = res.data;
+            })
+        }
+    }
 }
 </script>
 <style lang="less" scoped>

@@ -15,8 +15,8 @@
                 </div>
                 <div class="tag">
                     <ul>
-                        <li v-for="(item,index) in detail.keywords">
-                            <a href :key="index">
+                        <li v-for="(item,index) in detail.keywords" :key="index">
+                            <a href>
                                 <i class="fa fa-leaf" aria-hidden="true"></i>
                                 <span>{{item}}</span>
                             </a>

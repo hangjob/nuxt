@@ -2,26 +2,28 @@
     <div class="paged clearfix">
         <div
             class="prev previous"
-            style="background: linear-gradient(135deg,rgba(109,71,217,.92),rgba(249,61,102,.92)),url(https://www.vipbic.com/public/www/pc/img/mdbg.f32f4f0a.svg);"
+            :style="{background: `linear-gradient(135deg,rgba(109,71,217,.92),rgba(249,61,102,.92)),url(${transmit.prv.pic ? transmit.prv.pic  : 'https://www.vipbic.com/public/www/pc/img/mdbg.f32f4f0a.svg'})`}"
         >
-            <a href="/navdet/81.html">
-                <h5>Ant Design-一个服务于企业级产品的设计体系，基于『确定』和『自然』的设计价值观和模块化的解决方案，让设计者专注于更好的用户体验</h5>
+            <a :href="$utils.navLink(transmit.prv)">
+                <h5>{{transmit.prv.it_name}}—{{transmit.prv.describe}}</h5>
                 <p>
                     <span>
                         <i style="margin-right: 5px" class="fa fa-angle-left"></i>上一篇
                     </span>
-                    <span style="float: right">2018年07月28日&nbsp;&nbsp;星期六</span>
+                    <span
+                        style="float: right"
+                    >{{$dayjs(transmit.prv.create_time).format('YYYY年MM月DD日 hh:mm:ss')}}</span>
                 </p>
             </a>
         </div>
         <div
             class="next previous"
-            style="background: linear-gradient(135deg,rgba(71,114,217,.92),rgba(0,220,175,.92)),url(https://www.vipbic.com/public/www/pc/img/mdbg.f32f4f0a.svg) no-repeat 50%;"
+            :style="{background: `linear-gradient(135deg,rgba(71,114,217,.92),rgba(0,220,175,.92)),url(${transmit.nxet.pic ? transmit.nxet.pic : 'https://www.vipbic.com/public/www/pc/img/mdbg.f32f4f0a.svg'}) no-repeat 50%`}"
         >
-            <a href="/navdet/79.html">
-                <h5>wenyi-文艺范儿——文艺青年聚集地！</h5>
+            <a :href="$utils.navLink(transmit.nxet)">
+                <h5>{{transmit.nxet.it_name}}—{{transmit.nxet.describe}}</h5>
                 <p>
-                    <span>2018年07月28日&nbsp;&nbsp;星期六</span>
+                    <span>{{$dayjs(transmit.nxet.create_time).format('YYYY年MM月DD日 hh:mm:ss')}}</span>
                     <span style="float: right">
                         下一篇
                         <i style="margin-left: 5px" class="fa fa-angle-right"></i>
@@ -33,7 +35,12 @@
 </template>
 <script>
 export default {
-
+    props: {
+        transmit: {
+            type: Object,
+            default: () => { }
+        }
+    },
 }
 </script>
 <style lang="less" scoped>

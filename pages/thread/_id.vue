@@ -33,10 +33,27 @@ export default {
         Folder,
         Comment
     },
-    async asyncData({ $axios, app, store, params }) {
-        const detail = await apiNavtagDetail({ id: params.id });
+    head() {
         return {
-            detail: detail.data
+            title: this.detail.it_name,
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: this.detail.describe
+                },
+                {
+                    hid: 'keywords',
+                    name: 'keywords',
+                    content: this.detail.keywords.join(',')
+                }
+            ]
+        }
+    },
+    async asyncData({ $axios, app, store, params }) {
+        const res = await apiNavtagDetail({ id: params.id });
+        return {
+            detail: res.data.detail
         }
     },
 }

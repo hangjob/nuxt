@@ -9,13 +9,26 @@
                     <div class="album-card" v-for="item in items" :key="item.id">
                         <div class="album-aspect">
                             <a
-                                href
+                                :href="$utils.navLink(todo)"
                                 :style="{backgroundColor:todo.author.color}"
                                 v-for="todo in item.navtag"
                                 :key="todo.id"
+                                target="_blank"
                             >
-                                <img class="pic" v-if="todo.pic" :src="todo.pic" alt />
-                                <img class="icon" v-else :src="todo.icon" />
+                                <img
+                                    class="pic"
+                                    :title="todo.it_name"
+                                    :alt="todo.describe"
+                                    v-if="todo.pic"
+                                    :src="todo.pic"
+                                />
+                                <img
+                                    class="icon"
+                                    :title="todo.it_name"
+                                    :alt="todo.describe"
+                                    v-else
+                                    :src="todo.icon"
+                                />
                             </a>
                         </div>
                         <div class="album-aspect-title">
