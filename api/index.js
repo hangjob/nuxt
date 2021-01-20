@@ -27,10 +27,16 @@ const apiNactagDaily = (params) => {
     return post(`${prefix}/navtag/daily`, params)
 }
 
+// 精选
+const apiNactagCategory = (params) => {
+    return post(`${prefix}/navtag/category`, params)
+}
+
 export {
     apiDiscussAddlike,
     apiNavtagItems,
     apiConfigurationNavcount,
     apiNavtagPopularIt,
-    apiNactagDaily
+    apiNactagDaily,
+    apiNactagCategory
 }

@@ -36,9 +36,7 @@ export default {
 
     },
     mounted() {
-        setTimeout(() => {
-            console.log(this.listData)
-        }, 3000)
+        
     },
     async asyncData({ store }) {
         const listData = await apiNavtagItems({ page: 1 });

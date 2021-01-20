@@ -2,7 +2,7 @@
     <div class="daily">
         <Header />
         <div class="wp clearfix">
-            <div class="list">
+            <div class="lists">
                 <List :item="item" v-for="item in items" :key="item.id"/>
             </div>
         </div>
@@ -27,7 +27,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .daily {
-    .list {
+    .lists {
         margin-top: 30px;
     }
 }

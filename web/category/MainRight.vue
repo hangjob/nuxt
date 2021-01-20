@@ -18,9 +18,9 @@
             <div class="list">
                 <ul>
                     <li v-for="(item,index) in detailObject.record" :key="item.id">
-                        <a href>
+                        <a target="_blank" :href="$utils.navLink(item)" :title="item.describe">
                             <span>{{index+1}}</span>
-                            <p>{{item.it_name}}</p>
+                            <p>{{item.describe}}</p>
                         </a>
                     </li>
                 </ul>

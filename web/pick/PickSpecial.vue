@@ -2,34 +2,19 @@
     <div class="pick-special">
         <div class="item-thumb">
             <a href>
-                <img
-                    src="https://www.vipbic.com/uploads/20191211/297c3b4b6536f7702632b99444d2c073.png"
-                    alt
-                />
+                <img :src="detail.icon" :alt="detail.des" />
             </a>
-            <div class="number">专题:1期</div>
+            <div class="number">专题:{{index+1}}期</div>
         </div>
         <div class="item-info">
-            <h2>游戏动画</h2>
-            <p>07月26日-制作流畅有力的游戏动画</p>
+            <h2>{{detail.name}}</h2>
+            <p>{{$dayjs(detail.create_time).format('MM月 DD日')}}-{{detail.des}}</p>
         </div>
         <div class="item-nav">
             <ul>
-                <li>
-                    <span>1</span>
-                    <a>createjs-CreateJS中文网致力于CreatreateJS中文网致力于CreateJS在中国的推内reateJS中文网致力于CreateJS在中国的推内eJS在中国的推内容</a>
-                </li>
-                <li>
-                    <span>2</span>
-                    <a>createjs-CreateJS中文网致力于CreatreateJS中文网致力于CreateJS在中国的推内reateJS中文网致力于CreateJS在中国的推内eJS在中国的推内容</a>
-                </li>
-                <li>
-                    <span>3</span>
-                    <a>createjs-CreateJS中文网致力于CreatreateJS中文网致力于CreateJS在中国的推内reateJS中文网致力于CreateJS在中国的推内eJS在中国的推内容</a>
-                </li>
-                <li>
-                    <span>4</span>
-                    <a>createjs-CreateJS中文网致力于CreatreateJS中文网致力于CreateJS在中国的推内reateJS中文网致力于CreateJS在中国的推内eJS在中国的推内容</a>
+                <li v-for="(item,index) in detail.items" :key="item.id">
+                    <span>{{index+1}}</span>
+                    <a :href="$utils.navLink(item)" target="_blank">{{item.describe}}</a>
                 </li>
             </ul>
         </div>
@@ -37,7 +22,16 @@
 </template>
 <script>
 export default {
-
+    props: {
+        detail: {
+            type: Object,
+            default: () => { }
+        },
+        index: {
+            type: Number | String,
+            default: 1
+        }
+    },
 }
 </script>
 <style lang="less" scoped>
@@ -52,6 +46,7 @@ export default {
         overflow: hidden;
         a {
             display: block;
+            height: 100%;
             img {
                 height: 100%;
                 width: 100%;
@@ -113,17 +108,17 @@ export default {
                     display: inline-block;
                 }
                 &:nth-of-type(1) {
-                    span{
+                    span {
                         background-color: #fd9800;
                     }
                 }
                 &:nth-of-type(2) {
-                    span{
+                    span {
                         background-color: #ff3366;
                     }
                 }
                 &:nth-of-type(3) {
-                    span{
+                    span {
                         background-color: #469bfa;
                     }
                 }

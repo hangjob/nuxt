@@ -1,21 +1,39 @@
 <template>
     <div class="pick-specials">
         <div class="items clearfix">
-            <PickSpecial class="items-item"></PickSpecial>
-            <PickSpecial class="items-item"></PickSpecial>
-            <PickSpecial class="items-item"></PickSpecial>
-            <PickSpecial class="items-item"></PickSpecial>
-            <PickSpecial class="items-item"></PickSpecial>
-            <PickSpecial class="items-item"></PickSpecial>
+            <PickSpecial
+                class="items-item"
+                :index="index"
+                :detail="item"
+                v-for="(item,index) in listData.data"
+                :key="item.id"
+            ></PickSpecial>
         </div>
-        <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+        <el-pagination
+            @current-change="currentChange"
+            background
+            layout="prev, pager, next"
+            :total="listData.total"
+            :page-size="12"
+        ></el-pagination>
     </div>
 </template>
 <script>
 import PickSpecial from '@/web/pick/PickSpecial'
 export default {
+    props: {
+        listData: {
+            type: Object,
+            default: () => []
+        }
+    },
     components: {
         PickSpecial
+    },
+    methods: {
+        currentChange(page) {
+            this.$emit('apiNactagCategory', { page })
+        }
     }
 }
 </script>

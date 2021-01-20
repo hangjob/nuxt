@@ -4,8 +4,8 @@
             <i class="iconfont vm iconfont-speak"></i>
             <span class="vm">{{item.taxonomic.primary.mark}}</span>
         </div>
-        <div class="title">{{item.it_name}}</div>
-        <div class="des">{{item.describe}}</div>
+        <a :href="$utils.navLink(item)" target="_blank" class="title">{{item.it_name}}</a>
+        <a :href="$utils.navLink(item)" target="_blank" class="des">{{item.describe}}</a>
         <div class="content-bottom">
             <div class="join">
                 <span class="vm">
@@ -14,17 +14,9 @@
                 </span>
             </div>
             <div class="avatar-box">
-                <img
-                    src="https://cdn.sspai.com/2020/07/25/avatar/e09029e88e6f1f55a84b2769d2853726.jpg?imageMogr2/auto-orient/quality/95/thumbnail/!40x40r/gravity/Center/crop/40x40/interlace/1"
-                    alt
-                    class="avatar"
-                />
-                <img
-                    src="https://cdn.sspai.com/2019/12/30/avatar/f8aabc2d905c8a2f5ac5b6911fe9638d.jpg?imageMogr2/auto-orient/quality/95/thumbnail/!40x40r/gravity/Center/crop/40x40/interlace/1"
-                    alt
-                    class="avatar"
-                />
-                <span class="participant vm">30 位少数派已参与</span>
+                <span
+                    class="participant vm"
+                >{{$dayjs(item.create_time).format('YYYY年 MM月 DD日 hh点mm分ss秒')}}</span>
             </div>
         </div>
         <div class="cover">
@@ -54,6 +46,11 @@ export default {
     display: flex;
     flex-direction: column;
     margin-bottom: 30px;
+    &:hover {
+        .cover {
+            right: 10px;
+        }
+    }
     .vol {
         .vm {
             font-weight: 600;
@@ -65,6 +62,8 @@ export default {
         line-height: 39px;
         font-weight: 500;
         margin: 12px 30% 12px 0;
+        display: inline-block;
+        color: #544b4b;
     }
     .des {
         overflow: hidden;
@@ -74,6 +73,7 @@ export default {
         margin-right: 30%;
         line-height: 160%;
         color: #544b4b;
+        display: inline-block;
     }
     .content-bottom {
         font-size: 16px;
@@ -132,6 +132,7 @@ export default {
         top: 50%;
         right: 0;
         transform: translate(50%, -50%);
+        transition: all .3s;
         img {
             width: 100%;
             border-radius: 16px;
