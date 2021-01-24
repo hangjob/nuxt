@@ -1,13 +1,22 @@
 <template>
     <div class="article-kuai">
-        <div class="tab-nav">
+        <!-- <div class="tab-nav">
             <a href class="active">全部</a>
             <a href>设计</a>
             <a href>原型</a>
             <a href>绘画</a>
-        </div>
+        </div>-->
         <div class="tab-items">
-            <ArticleItem :detail="item" v-for="item in listData" :key="item.id" />
+            <ArticleItem :detail="item" v-for="item in listData.data" :key="item.id" />
+        </div>
+        <div class="page">
+            <el-pagination
+                @current-change="currentChange"
+                background
+                layout="prev, pager, next"
+                :total="total"
+                :page-size="12"
+            ></el-pagination>
         </div>
     </div>
 </template>
@@ -16,13 +25,23 @@ import ArticleItem from '@/web/article/ArticleItem'
 export default {
     props: {
         listData: {
-            type: Array,
-            default: () => []
+            type: Object,
+            default: () => { }
+        },
+        total: {
+            type: Number,
+            default: 0
         }
     },
     components: {
         ArticleItem
+    },
+    methods: {
+        currentChange(page) {
+            this.$emit('apiNavthemeItems', { page })
+        }
     }
+
 }
 </script>
 <style lang="less" scoped>
@@ -56,6 +75,9 @@ export default {
     }
     .tab-items {
         margin-top: 20px;
+    }
+    .page{
+        text-align: center;
     }
 }
 </style>

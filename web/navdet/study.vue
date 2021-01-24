@@ -2,10 +2,7 @@
     <div class="study">
         <div class="study-cont">
             <div class="cover">
-                <img
-                    :src="detail.icon"
-                    alt
-                />
+                <img :src="detail.icon" :alt="detail.describe" />
             </div>
             <div class="info">
                 <h3 class="ellipsis">{{detail.it_name}}</h3>
@@ -24,16 +21,17 @@
                     </ul>
                 </div>
                 <div class="mtm">
-                    <a href class="leave itnavs-button">
+                    <a href="javascript:;" class="leave itnavs-button" @click="$refs.attention.openWechat()">
                         <i class="fa fa-hand-o-right" aria-hidden="true"></i>前往官网
                     </a>
-                    <a href class="collect itnavs-button">
+                    <!-- <a href class="collect itnavs-button">
                         <i class="fa fa-paper-plane" aria-hidden="true"></i>放置首页
-                    </a>
+                    </a>-->
                 </div>
             </div>
         </div>
         <div class="study-author"></div>
+        <Attention :url="detail.url" ref="attention"></Attention>
     </div>
 </template>
 <script>
@@ -84,7 +82,7 @@ export default {
                 max-width: 100%;
                 font-size: 22px;
                 color: #2c3e50;
-                text-transform:capitalize;
+                text-transform: capitalize;
             }
             time {
                 color: #9aabb8;
@@ -118,7 +116,8 @@ export default {
                 margin-top: 10px;
                 a {
                     padding: 5px 15px;
-                    background-color: #3d7eff;
+                    background-color: #ffd100;
+                    border-color: #ffd100;
                     margin-right: 20px;
                     border-radius: 5px;
                     display: inline-block;

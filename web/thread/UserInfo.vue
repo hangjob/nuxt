@@ -29,22 +29,23 @@
                                 <i class="iconfont icon-chakan"></i>
                                 {{detail.hits}}次浏览
                             </a>
-                            <a href>
+                            <!-- <a href>
                                 <i class="iconfont icon-pinglun1"></i>22个评论
-                            </a>
+                            </a>-->
                             <a href>
-                                <i class="iconfont icon-dianzan5"></i>
-                                {{detail.like}}个点赞
+                                <i class="iconfont icon-huo"></i>
+                                {{fire(detail.hits)}}个火热值
                             </a>
                         </span>
                     </div>
                 </div>
                 <div class="link">
-                    <a href>立即访问<i class="el-icon-right"></i></a>
+                    <i @click="$refs.attention.openWechat()" class="iconfont icon-lianjie"></i>
+                    <!-- <a href>立即访问<i class="el-icon-right"></i></a> -->
                 </div>
             </div>
             <div class="left-details-author">
-                <div class="avatar">
+                <!-- <div class="avatar">
                     <img :src="detail.member.userhead" alt />
                 </div>
                 <div class="author-info">
@@ -58,9 +59,13 @@
                         <button class="js-project-focus-btn">关注</button>
                         <button class="js-project-focus-btn">私信</button>
                     </div>
+                </div>-->
+                <div class="small-img">
+                    <img :src="detail.pic" alt />
                 </div>
             </div>
         </div>
+        <Attention :url="detail.url" ref="attention"></Attention>
     </div>
 </template>
 <script>
@@ -71,6 +76,42 @@ export default {
             default: () => { }
         }
     },
+    computed: {
+        fire() {
+            return function (str) {
+                let num = parseInt(str);
+                let cardinal = function (a, b, c, d) {
+                    return parseInt((a / b * c) + d)
+                }
+                if (num > 0) {
+                    if (num >= 1000) {
+                        return cardinal(num, 3, 4.2, 100)
+                    }
+                    if (num >= 800) {
+                        return cardinal(num, 4.5, 5.8, 400)
+                    }
+                    if (num >= 600) {
+                        return cardinal(num, 1.4, 1.8, 200)
+                    }
+                    if (num >= 400) {
+                        return cardinal(num, 6, 2, 120)
+                    }
+                    if (num >= 300) {
+                        return cardinal(num, 3, 4, 100)
+                    }
+                    if (num >= 100) {
+                        return cardinal(num, 5, 2, 50)
+                    }
+                    if (num >= 30) {
+                        return cardinal(num, 3, 2, 8)
+                    }
+                    return num;
+                } else {
+                    return 1;
+                }
+            }
+        }
+    }
 }
 </script>
 <style lang="less" scoped>
@@ -138,16 +179,15 @@ export default {
             .link {
                 position: absolute;
                 right: 10px;
-                top: 10px;
-                a {
-                    color: #fff;
-                    display: inline-block;
-                    padding: 8px 20px;
-                    font-size: 14px;
-                    border-radius: 4px;
-                    background-color: #ffd100;
-                    border-color: #ffd100;
-                    color: #fff;
+                top: 0px;
+                i {
+                    font-size: 28px;
+                    color: #71c496;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                    &:hover {
+                        color: #ffd100;
+                    }
                 }
             }
         }
@@ -158,6 +198,14 @@ export default {
             box-sizing: border-box;
             display: flex;
             justify-content: space-between;
+            .small-img {
+                img {
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                    border-radius: 5px;
+                }
+            }
             .avatar {
                 width: 80px;
                 height: 80px;

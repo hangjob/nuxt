@@ -41,7 +41,7 @@ export default {
                 { title: '社区', id: 3, url: 'javascript:;', target: '_self' },
                 { title: '搜索', id: 9, url: 'javascript:;', target: '_self' },
                 { title: '精选', id: 10, url: '/pick', target: '_self' },
-                { title: '公众号', id: 6, url: '/wechat', target: '_self' },
+                { title: '文章', id: 6, url: '/article', target: '_self' },
                 { title: '开源', id: 12, url: 'https://github.com/hangjob', target: '_blank' },
                 { title: '联系我们', id: 5, url: '/join', target: '_self' },
                 { title: '登录', id: 7, url: 'javascript:;', target: '_self' }]

@@ -1,5 +1,6 @@
 <template>
     <div class="topbg" id="topbg">
+        <img class="img" :src="detail.pic" alt />
         <div class="wp">
             <div class="topbg-content">
                 <h2>{{detail.name}}</h2>
@@ -16,21 +17,6 @@ export default {
             default: () => { }
         }
     },
-    mounted() {
-        function loadStyleString(css) {
-            var style = document.createElement("style");
-            style.type = "text/css";
-            try {
-                style.appendChild(document.createTextNode(css));
-            } catch (ex) {
-                style.styleSheet.cssText = css;
-            }
-            var head = document.getElementsByTagName('head')[0];
-            head.appendChild(style);
-        }
-        loadStyleString('');
-        document.head.getElementsByTagName('style')[1].innerHTML = "#topbg::before{background-image: url(" + this.detail.pic + ");}";
-    }
 }
 </script>
 <style lang="less" scoped>
@@ -41,19 +27,12 @@ export default {
     margin-top: -10px;
     background: hsla(0, 0%, 100%, 0.3);
     overflow: hidden;
-    &::before {
-        content: '';
+    .img {
         position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        filter: blur(7px);
-        margin: -10px;
-        background-repeat: no-repeat;
-        background-position: 50%;
-        background-size: cover;
-        background-image: url(https://www.vipbic.com/uploads/20200804/8b9c579df614f717128a5939ac6ba6a3.jpg);
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: blur(1px);
     }
     &-content {
         position: absolute;

@@ -1,17 +1,17 @@
 <template>
-    <a class="article-item" :href="`/wechat/${detail.id}`">
+    <a class="article-item" :href="`/article/${detail.id}`">
         <div class="post-card">
             <div
                 class="blog-background"
-                style="background-image: url(https://tvax1.sinaimg.cn/large/6f8a2832gy1gehwm4x5hbj21hc0u0qen.jpg)"
+                :style="`background-image: url(${detail.pic})`"
             ></div>
             <div class="post-card-mask">
                 <div class="post-card-container">
-                    <h2 class="post-card-title" itemprop="headline">{{detail.ArticleTitle}}</h2>
+                    <h2 class="post-card-title" itemprop="headline">{{detail.title}}</h2>
                     <div class="post-card-info">
                         <span>全栈导航・</span>
-                        <span>{{$dayjs(detail.ArticlePublishDateTime).format('MM月DD日 YYYY年')}}・</span>
-                        <span>{{detail.ArticleType}}</span>
+                        <span>{{$dayjs(detail.create_time).format('YYYY年 MM月 DD日')}}・</span>
+                        <span>{{detail.describe}}</span>
                     </div>
                 </div>
             </div>
@@ -59,8 +59,15 @@ export default {
         display: table;
         vertical-align: middle;
         width: 100%;
-        height: 250px;
+        height: 280px;
+
         .post-card-container {
+            .post-card-title{
+                font-size: 20px;
+            }
+            .post-card-info{
+                color: #eee;
+            }
             padding: 2rem 2rem;
             text-align: center;
             display: table-cell;

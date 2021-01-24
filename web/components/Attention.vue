@@ -10,26 +10,26 @@
             <div slot="title"></div>
             <div class="attention-center">
                 <div class="sidebar">
-                    <h2>优质设计教程自学网站</h2>
+                    <h2>全栈导航</h2>
                     <ul>
                         <li>
-                            <i class="icon-option"></i> 全站23880个高清热门教程
+                            <i class="icon-option"></i> 全站1500+精选网址
                         </li>
                         <li>
-                            <i class="icon-option"></i> 教程每日更新！免费系统自学
+                            <i class="icon-option"></i> 每日更新！搜索聚集互联网的优秀资源
                         </li>
                         <li>
-                            <i class="icon-option"></i> 大家都在看的海量设计灵感库
+                            <i class="icon-option"></i> 专注分享产品运营、产品经理、UI设计师、前端开发工程师、后端开发工程师
                         </li>
                         <li>
-                            <i class="icon-option"></i> 免费字体设计神器实时更新
+                            <i class="icon-option"></i> 互联网职员，找导航，就上 全栈导航
                         </li>
                     </ul>
                 </div>
                 <div class="main">
                     <h2>扫码关注</h2>
                     <div class="main-content">
-                        <h4>扫码并 关注优优公众号优优公众号 安全快捷登录</h4>
+                        <h4>扫码 关注vipbic公众号 每日更新</h4>
                     </div>
                     <div class="main-code">
                         <img src="@/assets/images/code.png" alt />
@@ -87,7 +87,7 @@ export default {
             width: 400px;
             padding: 50px 50px 0;
             color: #fff;
-            background: #3385ff;
+            background-color: #ffd100;
             box-sizing: border-box;
             h2 {
                 font-size: 22px;

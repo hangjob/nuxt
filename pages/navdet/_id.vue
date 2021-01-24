@@ -4,7 +4,7 @@
         <div class="wp clearfix">
             <info :detail="detail" />
             <study :detail="detail" />
-            <recommend :detail="detail" />
+            <recommend :popularIt="popularIt" />
             <paged :transmit="transmit" />
             <div class="animatepln">
                 <h3>动画</h3>
@@ -65,7 +65,8 @@ export default {
         }
         return {
             detail: res.data.detail,
-            transmit: { prv: res.data.prv, nxet: res.data.nxet }
+            transmit: { prv: res.data.prv, nxet: res.data.nxet },
+            popularIt:res.data.popularIt
         }
     },
 }

@@ -5,7 +5,7 @@
             <a href class="more">...</a>
         </div>
         <div class="recommend-body">
-            <a :href="$utils.navLink(item)" target="_blank" v-for="item in items" :key="item.id">
+            <a :href="$utils.navLink(item)" target="_blank" v-for="item in popularIt" :key="item.id">
                 <div class="icon">
                     <img :alt="item.describe" :title="item.it_name" :src="item.icon" />
                 </div>
@@ -18,21 +18,11 @@
     </div>
 </template>
 <script>
-import { apiNavtagPopularIt } from '@/api/index'
 export default {
-    data() {
-        return {
-            items: []
-        }
-    },
-    created() {
-        this.apiNavtagPopularIt();
-    },
-    methods: {
-        apiNavtagPopularIt() {
-            apiNavtagPopularIt().then((res) => {
-                this.items = res.data;
-            })
+    props: {
+        popularIt: {
+            type: Array,
+            default: () => []
         }
     }
 }

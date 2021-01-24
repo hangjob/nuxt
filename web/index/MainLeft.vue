@@ -69,7 +69,7 @@ export default {
             background-color: #fff;
             position: relative;
             transition: all 0.3s ease;
-            height: 260px;
+            height: 280px;
             vertical-align: bottom;
             margin-bottom: 40px;
             &-bg {

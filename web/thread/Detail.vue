@@ -1,16 +1,18 @@
 <template>
     <div class="detail">
-        <div class="wp">
-            <no-ssr>
-                <mavon-editor
-                    class="detail-md itnavs-markdown"
-                    :value="detail[keyName]"
-                    :subfield="false"
-                    :defaultOpen="'preview'"
-                    :toolbarsFlag="false"
-                    :editable="false"
-                />
-            </no-ssr>
+        <div class="wp detail-box">
+            <div class="left">
+                <no-ssr>
+                    <mavon-editor
+                        class="detail-md itnavs-markdown"
+                        :value="detail[keyName]"
+                        :subfield="false"
+                        :defaultOpen="'preview'"
+                        :toolbarsFlag="false"
+                        :editable="false"
+                    />
+                </no-ssr>
+            </div>
         </div>
     </div>
 </template>
@@ -28,11 +30,11 @@ export default {
     },
     data() {
         return {
-            markdownOption: {
-                editable: false
-            },
-            handbook: '### 测试'
+
         }
+    },
+    created() {
+
     }
 }
 </script>
@@ -51,9 +53,15 @@ export default {
 <style lang="less">
 .detail {
     background-color: #fff;
-    padding: 20px 0;
+
     &-md {
         box-shadow: none !important;
+    }
+    &-box {
+        .left {
+            width: 100%;
+            padding: 0 15px;
+        }
     }
 }
 </style>

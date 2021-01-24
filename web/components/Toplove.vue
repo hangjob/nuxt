@@ -35,7 +35,7 @@ export default {
                 { value: '学习社区', icon: 'icon-xuexizhongxin', color: '#03a9f4', url: '/category/10' },
                 { value: '后端开发', icon: 'icon-_qianduankaifa', color: '#2196f3', url: '/category/9' },
                 { value: '产品经理', icon: 'icon-chanpinxiangqingsheji', color: '#67c23a', url: '/category/3' },
-                { value: '共享会员', icon: 'icon-changyonglogo45', color: '#66b1ff', url: '/category' },
+                { value: '共享会员', icon: 'icon-changyonglogo45', color: '#66b1ff', url: '' },
                 { value: '给我留言', icon: 'icon-xinjian', color: '#f8ce58', url: '',  url: '/intera' }, // 弹个窗 然后 发送邮件， 填写用户邮箱，我回复
             ]
         }

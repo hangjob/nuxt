@@ -1,7 +1,7 @@
 <template>
     <div class="like">
         <div class="wp">
-            <div class="like-zan" @click="addlike">
+            <!-- <div class="like-zan" @click="addlike">
                 <i class="iconfont icon-zan"></i>
                 <span v-if="detail.like">{{detail.like}}</span>
             </div>
@@ -12,15 +12,22 @@
                 </template>
                 <template v-else>
                     -
-                    <span>你能点点我嘛!</span>-
+                    <span>觉的它帮到了你，就点一下!</span>-
                 </template>
             </div>
             <div class="like-user">
                 <a href v-for="item in detail.zan" :key="item.id">
                     <img :src="item.member.userhead" alt />
                 </a>
+            </div>-->
+            <div class="leave">
+                <a href="javascript:;" @click="openUrl">
+                    立即访问
+                    <i class="el-icon-right"></i>
+                </a>
             </div>
         </div>
+        <Attention :url="detail.url" ref="attention"></Attention>
     </div>
 </template>
 <script>
@@ -34,7 +41,7 @@ export default {
     },
     data() {
         return {
-            isZan: false
+            isZan: false,
         }
     },
     methods: {
@@ -52,6 +59,9 @@ export default {
                     this.detail.like += 1;
                     this.isZan = true;
                 })
+        },
+        openUrl(){
+            this.$refs.attention.openWechat() 
         }
     }
 }
@@ -61,6 +71,19 @@ export default {
     background-color: #fff;
     padding: 20px 0;
     border-bottom: 1px solid #eee;
+    .leave {
+        text-align: center;
+        a {
+            color: #fff;
+            display: inline-block;
+            padding: 8px 20px;
+            font-size: 14px;
+            border-radius: 4px;
+            background-color: #ffd100;
+            border-color: #ffd100;
+            color: #fff;
+        }
+    }
     &-zan {
         width: 130px;
         height: 72px;
