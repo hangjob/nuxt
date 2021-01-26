@@ -1,20 +1,20 @@
 <template>
     <div class="MavonAdd">
         <el-form
-            :model="ruleForm"
+            :model="form"
             :rules="rules"
             ref="ruleForm"
             label-width="100px"
             class="ruleForm"
         >
             <el-form-item label="网址名称" prop="name">
-                <el-input v-model="ruleForm.name"></el-input>
+                <el-input v-model="form.it_name"></el-input>
             </el-form-item>
             <el-form-item label="网址地址" prop="name">
-                <el-input v-model="ruleForm.name"></el-input>
+                <el-input v-model="ruleForm.icon"></el-input>
             </el-form-item>
             <el-form-item label="上传封面" prop="name">
-                <el-input v-model="ruleForm.name">
+                <el-input v-model="ruleForm.pic">
                     <template slot="append">上传图片</template>
                 </el-input>
             </el-form-item>
@@ -72,6 +72,17 @@
 export default {
     data() {
         return {
+            form: {
+                it_name: '',
+                icon: '',
+                parentid: '', // 父级id
+                describe: '',
+                shows: true,
+                content: '',
+                pic: '',
+                keywords: '',
+                url: '',
+            },
             markdownOption: {
                 bold: true, // 粗体
                 italic: true, // 斜体
@@ -119,7 +130,7 @@ export default {
                 desc: ''
             },
             rules: {
-                name: [
+                it_name: [
                     { required: true, message: '请输入活动名称', trigger: 'blur' },
                     { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
                 ],
@@ -188,7 +199,7 @@ export default {
             line-height: 40px;
             padding: 0 12px 0 0;
             box-sizing: border-box;
-            font-weight:400;
+            font-weight: 400;
         }
         &-body {
             border: 1px solid #f5f5f5;

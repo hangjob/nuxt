@@ -2,14 +2,14 @@
     <div class="thread">
         <Header />
         <Banner />
-        <UserInfo :detail="detail" />
+        <!-- <UserInfo :detail="detail" /> -->
         <Detail :detail="detail" />
-        <Like :detail="detail" />
-        <Statement />
+        <!-- <Like :detail="detail" /> -->
+        <!-- <Statement />
         <SpaceSwiper />
         <Folder :taxonomic="detail.taxonomic" />
         <Comment />
-        <Footer />
+        <Footer /> -->
     </div>
 </template>
 <script>

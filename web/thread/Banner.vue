@@ -29,15 +29,13 @@ export default {
 </script>
 <style lang="less" scoped>
 .thread-banner {
-    border-bottom: 1px solid #eee;
-    padding: 12px 0;
-    background: #fff;
+    padding: 10px 0;
     .items {
         display: flex;
         justify-content: space-between;
         .item {
             width: 49%;
-            height: 130px;
+            height: 120px;
             border-radius: 6px;
             overflow: hidden;
             img {
