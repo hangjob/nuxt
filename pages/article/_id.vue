@@ -2,24 +2,16 @@
     <div class="aritcle-detail">
         <Header />
         <div class="wp clearfix">
-            <div class="site_content">
-                <h2>{{detail.title}}</h2>
-                <div class="site_tag">
-                    <span>作者：{{detail.member.username}}</span>
-                    <span>浏览次数：{{detail.hits}}</span>
-                    <span>发布时间：{{detail.create_time}}</span>
-                </div>
-            </div>
-            <Detail :detail="detail" keyName="content"></Detail>
+            <Detail :detail="detail"></Detail>
         </div>
         <Footer />
     </div>
 </template>
 <script>
 import { apiNavthemeDetail } from '@/api/navtheme'
-import Detail from '@/web/thread/Detail'
+import Detail from '@/web/article/Detail'
 export default {
-    components: {
+    components:{
         Detail
     },
     async asyncData({ $axios, app, store, params }) {

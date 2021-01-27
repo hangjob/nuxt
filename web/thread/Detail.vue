@@ -3,41 +3,46 @@
         <div class="wp">
             <div class="detail-container">
                 <div class="detail-left">
-                    <div class="breadcrumb">
-                        <i class="el-icon-location"></i>
-                        <span>
-                            <a>{{detail.taxonomic.primary.name}}</a>
-                        </span>
-                        <i>/</i>
-                        <span>
-                            <a>{{detail.taxonomic.name}}</a>
-                        </span>
-                        <i>/</i>
-                        <span>
-                            <a>{{detail.it_name}}</a>
-                        </span>
+                    <div class="info">
+                        <div class="breadcrumb">
+                            <i class="el-icon-location"></i>
+                            <span>
+                                <a>{{detail.taxonomic.primary.name}}</a>
+                            </span>
+                            <i>/</i>
+                            <span>
+                                <a>{{detail.taxonomic.name}}</a>
+                            </span>
+                            <i>/</i>
+                            <span>
+                                <a>{{detail.it_name}}</a>
+                            </span>
+                        </div>
+                        <div class="detail-left-title">
+                            <h1>{{detail.it_name}}</h1>
+                            <a href="javascript:;" @click="openUrl">
+                                立即访问
+                                <i class="el-icon-right"></i>
+                            </a>
+                        </div>
+                        <div class="detail-left-content">
+                            <no-ssr>
+                                <mavon-editor
+                                    class="detail-md itnavs-markdown"
+                                    :value="detail[keyName]"
+                                    :subfield="false"
+                                    :defaultOpen="'preview'"
+                                    :toolbarsFlag="false"
+                                    :editable="false"
+                                />
+                            </no-ssr>
+                        </div>
+                        <div class="detail-left-leave">
+                            <a href="javascript:;" @click="openUrl">前往[{{detail.it_name}}]官网</a>
+                        </div>
                     </div>
-                    <div class="detail-left-title">
-                        <h1>{{detail.it_name}}</h1>
-                        <a href="javascript:;" @click="openUrl">
-                            立即访问
-                            <i class="el-icon-right"></i>
-                        </a>
-                    </div>
-                    <div class="detail-left-content">
-                        <no-ssr>
-                            <mavon-editor
-                                class="detail-md itnavs-markdown"
-                                :value="detail[keyName]"
-                                :subfield="false"
-                                :defaultOpen="'preview'"
-                                :toolbarsFlag="false"
-                                :editable="false"
-                            />
-                        </no-ssr>
-                    </div>
-                    <div class="detail-left-leave">
-                        <a href="javascript:;" @click="openUrl">前往[{{detail.it_name}}]官网</a>
+                    <div class="detail-left-community">
+                        <img src="@/assets/images/qzdh.jpg" alt />
                     </div>
                     <div class="widget1 iconfont"></div>
                 </div>
@@ -49,7 +54,10 @@
                             </div>
                             <div class="user-head">
                                 <a href>
-                                    <img :src="detail.member.userhead" :alt="detail.member.username" />
+                                    <img
+                                        :src="detail.member.userhead"
+                                        :alt="detail.member.username"
+                                    />
                                 </a>
                             </div>
                             <div class="user-info">
@@ -139,11 +147,13 @@ export default {
         display: flex;
         .detail-left {
             width: 950px;
-            background-color: #fff;
-            border-radius: 6px;
-            padding: 20px;
-            position: relative;
-            overflow: hidden;
+            .info {
+                background-color: #fff;
+                border-radius: 6px;
+                padding: 20px;
+                position: relative;
+                overflow: hidden;
+            }
             .breadcrumb {
                 font-size: 14px;
                 color: #bbb;
@@ -201,6 +211,17 @@ export default {
                     width: 60%;
                 }
             }
+            &-community {
+                background-color: #fff;
+                border-radius: 6px;
+                margin-top: 20px;
+                overflow: hidden;
+                img {
+                    width: 100%;
+                    object-fit: cover;
+                    height: 200px;
+                }
+            }
             &-content {
             }
         }
@@ -236,8 +257,8 @@ export default {
                             border-radius: 50%;
                             overflow: hidden;
                             border: 4px solid rgba(255, 255, 255, 0.3);
-                            transition: all .3s;
-                            &:hover{
+                            transition: all 0.3s;
+                            &:hover {
                                 transform: rotate(180deg);
                             }
                         }
