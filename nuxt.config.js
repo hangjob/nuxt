@@ -44,7 +44,9 @@ export default {
      * mode: 'server'   表示是仅在前端服务端生效
      */
     cache: true,
-
+    loading: {
+        color: '#6dc498'
+    },
     plugins: [
         '@/plugins/element-ui',
         { src: '@/plugins/swiper.js', ssr: false },

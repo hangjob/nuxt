@@ -1,8 +1,8 @@
 <template>
     <div class="main-left">
         <div class="items">
-            <a
-                :href="`/thread/${item.id}`"
+            <nuxt-link
+                :to="`/thread/${item.id}`"
                 class="item"
                 v-for="(item,index) in listData.data"
                 :key="index"
@@ -18,7 +18,7 @@
                         </p>
                     </div>
                 </div>
-            </a>
+            </nuxt-link>
         </div>
         <div class="page">
             <el-pagination

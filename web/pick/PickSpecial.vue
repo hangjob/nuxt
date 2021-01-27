@@ -1,7 +1,7 @@
 <template>
     <div class="pick-special">
         <div class="item-thumb">
-            <a href>
+            <a :href="'https://www.vipbic.com/ranked.html?id='+detail.id" target="_blank">
                 <img :src="detail.icon" :alt="detail.des" />
             </a>
             <div class="number">专题:{{index+1}}期</div>
@@ -14,7 +14,7 @@
             <ul>
                 <li v-for="(item,index) in detail.items" :key="item.id">
                     <span>{{index+1}}</span>
-                    <a :href="$utils.navLink(item)" target="_blank">{{item.describe}}</a>
+                    <nuxt-link :to="$utils.navLink(item)">{{item.describe}}</nuxt-link>
                 </li>
             </ul>
         </div>

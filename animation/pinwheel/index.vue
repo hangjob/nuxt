@@ -1,6 +1,6 @@
 <template>
     <div class="pinwheel">
-        <div class="container">
+        <div class="container container-wh">
             <div class="canvas">
                 <div class="stars">
                     <div class="star star-1 opacity-quarter"></div>
@@ -125,5 +125,6 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+@import '../style.less';
 @import './index.less';
 </style>

@@ -6,14 +6,7 @@
             <study :detail="detail" />
             <recommend :popularIt="popularIt" />
             <paged :transmit="transmit" />
-            <div class="animatepln">
-                <h3>动画</h3>
-                <div class="animatepln-item">
-                    <animationEmotion />
-                    <animationHouse />
-                    <animationPinwheel />
-                </div>
-            </div>
+            <animatepln/>
         </div>
         <Footer />
     </div>
@@ -23,9 +16,7 @@ import paged from '@/web/navdet/paged'
 import info from '@/web/navdet/info'
 import study from '@/web/navdet/study'
 import recommend from '@/web/navdet/recommend'
-import animationEmotion from '@/animation/emotion/index.vue'
-import animationHouse from '@/animation/house/index.vue'
-import animationPinwheel from '@/animation/pinwheel/index.vue'
+import animatepln from '@/web/navdet/animatepln'
 import { apiNavtagDetail } from '@/api/thread'
 export default {
     components: {
@@ -33,9 +24,7 @@ export default {
         info,
         study,
         recommend,
-        animationEmotion,
-        animationHouse,
-        animationPinwheel
+        animatepln,
     },
     head() {
         return {
@@ -73,27 +62,6 @@ export default {
 </script>
 <style lang="less" scoped>
 .navdet {
-    .animatepln {
-        display: flex;
-        flex-direction: column;
-        padding: 20px;
-        margin-bottom: 50px;
-        background-color: #fff;
-        border-radius: 5px;
-        h3 {
-            position: relative;
-            padding-bottom: 15px;
-            background: #fff;
-            display: flex;
-            justify-content: space-between;
-            line-height: 1;
-            font-size: 18px;
-            color: #545454;
-        }
-        &-item {
-            display: flex;
-            justify-content: space-between;
-        }
-    }
+    
 }
 </style>

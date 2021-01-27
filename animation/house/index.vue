@@ -1,6 +1,6 @@
 <template>
     <div class="house">
-        <div class="container">
+        <div class="container container-wh">
             <div class="hill1"></div>
             <div class="hill2"></div>
             <div class="hill3"></div>
@@ -58,5 +58,6 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+@import '../style.less';
 @import './index.less';
 </style>

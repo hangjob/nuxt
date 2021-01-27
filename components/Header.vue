@@ -1,9 +1,9 @@
 <template>
     <div class="header">
         <div class="header_wap wp">
-            <a class="logo" href="/">
+            <nuxt-link class="logo" to="/">
                 <img src="@/assets/images/logo.png" alt="全栈导航" />
-            </a>
+            </nuxt-link>
             <div class="menus">
                 <ul>
                     <li v-for="item in items" :key="item.id">
@@ -12,15 +12,11 @@
                         </template>
                         <template v-else>
                             <a
-                                v-if="item.url==='javascript:;'"
+                                v-if="item.url==='javascript:;' || item.tag === 'a'"
                                 :href="item.url"
                                 @click.prevent="handClickItem(item)"
                             >{{item.title}}</a>
-                            <a
-                                v-else
-                                :target="item.target"
-                                :href="item.url"
-                            >{{item.title}}</a>
+                            <nuxt-link v-else :target="item.target" :to="item.url">{{item.title}}</nuxt-link>
                         </template>
                     </li>
                 </ul>
@@ -37,7 +33,7 @@ export default {
         return {
             items: [
                 { title: '首页', id: 1, url: '/', target: '_self' },
-                { title: '主题', id: 2, url: 'https://www.vipbic.com/rank.html', target: '_blank' },
+                { title: '主题', id: 2, url: 'https://www.vipbic.com/rank.html', tag: 'a', target: '_blank' },
                 { title: '社区', id: 3, url: 'javascript:;', target: '_self' },
                 { title: '搜索', id: 9, url: 'javascript:;', target: '_self' },
                 { title: '精选', id: 10, url: '/pick', target: '_self' },
@@ -59,6 +55,9 @@ export default {
             }
             if (item.title === '登录') {
                 this.$refs.login.visible = true;
+            }
+             if (item.title === '主题') {
+                window.open(item.url)
             }
         },
         registerOpen() {

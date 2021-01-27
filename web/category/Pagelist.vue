@@ -5,24 +5,23 @@
                 <div :key="index">
                     <div class="item" v-for="todo in item.navtag" :key="todo.id">
                         <div class="item-thumb hidden-xs">
-                            <a
-                                :href="$utils.navLink(todo)"
+                            <nuxt-link
+                                :to="$utils.navLink(todo)"
                                 v-if="!todo.pic"
                                 class="big"
-                                target="_blank"
                                 :style="{backgroundColor:todo.author.color}"
                             >
                                 <img :src="todo.icon" :alt="todo.describe" :title="todo.title" />
-                            </a>
-                            <a  target="_blank" :href="$utils.navLink(todo)" v-else>
+                            </nuxt-link>
+                            <nuxt-link  :to="$utils.navLink(todo)" v-else>
                                 <img :src="todo.pic" :alt="todo.describe" :title="todo.title" />
-                            </a>
+                            </nuxt-link>
                         </div>
                         <div class="item-content">
-                            <a  target="_blank" class="a_block" :href="$utils.navLink(todo)">
+                            <nuxt-link  class="a_block" :to="$utils.navLink(todo)">
                                 <h2 class="title">{{todo.it_name}}</h2>
                                 <p>{{todo.describe}}</p>
-                            </a>
+                            </nuxt-link>
                             <h4>
                                 <span class="time">
                                     <i class="fa fa-clock-o"></i>

@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container container-wh">
         <div class="sun"></div>
 
         <div class="bumps">
@@ -37,5 +37,6 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+@import '../style.less';
 @import './index.less';
 </style>

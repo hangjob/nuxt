@@ -8,12 +8,11 @@
                 <div class="folder-album">
                     <div class="album-card" v-for="item in items" :key="item.id">
                         <div class="album-aspect">
-                            <a
-                                :href="$utils.navLink(todo)"
+                            <nuxt-link
+                                :to="$utils.navLink(todo)"
                                 :style="{backgroundColor:todo.author.color}"
                                 v-for="todo in item.navtag"
                                 :key="todo.id"
-                                target="_blank"
                             >
                                 <img
                                     class="pic"
@@ -29,7 +28,7 @@
                                     v-else
                                     :src="todo.icon"
                                 />
-                            </a>
+                            </nuxt-link>
                         </div>
                         <div class="album-aspect-title">
                             <span>{{item.name}}</span>
@@ -41,27 +40,12 @@
     </div>
 </template>
 <script>
-import { apiTaxonomicYoulike } from '@/api/taxonomic'
+
 export default {
     props: {
-        taxonomic: {
-            type: Object,
-            default: () => { }
-        }
-    },
-    data() {
-        return {
-            items: []
-        }
-    },
-    created() {
-        this.apiTaxonomicYoulike();
-    },
-    methods: {
-        apiTaxonomicYoulike() {
-            apiTaxonomicYoulike({ id: this.taxonomic.parentid }).then((res) => {
-                this.items = res.data;
-            })
+        items: {
+            type: Array,
+            default: () => []
         }
     }
 }
@@ -73,7 +57,7 @@ export default {
         background: #fff;
         border-radius: 6px;
         .title {
-            padding: 0 20px;
+            padding: 0 10px;
             height: 56px;
             display: flex;
             align-items: center;
@@ -85,11 +69,11 @@ export default {
             }
         }
         .folder-album {
-            padding: 0 20px;
+            padding: 0 10px;
             display: flex;
             justify-content: space-between;
             .album-card {
-                width: 290px;
+                width: 310px;
                 .album-aspect {
                     display: flex;
                     flex-wrap: wrap;

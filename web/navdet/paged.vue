@@ -4,7 +4,7 @@
             class="prev previous"
             :style="{background: `linear-gradient(135deg,rgba(109,71,217,.92),rgba(249,61,102,.92)),url(${transmit.prv.pic ? transmit.prv.pic  : 'https://www.vipbic.com/public/www/pc/img/mdbg.f32f4f0a.svg'})`}"
         >
-            <a :href="$utils.navLink(transmit.prv)">
+            <nuxt-link :to="$utils.navLink(transmit.prv)">
                 <h5>{{transmit.prv.it_name}}—{{transmit.prv.describe}}</h5>
                 <p>
                     <span>
@@ -14,13 +14,13 @@
                         style="float: right"
                     >{{$dayjs(transmit.prv.create_time).format('YYYY年MM月DD日 hh:mm:ss')}}</span>
                 </p>
-            </a>
+            </nuxt-link>
         </div>
         <div
             class="next previous"
             :style="{background: `linear-gradient(135deg,rgba(71,114,217,.92),rgba(0,220,175,.92)),url(${transmit.nxet.pic ? transmit.nxet.pic : 'https://www.vipbic.com/public/www/pc/img/mdbg.f32f4f0a.svg'}) no-repeat 50%`}"
         >
-            <a :href="$utils.navLink(transmit.nxet)">
+            <nuxt-link :to="$utils.navLink(transmit.nxet)">
                 <h5>{{transmit.nxet.it_name}}—{{transmit.nxet.describe}}</h5>
                 <p>
                     <span>{{$dayjs(transmit.nxet.create_time).format('YYYY年MM月DD日 hh:mm:ss')}}</span>
@@ -29,7 +29,7 @@
                         <i style="margin-left: 5px" class="fa fa-angle-right"></i>
                     </span>
                 </p>
-            </a>
+            </nuxt-link>
         </div>
     </div>
 </template>

@@ -5,7 +5,7 @@
             <a href class="more">...</a>
         </div>
         <div class="recommend-body">
-            <a :href="$utils.navLink(item)" target="_blank" v-for="item in popularIt" :key="item.id">
+            <nuxt-link :to="$utils.navLink(item)" v-for="item in popularIt" :key="item.id">
                 <div class="icon">
                     <img :alt="item.describe" :title="item.it_name" :src="item.icon" />
                 </div>
@@ -13,7 +13,7 @@
                     <h5>{{item.it_name}}</h5>
                     <p>{{item.describe}}</p>
                 </div>
-            </a>
+            </nuxt-link>
         </div>
     </div>
 </template>

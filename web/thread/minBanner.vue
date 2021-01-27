@@ -4,10 +4,12 @@
             <div class="swiper-wrapper">
                 <div v-for="(item, index) in dataImage" :key="index" class="swiper-slide">
                     <div class="item">
-                        <a href="/figure" target="_blank">
-                            <img :src="item.img" :alt="item.title" />
-                        </a>
-                        <div class="des">{{item.title}}</div>
+                        <nuxt-link :to="$utils.navLink(item)">
+                            <img :src="item.pic" :alt="item.describe" />
+                        </nuxt-link>
+                        <div class="des">
+                            <p><span>{{item.it_name}}</span>-{{item.describe}}</p>
+                        </div>
                         <div class="widget2 iconfont"></div>
                     </div>
                 </div>
@@ -17,6 +19,12 @@
 </template>
 <script>
 export default {
+    props: {
+        dataImage: {
+            type: Array,
+            default: () => []
+        }
+    },
     data() {
         return {
             swiperOption: {
@@ -29,11 +37,8 @@ export default {
                     delay: 2500,
                     disableOnInteraction: false,
                 },
-                loop: false
-            },
-            dataImage: [
-                { img: 'https://www.tuniaokj.com/uploads/20191008/e1ad65ee40735fd058928f2b0a641f0a.jpg', title: 'sddad' }
-            ]
+                loop: true
+            }
         }
     }
 }
@@ -57,12 +62,17 @@ export default {
         }
         .des {
             padding: 15px;
-            font-size: 17px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
+            p {
+                span{
+                    font-weight: bold;
+                }
+                font-size: 17px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+            }
         }
     }
 }

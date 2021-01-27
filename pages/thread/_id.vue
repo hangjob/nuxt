@@ -3,13 +3,13 @@
         <Header />
         <Banner />
         <!-- <UserInfo :detail="detail" /> -->
-        <Detail :detail="detail" />
+        <Detail :detail="detail" :alldetails="alldetails" />
         <!-- <Like :detail="detail" /> -->
-        <!-- <Statement />
+        <!-- <Statement /> -->
         <SpaceSwiper />
-        <Folder :taxonomic="detail.taxonomic" />
+        <Folder :items="taxonomicItems" />
         <Comment />
-        <Footer /> -->
+        <Footer />
     </div>
 </template>
 <script>
@@ -22,6 +22,7 @@ import SpaceSwiper from '@/web/components/SpaceSwiper'
 import Folder from '@/web/thread/Folder'
 import Comment from '@/web/components/Comment'
 import { apiNavtagDetail } from '@/api/thread'
+import { apiTaxonomicYoulike } from '@/api/taxonomic'
 export default {
     components: {
         Banner,
@@ -52,8 +53,11 @@ export default {
     },
     async asyncData({ $axios, app, store, params }) {
         const res = await apiNavtagDetail({ id: params.id });
+        const res2 = await apiTaxonomicYoulike({ id: res.data.detail.taxonomic.parentid })
         return {
-            detail: res.data.detail
+            detail: res.data.detail,
+            alldetails:res.data,
+            taxonomicItems: res2.data
         }
     },
 }

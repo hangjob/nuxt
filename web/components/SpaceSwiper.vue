@@ -7,9 +7,9 @@
                         <div v-for="(item, index) in dataImage" :key="index" class="swiper-slide">
                             <div class="item">
                                 <div class="item-card-img">
-                                    <a href="/figure" target="_blank">
+                                    <nuxt-link to="/figure" target="_blank">
                                         <img :src="item.img" :alt="item.title" />
-                                    </a>
+                                    </nuxt-link>
                                 </div>
                                 <!-- <div class="item-card-title">
                                     <a href="/figure">{{item.title}}</a>
@@ -44,7 +44,7 @@ export default {
                     loadPrevNext: true
                 },
                 autoplay: {
-                    delay: 2500,
+                    delay: 3500,
                     disableOnInteraction: false,
                 },
                 navigation: {

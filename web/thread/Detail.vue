@@ -36,17 +36,20 @@
                             />
                         </no-ssr>
                     </div>
+                    <div class="detail-left-leave">
+                        <a href="javascript:;" @click="openUrl">前往[{{detail.it_name}}]官网</a>
+                    </div>
                     <div class="widget1 iconfont"></div>
                 </div>
                 <div class="detail-right">
                     <div class="users">
                         <div class="user">
                             <div class="user-up">
-                                <img class="tile" :src="detail.member.userhead" alt />
+                                <img class="tile" :src="detail.pic" :alt="detail.it_name" />
                             </div>
                             <div class="user-head">
                                 <a href>
-                                    <img :src="detail.member.userhead" alt />
+                                    <img :src="detail.member.userhead" :alt="detail.member.username" />
                                 </a>
                             </div>
                             <div class="user-info">
@@ -61,36 +64,23 @@
                             </div>
                             <div class="included-list">
                                 <ul>
-                                    <li>
-                                        <a href>
-                                            <span>1</span>消费者有多敏感，看老干妈就知道了
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href>
-                                            <span>2</span>消费者有多敏感，看老干妈就知道了
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href>
-                                            <span>3</span>消费者有多敏感，看老干妈就知道了
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href>
-                                            <span>4</span>消费者有多敏感，看老干妈就知道了
-                                        </a>
+                                    <li v-for="(item,idx) in alldetails.latest" :key="item.id">
+                                        <nuxt-link :to="$utils.navLink(item)">
+                                            <span>{{idx+1}}</span>
+                                            {{item.it_name}}-{{item.describe}}
+                                        </nuxt-link>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="minbanner">
-                        <minBanner></minBanner>
+                        <minBanner :dataImage="alldetails.hot"></minBanner>
                     </div>
                 </div>
             </div>
         </div>
+        <Attention :url="detail.url" ref="attention"></Attention>
     </div>
 </template>
 <script>
@@ -98,6 +88,10 @@ import minBanner from './minBanner'
 export default {
     props: {
         detail: {
+            type: Object,
+            default: () => { }
+        },
+        alldetails: {
             type: Object,
             default: () => { }
         },
@@ -192,6 +186,21 @@ export default {
                     color: #fff;
                 }
             }
+            &-leave {
+                text-align: center;
+                margin-top: 30px;
+                a {
+                    color: #fff;
+                    display: inline-block;
+                    padding: 8px 20px;
+                    font-size: 14px;
+                    border-radius: 4px;
+                    background-color: #ffd100;
+                    border-color: #ffd100;
+                    color: #fff;
+                    width: 60%;
+                }
+            }
             &-content {
             }
         }
@@ -227,7 +236,10 @@ export default {
                             border-radius: 50%;
                             overflow: hidden;
                             border: 4px solid rgba(255, 255, 255, 0.3);
-                            transition: all 500ms;
+                            transition: all .3s;
+                            &:hover{
+                                transform: rotate(180deg);
+                            }
                         }
                     }
                     &-info {
@@ -239,7 +251,7 @@ export default {
                         color: #333;
                         .tag {
                             background-color: #fc3c2d;
-                            border-radius: 2px;
+                            border-radius: 4px;
                             color: #fff;
                             display: inline-block;
                             font-size: 12px;
@@ -287,9 +299,17 @@ export default {
                         padding-bottom: 10px;
                         ul {
                             li {
-                                text-align: center;
+                                text-align: left;
                                 margin-top: 10px;
                                 a {
+                                    display: inline-block;
+                                    overflow: hidden;
+                                    white-space: nowrap;
+                                    text-overflow: ellipsis;
+                                    font-size: 14px;
+                                    line-height: 20px;
+                                    color: #333;
+                                    width: 100%;
                                     span {
                                         font-size: 13px;
                                         display: inline-block;
@@ -303,13 +323,36 @@ export default {
                                         margin-top: 1px;
                                         margin-right: 5px;
                                     }
-                                    display: inline-block;
-                                    overflow: hidden;
-                                    white-space: nowrap;
-                                    text-overflow: ellipsis;
-                                    font-size: 14px;
-                                    line-height: 20px;
-                                    color: #333;
+                                }
+                                &:nth-of-type(1) {
+                                    span {
+                                        background-color: #fd9800;
+                                    }
+                                }
+                                &:nth-of-type(2) {
+                                    span {
+                                        background-color: #ff3366;
+                                    }
+                                }
+                                &:nth-of-type(3) {
+                                    span {
+                                        background-color: #469bfa;
+                                    }
+                                }
+                                &:nth-of-type(4) {
+                                    span {
+                                        background-color: #67c23a;
+                                    }
+                                }
+                                &:nth-of-type(5) {
+                                    span {
+                                        background-color: #ffd100;
+                                    }
+                                }
+                                &:nth-of-type(6) {
+                                    span {
+                                        background-color: #26cb7c;
+                                    }
                                 }
                             }
                         }
@@ -319,7 +362,8 @@ export default {
             .minbanner {
                 margin-top: 20px;
                 overflow: hidden;
-                 background-color: #fff;
+                border-radius: 6px;
+                background-color: #fff;
             }
         }
     }

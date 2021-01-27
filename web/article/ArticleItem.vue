@@ -1,5 +1,5 @@
 <template>
-    <a class="article-item" :href="`/article/${detail.id}`">
+    <nuxt-link class="article-item" :to="`/article/${detail.id}`">
         <div class="post-card">
             <div
                 class="blog-background"
@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-    </a>
+    </nuxt-link>
 </template>
 <script>
 export default {
