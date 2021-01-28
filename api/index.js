@@ -32,11 +32,16 @@ const apiNactagCategory = (params) => {
     return post(`${prefix}/navtag/category`, params)
 }
 
+const apiNavtagSearch = (params) => {
+    return post(`${prefix}/navtag/search`, params)
+}
+
 export {
     apiDiscussAddlike,
     apiNavtagItems,
     apiConfigurationNavcount,
     apiNavtagPopularIt,
     apiNactagDaily,
-    apiNactagCategory
+    apiNactagCategory,
+    apiNavtagSearch
 }

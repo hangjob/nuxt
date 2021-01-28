@@ -38,14 +38,22 @@
                         />
                     </no-ssr>
                 </div>
+                <div class="tags-meat">
+                    <a href v-for="(item,index) in detail.keywords" :key="index">
+                        <span class="tag-img">
+                            <i class="icon-biaoqian iconfont"></i>
+                        </span>
+                        <span class="tag-text">{{item}}</span>
+                    </a>
+                </div>
             </div>
             <div class="community">
                 <img src="@/assets/images/qzdh.jpg" alt />
             </div>
         </div>
         <div class="detail-right">
-            <Rightuser/>
-            <Casually/>
+            <Rightuser />
+            <Casually :items="detail.recommended" />
         </div>
     </div>
 </template>
@@ -53,7 +61,7 @@
 import Rightuser from './Rightuser'
 import Casually from './Casually'
 export default {
-    components:{
+    components: {
         Rightuser,
         Casually
     },
@@ -88,12 +96,11 @@ export default {
                     margin-top: 10px;
                     span {
                         background-color: rgba(245, 245, 245, 0.47);
-                        height: 19px;
                         display: flex;
                         align-items: center;
                         line-height: 19px;
-                        padding: 0 5px;
-                        border-radius: 3px;
+                        padding: 5px 8px;
+                        border-radius: 4px;
                         margin-right: 10px;
                         color: #ccc;
                         i {
@@ -139,6 +146,38 @@ export default {
                 }
             }
             .content {
+            }
+            .tags-meat {
+                padding: 20px 20px 0px 20px;
+                border-top: 1px solid #f7efef;
+                position: relative;
+                margin: 0 -20px;
+                display: flex;
+                flex-flow: wrap;
+                a {
+                    margin-right: 10px;
+                    font-size: 12px;
+                    display: flex;
+                    background-color: #f3f3f3;
+                    color: #999;
+                    align-items: center;
+                    transition: all 0.5s;
+                    margin-bottom: 10px;
+                    line-height: 1;
+                    border-radius: 20px;
+                    border: 1px solid #f7efef;
+                    .tag-img {
+                        padding: 3px;
+                        border-radius: 100%;
+                        background-color: #fff;
+                        i {
+                            color: red;
+                        }
+                    }
+                    .tag-text {
+                        padding: 0 5px 0 2px;
+                    }
+                }
             }
         }
         .community {

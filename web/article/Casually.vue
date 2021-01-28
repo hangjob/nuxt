@@ -7,16 +7,16 @@
         </div>
         <div class="list">
             <ul>
-                <li>
-                    <a>
+                <li v-for="item in items" :key="item.id">
+                    <nuxt-link :to="'/article/'+item.id">
                         <div class="thumb">
-                            <img src="https://www.vipbic.com/public/www/pc/img/7.cc9a928e.png" alt />
+                            <img :src="item.pic" alt />
                         </div>
-                        <div class="title">
-                            <h2>小半 | 青年生产力指南</h2>
-                            <time>202012331</time>
+                        <div class="des">
+                            <h2>{{item.title}}</h2>
+                            <time>{{item.create_time}}</time>
                         </div>
-                    </a>
+                    </nuxt-link>
                 </li>
             </ul>
         </div>
@@ -24,7 +24,12 @@
 </template>
 <script>
 export default {
-
+    props: {
+        items: {
+            type: Array,
+            default: () => []
+        }
+    }
 }
 </script>
 <style lang="less" scoped>
@@ -35,10 +40,10 @@ export default {
     margin-top: 10px;
     .title {
         font-size: 12px;
-        padding: 12px 10px;
         display: flex;
         justify-content: space-between;
         flex-direction: column;
+        padding: 8px 10px;
     }
     .list {
         ul {
@@ -51,21 +56,29 @@ export default {
                     .thumb {
                         width: 83px;
                         height: 51px;
+                        border-radius: 4px;
+                        overflow: hidden;
+                        margin-right: 5px;
                         img {
                             width: 100%;
                             height: 100%;
                             object-fit: cover;
                         }
                     }
-                    .title {
-                        height: 51px;
+                    .des {
+                        height: 60px;
+                        flex: 1;
                         h2 {
-                            display: -webkit-box;
-                            -webkit-box-orient: vertical;
-                            -webkit-line-clamp: 2;
-                            overflow: hidden;
-                            max-height: 52px;
                             font-size: 13px;
+                            display: inline-block;
+                            white-space: nowrap;
+                            width: 100%;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            color: rgba(0, 0, 0, 0.8);
+                            &:hover{
+                                text-decoration: underline;
+                            }
                         }
                         time {
                             font-size: 12px;
