@@ -51,12 +51,14 @@ export default {
     methods: {
         handClickItem(item) {
             if (item.title === '搜索') {
-                this.$refs.search.openDialogTableVisible();
+                if (this.$route.name != 'search') {
+                    this.$refs.search.openDialogTableVisible();
+                }
             }
             if (item.title === '登录') {
                 this.$refs.login.visible = true;
             }
-             if (item.title === '主题') {
+            if (item.title === '主题') {
                 window.open(item.url)
             }
         },

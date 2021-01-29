@@ -33,7 +33,7 @@
                 </el-autocomplete>
                 <div class="keywords">
                     <template v-for="(item,index) in keywords">
-                        <a :key="index" :style="{backgroundColor:colour[index].color}">#{{item}}</a>
+                        <nuxt-link :to="`/search?ks=${item}`" :key="index" :style="{backgroundColor:colour[index].color}">#{{item}}</nuxt-link>
                     </template>
                 </div>
                 <div class="manuscript">
@@ -66,7 +66,7 @@ export default {
     data() {
         return {
             ks: '',
-            select: 'baidu.png',
+            select: 'logo.png',
             options: [
                 { name: '本站搜索', img: 'logo.png' },
                 { name: '百度', img: 'baidu.png', url: 'https://www.baidu.com/s?wd=' },
@@ -80,7 +80,8 @@ export default {
             ],
             dialogTableVisible: false,
             colour: colour,
-            keywords: ['搜索', '图库', '视频', '效率', '前端', '开发', '工具', '资源', '素材', '阅读']
+            keywords: ['前端', '文档', 'Vue', 'React', '在线工具', 'PPT', '图床', 'Node.js', 'Java', 'JavaScript', 'PHP', 'Redis', 'Nginx', 'ThinkPHP',
+                '面试', '后台管理', '公众号', '桌面工具', '设计工具', '截图', 'Linux', 'Windows', '字体下载', '免费素材', 'App', '混合开发', 'Icon', '产品经理', '实用工具', '建站', 'UI框架']
         }
     },
     computed: {
@@ -199,9 +200,9 @@ export default {
                 margin: 0 10px;
                 color: #888;
                 background-color: #fafafa;
-                padding: 8px 20px;
-                margin-right: 20px;
-                margin-bottom: 15px;
+                padding: 6px 14px;
+                margin-right: 10px;
+                margin-bottom: 10px;
                 font-size: 14px;
                 line-height: 14px;
                 color: #ffffff;

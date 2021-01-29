@@ -13,7 +13,7 @@
                             >
                                 <img :src="todo.icon" :alt="todo.describe" :title="todo.title" />
                             </nuxt-link>
-                            <nuxt-link  :to="$utils.navLink(todo)" v-else>
+                            <nuxt-link :to="$utils.navLink(todo)" v-else>
                                 <img :src="todo.pic" :alt="todo.describe" :title="todo.title" />
                             </nuxt-link>
                         </div>

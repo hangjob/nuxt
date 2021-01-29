@@ -46,12 +46,18 @@ utils.isEmail = (str) => {
 }
 
 utils.navLink = (item) => {
-    if (item.pic) {
-        return `/thread/${item.id}`
+    // 文章
+    if (item.isArticle === true) {
+        return `/article/${item.id}`
     } else {
-        return `/navdet/${item.id}`
+        if (item.pic) {
+            return `/thread/${item.id}`
+        } else {
+            return `/navdet/${item.id}`
+        }
     }
 }
+
 
 // 挂载到全局Vue实例
 Vue.use({

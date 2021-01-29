@@ -5,33 +5,21 @@
             <div class="container">
                 <div class="search-title">
                     <h2>文章</h2>
-                    <p>
-                        关键词
-                        <span class="red">[测试]</span>的搜索结果：
+                    <p>关键词<span class="red">[{{ks ? ks : '尝试输入你想要搜索的'}}]</span>的搜索结果：{{items.length ? items.length + '条' :' '}}
                     </p>
                 </div>
                 <div class="search-tax">
-                    <input type="text" placeholder="在「文章」中搜索" />
+                    <input
+                        v-model="ks"
+                        @keyup.enter="apiNavtagSearch"
+                        type="text"
+                        placeholder="在「文章」中搜索"
+                    />
                 </div>
                 <div class="search-items">
                     <ul>
-                        <li>
-                            <Item />
-                        </li>
-                        <li>
-                            <Item />
-                        </li>
-                        <li>
-                            <Item />
-                        </li>
-                        <li>
-                            <Item />
-                        </li>
-                        <li>
-                            <Item />
-                        </li>
-                        <li>
-                            <Item />
+                        <li v-for="(item,index) in items" :key="index">
+                            <Item :detail="item" />
                         </li>
                     </ul>
                 </div>
@@ -43,21 +31,43 @@
 <script>
 import Item from '@/web/search/item'
 import { apiNavtagSearch } from '@/api/index'
+const processData = (arr) => {
+    arr.forEach(item => {
+        item.isArticle = true;
+    });
+    return arr;
+}
 export default {
     components: {
         Item
     },
-    async asyncData({ $axios, app, store, params }) {
-        let id = params.id ? params.id : 1;
-        const res = await apiNavtagSearch();
+    async asyncData({ $axios, app, store, params, query }) {
+        let ks = query.ks ? query.ks : '';
+        let res = await apiNavtagSearch({ ks });
+        let arr = []
+        arr.push(...res.data.nav);
+        let article = processData(res.data.article);
+        arr.push(...article);
+        // nav.push(...processData(article));
         return {
-            items: res.data,
+            items: arr,
+            ks: ks
         }
     },
-    created(){
-        setTimeout(()=>{
+    created() {
+        setTimeout(() => {
             console.log(this.items)
-        },2000)
+        }, 2000)
+    },
+    methods: {
+        async apiNavtagSearch() {
+            const res = await apiNavtagSearch({ ks: this.ks });
+            let arr = []
+            arr.push(...res.data.nav);
+            let article = processData(res.data.article);
+            arr.push(...article);
+            this.items = arr;
+        }
     }
 }
 </script>

@@ -38,12 +38,12 @@
                             </no-ssr>
                         </div>
                         <div class="tags-meat">
-                            <a href v-for="(item,index) in detail.keywords" :key="index">
+                            <nuxt-link :to="`/search?ks=${item}`" v-for="(item,index) in detail.keywords" :key="index">
                                 <span class="tag-img">
                                     <i class="icon-biaoqian iconfont"></i>
                                 </span>
                                 <span class="tag-text">{{item}}</span>
-                            </a>
+                            </nuxt-link>
                         </div>
                         <div class="detail-left-leave">
                             <a href="javascript:;" @click="openUrl">前往[{{detail.it_name}}]官网</a>

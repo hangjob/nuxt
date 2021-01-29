@@ -2,25 +2,37 @@
     <div class="item">
         <div class="container">
             <div class="thumb">
-                <a href class="big" style="background:red">
-                    <img
-                        src="https://www.vipbic.com/uploads/20200225/ilWf3NXWXW1miWabZrsHBCt5mqW8cIeY.png"
-                        alt
-                    />
-                </a>
+                <nuxt-link v-if="detail.pic" :to="$utils.navLink(detail)">
+                    <img :src="detail.pic" alt />
+                </nuxt-link>
+                <nuxt-link
+                    v-else
+                    :to="$utils.navLink(detail)"
+                    class="big"
+                    :style="{backgroundColor:detail.author.color}"
+                >
+                    <img :src="detail.icon" alt />
+                </nuxt-link>
             </div>
             <div class="info">
                 <h2>
-                    <a href>源码天空丨网站源码下载平台</a>
+                    <nuxt-link
+                        :to="$utils.navLink(detail)"
+                    >{{detail.it_name ? detail.it_name : detail.title}}</nuxt-link>
                 </h2>
-                <div class="excerpt">网站地址：https://ccmmmm.com/ 网站介绍： 源码天空提供各类精品源码资源,包含网站模板、小程</div>
+                <div class="excerpt">{{detail.describe}}</div>
             </div>
         </div>
     </div>
 </template>
 <script>
 export default {
-
+    props: {
+        detail: {
+            type: Object,
+            default: () => { }
+        }
+    },
 }
 </script>
 <style lang="less" scoped>
@@ -71,10 +83,14 @@ export default {
                 a {
                     display: -webkit-box;
                     -webkit-box-orient: vertical;
-                    -webkit-line-clamp: 2;
+                    -webkit-line-clamp: 1;
                     overflow: hidden;
                     font-size: 15px;
                     color: #333;
+                    transition: all 0.3s;
+                    &:hover{
+                        color: black;
+                    }
                 }
             }
             .excerpt {
@@ -87,6 +103,8 @@ export default {
                 text-justify: inter-ideograph;
                 word-break: break-all;
                 margin-top: 5px;
+                min-height: 40px;
+                max-height: 40px;
             }
         }
     }

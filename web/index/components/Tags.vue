@@ -4,11 +4,12 @@
             <img src="@/assets/images/fire.png" />热门标签
         </h4>
         <div class="tags-items clearfix">
-            <a
+            <nuxt-link
+                :to="`/search?ks=${item}`"
                 v-for="(item,index) in items"
                 :key="index"
                 :style="{backgroundColor:colors[index+10].color}"
-            >{{item}}</a>
+            >{{item}}</nuxt-link>
         </div>
     </div>
 </template>
@@ -19,7 +20,7 @@ export default {
         return {
             colors: color,
             items: ['前端', '文档', 'Vue', 'React', '在线工具', 'PPT', '图床', 'Node.js', 'Java', 'JavaScript', 'PHP', 'Redis', 'Nginx', 'ThinkPHP',
-                '面试', '后台管理', '桌面工具', '设计工具', '截图', 'Linux', 'Windows', '字体下载', '免费素材', 'App', '混合开发', 'Icon', '产品经理', '在线Logo', '实用工具', '如何建站', 'UI框架']
+                '面试', '后台管理', '公众号', '桌面工具', '设计工具', '截图', 'Linux', 'Windows', '字体下载', '免费素材', 'App', '混合开发', 'Icon', '产品经理', '实用工具', '建站', 'UI框架']
         }
     }
 }

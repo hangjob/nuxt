@@ -4,8 +4,8 @@
             <i class="iconfont vm iconfont-speak"></i>
             <span class="vm">{{item.taxonomic.primary.mark}}</span>
         </div>
-        <a :href="$utils.navLink(item)" target="_blank" class="title">{{item.it_name}}</a>
-        <a :href="$utils.navLink(item)" target="_blank" class="des">{{item.describe}}</a>
+        <nuxt-link :to="$utils.navLink(item)"  class="title">{{item.it_name}}</nuxt-link>
+        <nuxt-link :to="$utils.navLink(item)" class="des">{{item.describe}}</nuxt-link>
         <div class="content-bottom">
             <div class="join">
                 <span class="vm">
