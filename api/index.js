@@ -36,6 +36,11 @@ const apiNavtagSearch = (params) => {
     return post(`${prefix}/navtag/search`, params)
 }
 
+
+const apiNavtagAppend = (params) => {
+    return post(`${prefix}/navtag/append`, params)
+}
+
 export {
     apiDiscussAddlike,
     apiNavtagItems,
@@ -43,5 +48,6 @@ export {
     apiNavtagPopularIt,
     apiNactagDaily,
     apiNactagCategory,
-    apiNavtagSearch
+    apiNavtagSearch,
+    apiNavtagAppend
 }

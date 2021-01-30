@@ -1,88 +1,128 @@
 <template>
     <div class="MavonAdd">
         <el-form
-            :model="form"
+            :model="ruleForm"
             :rules="rules"
             ref="ruleForm"
             label-width="100px"
             class="ruleForm"
         >
-            <el-form-item label="网址名称" prop="name">
-                <el-input v-model="form.it_name"></el-input>
+            <el-form-item label="网址名称" prop="it_name">
+                <el-input placeholder="输入网址名称" v-model="ruleForm.it_name"></el-input>
             </el-form-item>
-            <el-form-item label="网址地址" prop="name">
-                <el-input v-model="ruleForm.icon"></el-input>
+            <el-form-item label="网站地址" prop="url">
+                <el-input placeholder="输入网站地址" v-model="ruleForm.url"></el-input>
             </el-form-item>
-            <el-form-item label="上传封面" prop="name">
-                <el-input v-model="ruleForm.pic">
-                    <template slot="append">上传图片</template>
+            <el-form-item label="上传封面" prop="pic">
+                <el-input placeholder="点击上传图片" v-model="ruleForm.pic" readonly>
+                    <template slot="append">
+                        <span class="uploadImage" @click="uploadImage">上传图片</span>
+                    </template>
                 </el-input>
             </el-form-item>
-            <el-form-item label="选择分类" prop="resource">
-                <el-radio-group v-model="ruleForm.type">
-                    <el-radio-button label="上海"></el-radio-button>
-                    <el-radio-button label="北京"></el-radio-button>
-                    <el-radio-button label="广州"></el-radio-button>
-                    <el-radio-button label="深圳"></el-radio-button>
+            <el-form-item label="选择分类" prop="reclassify">
+                <el-radio-group v-model="ruleForm.reclassify" @change="typeChange">
+                    <el-radio-button
+                        :label="item.id"
+                        v-for="(item,index) in detail.data"
+                        :key="index"
+                    >{{item.name}}</el-radio-button>
                 </el-radio-group>
             </el-form-item>
-            <el-form-item label="选择主题" prop="region">
-                <el-select v-model="ruleForm.region" placeholder="请选择活动区域" style="width:100%">
-                    <el-option label="区域一" value="shanghai"></el-option>
-                    <el-option label="区域二" value="beijing"></el-option>
+            <el-form-item label="选择主题" prop="parentid">
+                <el-select v-model="ruleForm.parentid" placeholder="请选择活动区域" style="width:100%">
+                    <el-option
+                        :label="item.name"
+                        :value="item.id"
+                        v-for="item in options"
+                        :key="item.id"
+                    ></el-option>
                 </el-select>
             </el-form-item>
-            <el-form-item label="是否公开" prop="delivery">
-                <el-switch v-model="ruleForm.delivery"></el-switch>
+            <el-form-item label="是否公开">
+                <el-switch v-model="ruleForm.shows"></el-switch>
             </el-form-item>
-            <el-form-item label="关键词" prop="delivery">
+            <el-form-item label="关键词" prop="keywords">
                 <el-select
-                    v-model="ruleForm.delivery"
+                    v-model="ruleForm.keywords"
                     multiple
                     filterable
                     allow-create
                     default-first-option
-                    placeholder="请选择文章标签"
+                    placeholder="选择关键词"
                     style="width:100%"
                 >
-                    <el-option
-                        v-for="item in options"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value"
-                    ></el-option>
+                    <el-option v-for="item in keywords" :key="item" :label="item" :value="item"></el-option>
                 </el-select>
             </el-form-item>
-            <el-form-item label="活动形式" prop="desc">
-                <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+            <el-form-item label="简介" prop="describe">
+                <el-input type="textarea" placeholder="输入简介" v-model="ruleForm.describe"></el-input>
             </el-form-item>
         </el-form>
         <div class="editor">
             <h6 class="title">内容描述</h6>
             <div class="editor-body">
-                <mavon-editor class="custom-editor" :toolbars="markdownOption" v-model="handbook" />
+                <no-ssr>
+                    <mavon-editor
+                        class="custom-editor"
+                        :toolbars="markdownOption"
+                        v-model="ruleForm.content"
+                        @imgAdd="$imgAdd"
+                        ref="md"
+                    />
+                </no-ssr>
             </div>
         </div>
         <div class="submit">
             <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
         </div>
+        <Imgcre ref="imgcre" @handleResult="handleResult" />
     </div>
 </template>
 <script>
+import { keywords } from '@/utils/keywords'
+import Imgcre from './Imgcre'
+import { apiNavtagAppend } from '@/api/index'
+import { apiUploadUpimage } from '@/api/upload'
+function checkURL(URL) {
+    var str = URL;
+    //判断URL地址的正则表达式为:http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?
+    //下面的代码中应用了转义字符"\"输出一个字符"/"
+    var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+    var objExp = new RegExp(Expression);
+    if (objExp.test(str) == true) {
+        return true;
+    } else {
+        return false;
+    }
+}
 export default {
+    components: {
+        Imgcre
+    },
+    props: {
+        detail: {
+            type: Object,
+            default: () => { }
+        },
+        detail2: {
+            type: Object,
+            default: () => { }
+        }
+    },
     data() {
+        let validateUrl = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('小可爱，请输入网站地址'));
+            } else {
+                if (value.indexOf('http') === 0) {
+                    callback();
+                } else {
+                    callback(new Error('小可爱，请输入正确的网址'));
+                }
+            }
+        };
         return {
-            form: {
-                it_name: '',
-                icon: '',
-                parentid: '', // 父级id
-                describe: '',
-                shows: true,
-                content: '',
-                pic: '',
-                keywords: '',
-                url: '',
-            },
             markdownOption: {
                 bold: true, // 粗体
                 italic: true, // 斜体
@@ -118,66 +158,127 @@ export default {
                 subfield: true, // 单双栏模式
                 preview: true, // 预览
             },
-            handbook: "#### how to use mavonEditor in nuxt.js",
+            handbook: "",
             ruleForm: {
-                name: '',
-                region: '',
-                date1: '',
-                date2: '',
-                delivery: false,
-                type: [],
-                resource: '',
-                desc: ''
+                type: 1,
+                it_name: '',
+                icon: '',
+                parentid: '', // 父级id
+                describe: '',
+                shows: false,
+                content: '写你知道，说你想说的',
+                pic: '',
+                keywords: [],
+                url: '',
+                reclassify: ''
             },
             rules: {
                 it_name: [
-                    { required: true, message: '请输入活动名称', trigger: 'blur' },
-                    { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+                    { required: true, message: '请输入名称', trigger: 'blur' },
+                    { min: 1, max: 20, message: '长度在 1 到 20 个字符', trigger: 'blur' }
                 ],
-                region: [
-                    { required: true, message: '请选择活动区域', trigger: 'change' }
+                url: [
+                    { required: true, message: '输入网址链接', trigger: 'change', validator: validateUrl }
                 ],
-                date1: [
-                    { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+                reclassify: [
+                    { type: 'number', required: true, message: '选择一级分类', }
                 ],
-                date2: [
-                    { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
+                pic: [
+                    { required: true, message: '上传一张首页图片', }
                 ],
-                type: [
-                    { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
+                keywords: [
+                    { required: true, message: '至少选择或者输入一个关键词', }
                 ],
-                resource: [
-                    { required: true, message: '请选择活动资源', trigger: 'change' }
+                parentid: [
+                    { type: 'number', required: true, message: '选择二级分类', }
                 ],
-                desc: [
-                    { required: true, message: '请填写活动形式', trigger: 'blur' }
+                describe: [
+                    { required: true, min: 10, max: 300, message: '输入简介', message: '长度在 10 到 300 个字符', trigger: 'blur' }
                 ]
             },
-            options: [{
-                value: 'HTML',
-                label: 'HTML'
-            }, {
-                value: 'CSS',
-                label: 'CSS'
-            }, {
-                value: 'JavaScript',
-                label: 'JavaScript'
-            }],
+            options: [],
+            keywords: keywords
         };
+    },
+    created() {
+
     },
     methods: {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    alert('submit!');
+                    this.apiNavtagAppend()
                 } else {
-                    console.log('error submit!!');
                     return false;
                 }
             });
         },
+        apiNavtagAppend() {
+            if (!this.ruleForm.content) {
+                this.$message({
+                    message: '小可爱，输入内容',
+                    type: 'warning'
+                });
+                return false;
+            }
+            if (this.ruleForm.content.length <= 60) {
+                this.$message({
+                    message: '内容不少于60个字符',
+                    type: 'warning'
+                });
+                return false;
+            }
+            let obj = JSON.parse(JSON.stringify(this.ruleForm));
+            obj.keywords = obj.keywords.join(',');
+            obj.shows = obj.shows === false ? 0 : 1;
+            apiNavtagAppend(obj).then((res) => {
+                if (res.code == 0) {
+                    this.$utils.isErrJson(res, this)
+                } else {
+                    this.$notify({
+                        title: '发表成功',
+                        message: `${this.ruleForm.it_name}已发表成功`,
+                        type: 'success'
+                    });
+                }
+                console.log(res)
+            })
+        },
         resetForm(formName) {
             this.$refs[formName].resetFields();
+        },
+        typeChange() {
+            this.options = this.manipulationData(this.ruleForm.type)
+            this.ruleForm.parentid = this.options[0].id;
+        },
+        manipulationData(id) {
+            let data = JSON.parse(JSON.stringify(this.detail2.data));
+            let arr = [];
+            data.forEach((item) => {
+                if (item.parentid === id) {
+                    arr.push(item);
+                }
+            })
+            return arr;
+        },
+        uploadImage() {
+            this.$refs.imgcre.handleOpen();
+        },
+        handleResult(res) {
+            this.ruleForm.pic = res.data.path;
+            this.ruleForm.icon = res.data.path;
+        },
+        $imgAdd(pos, file) {
+            // 第一步.将图片上传到服务器.
+            let formdata = new FormData();
+            formdata.append('file', file, file.name);
+            this.loading = true;
+            apiUploadUpimage(formdata).then((res) => {
+                console.log(res)
+                this.$refs.md.$img2Url(pos, this.$utils.imgsrc(res.data.path));
+            }).finally(() => {
+                this.loading = false;
+            })
         }
     }
 };
@@ -187,6 +288,11 @@ export default {
     width: 100%;
 }
 .MavonAdd {
+    .uploadImage {
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+    }
     .ruleForm {
         padding-right: 20px;
     }

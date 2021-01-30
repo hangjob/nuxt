@@ -4,7 +4,7 @@
             <div v-swiper="swiperOption" ref="bannerSwiper">
                 <div class="swiper-wrapper">
                     <div v-for="(item, index) in dataImage" :key="index" class="swiper-slide">
-                        <img :src="item.imgUrl" />
+                        <img :src="item.img" />
                     </div>
                 </div>
                 <div slot="pagination" class="swiper-pagination"></div>
@@ -16,25 +16,22 @@
                 <i class="iconfont icon-xiayiye"></i>
             </div>
         </div>
-        <div class="pick-sub">
+        <div class="pick-sub" v-if="dataImage.length">
             <a class="item">
-                <img :src="dataImage[0].imgUrl" alt />
+                <img :src="dataImage[dataImage.length-2].img" alt />
             </a>
             <a class="item">
-                <img :src="dataImage[1].imgUrl" alt />
+                <img :src="dataImage[dataImage.length-1].img" alt />
             </a>
         </div>
     </div>
 </template>
 <script>
+import { apiFigureBans } from '@/api/figure'
 export default {
     data() {
         return {
-            dataImage: [
-                { imgUrl: 'https://images.wallpaperscraft.com/image/girl_shell_hare_167320_1600x1200.jpg' },
-                { imgUrl: 'https://images.wallpaperscraft.com/image/girl_kimono_anime_182197_1600x1200.jpg' },
-                { imgUrl: 'https://images.wallpaperscraft.com/image/girl_anime_toy_183017_1600x1200.jpg' }
-            ],
+            dataImage: [],
             swiperOption: {
                 speed: 1200,
                 lazy: {
@@ -47,9 +44,17 @@ export default {
                 navigation: {
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
-                }
+                },
+                autoplay: {
+                    delay: 3500,
+                    disableOnInteraction: false,
+                },
+                loop:true
             }
         }
+    },
+    created() {
+        this.apiFigureBans();
     },
     methods: {
         next() {
@@ -57,6 +62,11 @@ export default {
         },
         prev() {
             this.$refs.bannerSwiper.swiper.slidePrev()
+        },
+        apiFigureBans() {
+            apiFigureBans().then((res) => {
+                this.dataImage = res.data;
+            })
         }
     }
 }

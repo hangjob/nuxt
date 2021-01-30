@@ -24,7 +24,7 @@ utils.copy = () => {
     target.parentElement.removeChild(target);
 }
 
-utils.isErrJson = function(res) {
+utils.isErrJson = function(res, that) {
     if (res.code != 1) {
         let str = res.message || '小可爱出错了';
         if (Object.prototype.toString.call(res.message) === "[object Object]") {
@@ -35,7 +35,11 @@ utils.isErrJson = function(res) {
                 }
             }
         }
-        window.vm.$message.warning(str)
+        that.$notify({
+            title: '小可出错了^_^',
+            message: str,
+            type: 'warning'
+        })
     }
 }
 
@@ -58,6 +62,10 @@ utils.navLink = (item) => {
     }
 }
 
+utils.imgsrc = function(str) {
+    let url = 'https://api.vipbic.com';
+    return url + str;
+}
 
 // 挂载到全局Vue实例
 Vue.use({

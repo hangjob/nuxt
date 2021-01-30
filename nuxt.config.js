@@ -51,6 +51,7 @@ export default {
         '@/plugins/element-ui',
         { src: '@/plugins/swiper.js', ssr: false },
         { src: '@/plugins/viewer.js', ssr: false },
+        { src: '@/plugins/cropper.js', ssr: false },
         { src: '@/plugins/utils.js' },
         { src: '@/plugins/tool.js', mode: 'server' },
         { src: '@/plugins/vue-mavon-editor', ssr: false },
@@ -90,7 +91,14 @@ export default {
                 '^/api': '/', // 把 /api 替换成 /
                 changeOrigin: true // 表示是否跨域
             }
-        }
+        },
+        '/imgapi': {
+            target: ' https://www.vipbic.com/', // 目标接口域名
+            pathRewrite: {
+                '^/imgapi': '/', // 把 /api 替换成 /
+                changeOrigin: true // 表示是否跨域
+            }
+        },
     },
 
     // Build Configuration (https://go.nuxtjs.dev/config-build)
