@@ -25,6 +25,9 @@
                             <i class="icon-option"></i> 互联网职员，找导航，就上 全栈导航
                         </li>
                     </ul>
+                    <div class="textwarp">
+                        <div class="text" data-text="2021">2021</div>
+                    </div>
                 </div>
                 <div class="main">
                     <h2>扫码关注</h2>
@@ -89,6 +92,7 @@ export default {
             color: #fff;
             background-color: #ffd100;
             box-sizing: border-box;
+            position: relative;
             h2 {
                 font-size: 22px;
                 margin-bottom: 30px;
@@ -100,9 +104,37 @@ export default {
                     font-size: 15px;
                 }
             }
-            background-image: url(~@/assets/images/uiii-001.png);
-            background-position: 146px bottom;
-            background-repeat: no-repeat;
+            .textwarp {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                display: inline-block;
+                width: 400px;
+                overflow: hidden;
+            }
+            .text {
+                font-size: 120px;
+                font-weight: 900;
+                color: #00000000;
+                text-align: center;
+                font-family: 'Lato', sans-serif;
+                background: url(~@/assets/images/source.gif);
+                background-clip: text;
+                -webkit-background-clip: text;
+            }
+
+            .text:after {
+                content: attr(data-text);
+                -webkit-text-stroke: 1.5px #d4d7ff;
+                position: absolute;
+                left: 60px;
+                top: 0;
+                transform: translate(0, 0);
+                background: url(~@/assets/images/source.gif);
+                background-clip: text;
+                -webkit-background-clip: text;
+                background-size: 43%;
+            }
         }
         .main {
             flex: 1;

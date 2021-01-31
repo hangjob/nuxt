@@ -33,12 +33,12 @@ export default {
         return {
             items: [
                 { title: '首页', id: 1, url: '/', target: '_self' },
-                { title: '主题', id: 2, url: 'https://www.vipbic.com/rank.html', tag: 'a', target: '_blank' },
                 { title: '社区', id: 3, url: 'javascript:;', target: '_self' },
                 { title: '搜索', id: 9, url: 'javascript:;', target: '_self' },
-                { title: '精选', id: 10, url: '/pick', target: '_self' },
                 { title: '文章', id: 6, url: '/article', target: '_self' },
-                { title: '开源', id: 12, url: 'https://github.com/hangjob', target: '_blank' },
+                { title: '精选', id: 10, url: '/pick', target: '_self' },
+                { title: '主题', id: 2, url: 'https://www.vipbic.com/rank.html', tag: 'a', target: '_blank' },
+                { title: '开源', id: 12, url: 'https://github.com/hangjob', tag: 'a', target: '_blank' },
                 { title: '联系我们', id: 5, url: '/join', target: '_self' },
                 { title: '登录', id: 7, url: 'javascript:;', target: '_self' }]
         }
@@ -53,12 +53,28 @@ export default {
             if (item.title === '搜索') {
                 if (this.$route.name != 'search') {
                     this.$refs.search.openDialogTableVisible();
+                } else {
+                    this.$notify.success({
+                        title: '提示',
+                        message: '小可爱，你当前处于在搜索页面中，输入关键词搜索',
+                        showClose: false
+                    });
                 }
+            }
+            if (item.title === '社区') {
+                this.$notify.success({
+                    title: '提示',
+                    message: '小可爱，社区正在加紧开发中...',
+                    showClose: false
+                });
             }
             if (item.title === '登录') {
                 this.$refs.login.visible = true;
             }
             if (item.title === '主题') {
+                window.open(item.url)
+            }
+            if (item.title === '开源') {
                 window.open(item.url)
             }
         },

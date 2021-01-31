@@ -17,9 +17,23 @@ axios.interceptors.request.use(request => {
 
 
 
-const post = async(url, params) => {
-    const res = await http.post(handLastUrl(url), params);
-    return res.data;
+const post = async(url, params, hand = { loca: false }) => {
+    if (process.server) {
+        const res = await http.post(handLastUrl(url), params);
+        return res.data;
+    } else {
+        let key = url.replace(/\//g, 'A');
+        if (key && hand.loca && window[key]) {
+            return window[key];
+        }
+        const res = await http.post(handLastUrl(url), params);
+        if (hand.loca) {
+            console.log(key);
+            window[key] = res.data;
+        }
+        return res.data;
+    }
+
 }
 
 

@@ -13,7 +13,7 @@
             </div>
             <div class="join-action">
                 <a href="https://www.vipbic.com/weixin.html" target="_blank">订阅公众号</a>
-                <a target="_blank" href="/write" class>发表收录</a>
+                <a target="_blank" href="/write" class>写点什么</a>
             </div>
         </div>
         <div class="right-activity">

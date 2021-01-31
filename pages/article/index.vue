@@ -1,6 +1,7 @@
 <template>
     <div class="article">
         <Header />
+        <PageTop/>
         <div class="wp clearfix">
             <ArticleBanner></ArticleBanner>
             <ArticleKuai :total="total" @apiNavthemeItems="apiNavthemeItems" :listData="listData" />
@@ -12,10 +13,12 @@
 import ArticleBanner from '@/web/article/ArticleBanner'
 import ArticleKuai from '@/web/article/ArticleKuai'
 import { apiNavthemeItems } from '@/api/navtheme'
+import PageTop from '@/web/article/PageTop'
 export default {
     components: {
         ArticleKuai,
-        ArticleBanner
+        ArticleBanner,
+        PageTop
     },
     async asyncData({ $axios, app, store }) {
         const listData = await apiNavthemeItems();

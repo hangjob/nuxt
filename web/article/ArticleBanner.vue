@@ -1,25 +1,42 @@
 <template>
     <div class="article-banner">
-        <div class="items">
-            <a class="item">
-                <img src="https://www.ubuuk.com/uploads/articles/thumbnail/201909/b21bb481b0a96801e2cecebd119bb79171f9062d.jpg" alt />
-            </a>
-            <a class="item">
-                <img src="https://www.ubuuk.com/uploads/articles/thumbnail/201909/b21bb481b0a96801e2cecebd119bb79171f9062d.jpg" alt />
-            </a>
-            <a class="item item-long">
-                <img src="https://www.ubuuk.com/uploads/articles/thumbnail/201909/b21bb481b0a96801e2cecebd119bb79171f9062d.jpg" alt />
-            </a>
+        <div class="items" v-if="dataImage.length">
+            <nuxt-link to="/figure"  class="item">
+                <img :src="dataImage[0].img" alt />
+            </nuxt-link>
+            <nuxt-link to="/figure"  class="item">
+                <img :src="dataImage[1].img" alt />
+            </nuxt-link>
+            <nuxt-link to="/figure" class="item item-long">
+                <img :src="dataImage[2].img" alt />
+            </nuxt-link>
         </div>
     </div>
 </template>
 <script>
+import { apiFigureBans } from '@/api/figure'
 export default {
+    data() {
+        return {
+            dataImage: []
+        }
+    },
+    created() {
+        this.apiFigureBans();
+    },
+    methods: {
+        apiFigureBans() {
+            apiFigureBans().then((res) => {
+                this.dataImage = res.data;
+            })
+        }
+    }
 
 }
 </script>
 <style lang="less" scoped>
 .article-banner {
+    margin-top: 20px;
     .items {
         font-size: 0;
         .item {
@@ -33,6 +50,7 @@ export default {
             img {
                 width: 100%;
                 height: 100%;
+                object-fit: cover;
             }
         }
         .item-long {

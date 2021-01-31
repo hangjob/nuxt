@@ -1,10 +1,7 @@
 <template>
     <nuxt-link class="article-item" :to="`/article/${detail.id}`">
         <div class="post-card">
-            <div
-                class="blog-background"
-                :style="`background-image: url(${detail.pic})`"
-            ></div>
+            <div class="blog-background" :style="`background-image: url(${detail.pic})`"></div>
             <div class="post-card-mask">
                 <div class="post-card-container">
                     <h2 class="post-card-title" itemprop="headline">{{detail.title}}</h2>
@@ -38,6 +35,12 @@ export default {
     transition: 0.3s ease all;
     margin-bottom: 40px;
     display: block;
+    &:hover {
+        .blog-background {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 22px 43px rgba(0, 0, 0, 0.15);
+        }
+    }
     .blog-background {
         display: block;
         width: 100%;
@@ -50,7 +53,7 @@ export default {
         top: 0;
         overflow: hidden;
         opacity: 1;
-        transition: 1s ease opacity;
+        transition: all 0.3s;
     }
     .post-card-mask {
         background: rgba(0, 0, 0, 0.25);
@@ -62,10 +65,10 @@ export default {
         height: 280px;
 
         .post-card-container {
-            .post-card-title{
+            .post-card-title {
                 font-size: 20px;
             }
-            .post-card-info{
+            .post-card-info {
                 color: #eee;
             }
             padding: 2rem 2rem;

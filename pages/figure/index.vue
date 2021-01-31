@@ -44,6 +44,8 @@ export default {
             width: 20%;
             padding: 10px 5px;
             box-sizing: border-box;
+            max-height: 380px;
+            min-height: 250px;
             a {
                 display: block;
                 height: 100%;

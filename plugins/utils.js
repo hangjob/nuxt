@@ -67,6 +67,26 @@ utils.imgsrc = function(str) {
     return url + str;
 }
 
+// 去除html
+utils.delHtmlTag = function(str) {
+    return str.replace(/<[^>]+>/g, "");
+}
+
+// 去空格
+utils.trim = function(str, is_global = 'g') {
+    var result;
+    result = str.replace(/(^\s+)|(\s+$)/g, "");
+    if (is_global.toLowerCase() == "g") {
+        result = result.replace(/\s/g, "");
+    }
+    return result;
+}
+
+
+utils.delHtmlTagTrim = function(str) {
+    return utils.trim(utils.delHtmlTag(str));
+}
+
 // 挂载到全局Vue实例
 Vue.use({
     install(Vue) {

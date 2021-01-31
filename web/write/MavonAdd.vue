@@ -10,7 +10,7 @@
             <el-form-item label="网址名称" prop="it_name">
                 <el-input placeholder="输入网址名称" v-model="ruleForm.it_name"></el-input>
             </el-form-item>
-            <el-form-item label="网站地址" prop="url">
+            <el-form-item label="网站地址" prop="url" v-if="isWrite">
                 <el-input placeholder="输入网站地址" v-model="ruleForm.url"></el-input>
             </el-form-item>
             <el-form-item label="上传封面" prop="pic">
@@ -64,7 +64,7 @@
             <div class="editor-body">
                 <no-ssr>
                     <mavon-editor
-                        class="custom-editor"
+                        class="custom-editor itnavs-markdown"
                         :toolbars="markdownOption"
                         v-model="ruleForm.content"
                         @imgAdd="$imgAdd"
@@ -74,7 +74,7 @@
             </div>
         </div>
         <div class="submit">
-            <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
+            <el-button type="primary" @click="submitForm('ruleForm')" :loading="loading">写好了，发 表</el-button>
         </div>
         <Imgcre ref="imgcre" @handleResult="handleResult" />
     </div>
@@ -84,6 +84,27 @@ import { keywords } from '@/utils/keywords'
 import Imgcre from './Imgcre'
 import { apiNavtagAppend } from '@/api/index'
 import { apiUploadUpimage } from '@/api/upload'
+import { photoCompress, showSize, convertBase64UrlToBlob } from '@/utils/compress'
+import { Loading } from 'element-ui';
+const _utils = {};
+_utils.delHtmlTag = function (str) {
+    return str.replace(/<[^>]+>/g, "");
+}
+
+// 去空格
+_utils.trim = function (str, is_global = 'g') {
+    var result;
+    result = str.replace(/(^\s+)|(\s+$)/g, "");
+    if (is_global.toLowerCase() == "g") {
+        result = result.replace(/\s/g, "");
+    }
+    return result;
+}
+
+
+_utils.delHtmlTagTrim = function (str) {
+    return _utils.trim(_utils.delHtmlTag(str));
+}
 function checkURL(URL) {
     var str = URL;
     //判断URL地址的正则表达式为:http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?
@@ -101,6 +122,10 @@ export default {
         Imgcre
     },
     props: {
+        isWrite: {
+            type: Boolean,
+            default: true
+        },
         detail: {
             type: Object,
             default: () => { }
@@ -119,6 +144,17 @@ export default {
                     callback();
                 } else {
                     callback(new Error('小可爱，请输入正确的网址'));
+                }
+            }
+        };
+        let validatorTitle = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('小可爱，请输入内容'));
+            } else {
+                if (_utils.delHtmlTagTrim(value) == '') {
+                    callback(new Error('小可爱，请输入正确的内容'));
+                } else {
+                    callback();
                 }
             }
         };
@@ -174,8 +210,7 @@ export default {
             },
             rules: {
                 it_name: [
-                    { required: true, message: '请输入名称', trigger: 'blur' },
-                    { min: 1, max: 20, message: '长度在 1 到 20 个字符', trigger: 'blur' }
+                    { required: true, message: '请输入名称', trigger: 'change', validator: validatorTitle }
                 ],
                 url: [
                     { required: true, message: '输入网址链接', trigger: 'change', validator: validateUrl }
@@ -193,15 +228,16 @@ export default {
                     { type: 'number', required: true, message: '选择二级分类', }
                 ],
                 describe: [
-                    { required: true, min: 10, max: 300, message: '输入简介', message: '长度在 10 到 300 个字符', trigger: 'blur' }
+                    { required: true, message: '请输入简介', trigger: 'change', validator: validatorTitle }
                 ]
             },
             options: [],
-            keywords: keywords
+            keywords: keywords,
+            loading: false
         };
     },
     created() {
-
+        this.ruleForm.type = this.isWrite ? 1 : 2;
     },
     methods: {
         submitForm(formName) {
@@ -229,8 +265,12 @@ export default {
                 return false;
             }
             let obj = JSON.parse(JSON.stringify(this.ruleForm));
-            obj.keywords = obj.keywords.join(',');
+            obj.keywords = _utils.delHtmlTagTrim(obj.keywords.join(','));
+            if (this.isWrite) {
+                obj.title = obj.it_name;
+            }
             obj.shows = obj.shows === false ? 0 : 1;
+            this.loading = true;
             apiNavtagAppend(obj).then((res) => {
                 if (res.code == 0) {
                     this.$utils.isErrJson(res, this)
@@ -241,7 +281,8 @@ export default {
                         type: 'success'
                     });
                 }
-                console.log(res)
+            }).finally(() => {
+                this.loading = false;
             })
         },
         resetForm(formName) {
@@ -270,15 +311,27 @@ export default {
         },
         $imgAdd(pos, file) {
             // 第一步.将图片上传到服务器.
-            let formdata = new FormData();
-            formdata.append('file', file, file.name);
-            this.loading = true;
-            apiUploadUpimage(formdata).then((res) => {
-                console.log(res)
-                this.$refs.md.$img2Url(pos, this.$utils.imgsrc(res.data.path));
-            }).finally(() => {
-                this.loading = false;
-            })
+            photoCompress(file.miniurl, (base64) => {
+                if (showSize(base64) > 500) {
+                    this.$message({
+                        message: '小可爱，图片太大了',
+                        type: 'warning'
+                    });
+                    this.$refs.md.$img2Url(pos, '');
+                    return false;
+                }
+                let bl = convertBase64UrlToBlob(base64);
+                let formdata = new FormData()
+                formdata.append("file", bl, Date.parse(new Date()) + ".jpg");
+                let loadingInstance = Loading.service({ fullscreen: true, text: '图片正在压缩上传中...' });
+                apiUploadUpimage(formdata).then((res) => {
+                    this.$refs.md.$img2Url(pos, this.$utils.imgsrc(res.data.path));
+                }).finally(() => {
+                    this.$nextTick(() => { // 以服务的方式调用的 Loading 需要异步关闭
+                        loadingInstance.close();
+                    });
+                })
+            }, { quality: 0.8 })
         }
     }
 };
@@ -288,6 +341,10 @@ export default {
     width: 100%;
 }
 .MavonAdd {
+    background-color: #fff;
+    box-sizing: border-box;
+    padding: 20px 0;
+    border-radius: 6px;
     .uploadImage {
         width: 100%;
         height: 100%;
@@ -313,6 +370,7 @@ export default {
     }
     .custom-editor {
         box-shadow: none !important;
+        min-height: 400px;
     }
     .submit {
         padding: 20px;

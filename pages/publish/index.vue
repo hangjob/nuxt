@@ -4,13 +4,13 @@
         <div class="wp clearfix">
             <div class="tab">
                 <h2>
-                    <nuxt-link to="/write" class="cur">发布网址</nuxt-link>
+                    <nuxt-link to="/write">发布网址</nuxt-link>
                 </h2>
                 <h2>
-                    <nuxt-link to="/publish">发布文章</nuxt-link>
+                    <nuxt-link to="/publish" class="cur">发布文章</nuxt-link>
                 </h2>
             </div>
-            <MavonAdd :detail="detail" :detail2="detail2" />
+            <MavonAdd :isWrite="false" :detail="detail" :detail2="detail2" />
         </div>
         <Footer />
     </div>

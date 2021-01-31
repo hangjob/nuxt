@@ -31,11 +31,11 @@
                                     <i class="fa fa-user-circle"></i>羊先生
                                 </span>
                                 <span class="tags">
-                                    <a
-                                        href="javascript:;"
+                                    <nuxt-link
                                         v-for="(evto,j) in todo.keywords"
                                         :key="j"
-                                    >{{evto}}</a>
+                                        :to="`/search?ks=${evto}`"
+                                    >{{evto}}</nuxt-link>
                                 </span>
                             </h4>
                         </div>

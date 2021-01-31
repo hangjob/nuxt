@@ -41,7 +41,7 @@
                         <div slot="cancel"></div>
                         <div slot="confirm"></div>
                         <div slot="choose">
-                             <el-button v-show="isClick" type="danger" plain>重新上传</el-button>
+                            <el-button v-show="isClick" type="danger" plain>重新上传</el-button>
                         </div>
                     </ImgCutter>
                 </div>
@@ -69,14 +69,15 @@
 </template>
 <script>
 import { apiUploadUpimage } from '@/api/upload'
+import { photoCompress, showSize, convertBase64UrlToBlob } from '@/utils/compress'
 export default {
 
     data() {
         return {
             dialogVisible: false,
             dataURL: '',
-            loading:false,
-            isClick:false
+            loading: false,
+            isClick: false
         }
     },
     mounted() {
@@ -90,23 +91,34 @@ export default {
             this.dialogVisible = false;
         },
         handleConfirm() {
-            if(!this.isClick){
+
+            if (!this.isClick) {
                 this.$message({
                     message: '小可爱，请选择图片',
                     type: 'warning'
                 });
                 return false;
             }
-            let formFile = new FormData()
-            formFile.append('file', this.file.file)
-            this.loading = true;
-            apiUploadUpimage(formFile).then((res) => {
-                this.handleClose()
-                this.$emit('handleResult', res);
-            }).finally(() => {
-                this.loading = false;
+            photoCompress(this.dataURL, (base64) => {
+                if (showSize(base64) > 300) {
+                    this.$message({
+                        message: '小可爱，图片太大了',
+                        type: 'warning'
+                    });
+                    return false;
+                }
+                let bl = convertBase64UrlToBlob(base64);
+                let formdata = new FormData()
+                formdata.append("file", bl, Date.parse(new Date()) + ".jpg");
+                this.loading = true;
+                apiUploadUpimage(formdata).then((res) => {
+                    this.handleClose()
+                    this.$emit('handleResult', res);
+                }).finally(() => {
+                    this.loading = false;
+                })
             })
-            // this.dialogVisible = false;
+
         },
         handleOpen() {
             this.dialogVisible = true;

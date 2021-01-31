@@ -3,7 +3,7 @@ const prefix = '/itapi';
 
 
 const apiTaxonomicYoulike = (params) => {
-    return post(`${prefix}/taxonomic/youlike`, params)
+    return post(`${prefix}/taxonomic/youlike`, params, { loca: true })
 }
 
 

@@ -29,11 +29,20 @@
                             <span class="site-name">{{item.name}}</span>
                         </el-option>
                     </el-select>
-                    <el-button class="custom-search-btn" slot="append" icon="el-icon-search">搜索</el-button>
+                    <el-button
+                        @click="handleSearch"
+                        class="custom-search-btn"
+                        slot="append"
+                        icon="el-icon-search"
+                    >搜索</el-button>
                 </el-autocomplete>
                 <div class="keywords">
                     <template v-for="(item,index) in keywords">
-                        <nuxt-link :to="`/search?ks=${item}`" :key="index" :style="{backgroundColor:colour[index].color}">#{{item}}</nuxt-link>
+                        <nuxt-link
+                            :to="`/search?ks=${item}`"
+                            :key="index"
+                            :style="{backgroundColor:colour[index].color}"
+                        >#{{item}}</nuxt-link>
                     </template>
                 </div>
                 <div class="manuscript">
@@ -97,6 +106,21 @@ export default {
     methods: {
         openDialogTableVisible() {
             this.dialogTableVisible = true;
+        },
+        handleSearch() {
+            if (this.$utils.delHtmlTagTrim(this.ks) == '') {
+                this.$notify({
+                    title: '提示信息',
+                    message: `小可爱，检查输入有误`,
+                    type: 'warning'
+                });
+            } else {
+                if(this.select === 'logo.png'){
+                    this.$router.push({ path: '/search', query: { ks: this.ks } })
+                }else{
+                    this.handleSelect();
+                }
+            }
         },
         change() {
             let index = this.options.findIndex(findKey('img', this.select));

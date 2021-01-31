@@ -4,12 +4,12 @@
             <i class="iconfont vm iconfont-speak"></i>
             <span class="vm">{{item.taxonomic.primary.mark}}</span>
         </div>
-        <nuxt-link :to="$utils.navLink(item)"  class="title">{{item.it_name}}</nuxt-link>
+        <nuxt-link :to="$utils.navLink(item)" class="title">{{item.it_name}}</nuxt-link>
         <nuxt-link :to="$utils.navLink(item)" class="des">{{item.describe}}</nuxt-link>
         <div class="content-bottom">
-            <div class="join">
+            <div class="join" @click="openWechat(item.url)">
                 <span class="vm">
-                    立即访问
+                    直接访问
                     <i class="el-icon-right"></i>
                 </span>
             </div>
@@ -22,6 +22,7 @@
         <div class="cover">
             <img :src="item.pic" :alt="item.describe" :title="item.it_name" />
         </div>
+        <Attention :url="url" ref="attention"></Attention>
     </div>
 </template>
 <script>
@@ -32,6 +33,20 @@ export default {
             default: () => { }
         }
     },
+    data() {
+        return {
+            url: ''
+        }
+    },
+    methods: {
+        openWechat(url) {
+            console.log(url);
+            this.url = url;
+            this.$nextTick(() => {
+                this.$refs.attention.openWechat()
+            })
+        }
+    }
 }
 </script>
 <style lang="less" scoped>
@@ -86,15 +101,19 @@ export default {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 126px;
-            height: 46px;
-            border-radius: 46px;
+            width: 120px;
+            height: 42px;
+            border-radius: 6px;
             color: #fff;
-            background: #ffd100;
+            background: #fbbeaa;
             font-weight: 600;
             font-size: 16px;
             text-align: center;
             margin-right: 24px;
+            transition: all 0.3s;
+            &:hover {
+                background: #e96c59;
+            }
             .vm {
                 margin-left: auto;
                 display: flex;
@@ -132,7 +151,7 @@ export default {
         top: 50%;
         right: 0;
         transform: translate(50%, -50%);
-        transition: all .3s;
+        transition: all 0.3s;
         img {
             width: 100%;
             border-radius: 16px;

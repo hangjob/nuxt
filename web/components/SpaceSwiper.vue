@@ -7,7 +7,7 @@
                         <div v-for="(item, index) in dataImage" :key="index" class="swiper-slide">
                             <div class="item">
                                 <div class="item-card-img">
-                                    <nuxt-link to="/figure" target="_blank">
+                                    <nuxt-link to="/figure">
                                         <img :src="item.img" :alt="item.title" />
                                     </nuxt-link>
                                 </div>

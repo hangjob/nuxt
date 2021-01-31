@@ -26,7 +26,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="content">
+                <div class="content article-md">
                     <no-ssr>
                         <mavon-editor
                             class="detail-md itnavs-markdown"
