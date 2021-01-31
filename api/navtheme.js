@@ -11,7 +11,15 @@ const apiNavthemeDetail = (params) => {
 }
 
 
+const apiNavthemeNewest = (params) => {
+    return post(`${prefix}/navtheme/newest`, params)
+}
+
+
+
+
 export {
     apiNavthemeItems,
-    apiNavthemeDetail
+    apiNavthemeDetail,
+    apiNavthemeNewest
 }
