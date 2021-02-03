@@ -29,13 +29,13 @@ export default {
                 { value: '公众号', icon: 'icon-weixin', color: '#67c23a', url: '', isClick: true },
                 { value: '全栈主题', icon: 'icon-tansuoxuanzhong', color: '#ffc107', isClick: true, url: 'https://www.vipbic.com/rank.html' },
                 { value: '精选文章', icon: 'icon-wenzhangguanli', color: '#cddc39', url: '/article' },
-                { value: 'Top热榜', icon: 'icon-redu', isClick: true, color: '#f56c6c' },
+                { value: 'Top热榜', icon: 'icon-redu', color: '#f56c6c',url: '/hot' },
                 { value: 'Web前端', icon: 'icon-kaifaguanli', color: '#6869dc', url: '/category/8' },
                 { value: 'UI设计', icon: 'icon-shejishi2', color: '#e91e63', url: '/category/4' },
                 { value: '学习社区', icon: 'icon-xuexizhongxin', color: '#03a9f4', url: '/category/10' },
                 { value: '后端开发', icon: 'icon-_qianduankaifa', color: '#2196f3', url: '/category/9' },
                 { value: '产品经理', icon: 'icon-chanpinxiangqingsheji', color: '#67c23a', url: '/category/3' },
-                { value: '共享会员', icon: 'icon-changyonglogo45', color: '#66b1ff', url: '' },
+                { value: '软件下载', icon: 'icon-changyonglogo45', color: '#66b1ff', url: '/download' },
                 { value: '给我留言', icon: 'icon-xinjian', color: '#f8ce58', url: '', url: '/intera' }, // 弹个窗 然后 发送邮件， 填写用户邮箱，我回复
             ]
         }

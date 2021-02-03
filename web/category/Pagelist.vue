@@ -18,7 +18,7 @@
                             </nuxt-link>
                         </div>
                         <div class="item-content">
-                            <nuxt-link  class="a_block" :to="$utils.navLink(todo)">
+                            <nuxt-link class="a_block" :to="$utils.navLink(todo)">
                                 <h2 class="title">{{todo.it_name}}</h2>
                                 <p>{{todo.describe}}</p>
                             </nuxt-link>
@@ -125,9 +125,13 @@ export default {
                         color: #888;
                         line-height: 24px;
                         height: 48px;
-                        overflow: hidden;
                         margin-bottom: 14px;
                         max-width: 615px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
                     }
                 }
                 h4 {
