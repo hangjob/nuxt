@@ -54,11 +54,7 @@ export default {
             ks: ks
         }
     },
-    created() {
-        setTimeout(() => {
-            console.log(this.items)
-        }, 2000)
-    },
+
     methods: {
         async apiNavtagSearch() {
             const res = await apiNavtagSearch({ ks: this.ks });

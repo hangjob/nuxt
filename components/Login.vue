@@ -45,7 +45,7 @@
             <div class="login-bottom" slot="footer">
                 <button class="itnavs-button" @click="login" :disabled="disabled">登录</button>
                 <p>
-                    还没加入vipbic？马上去
+                    还没加入 全栈导航 ？马上去
                     <a href="javascript:;" @click="registerOpen">注册</a>
                 </p>
             </div>

@@ -56,7 +56,7 @@
             <div class="login-bottom" slot="footer">
                 <button class="itnavs-button" @click="register" :disabled="disabled">注册</button>
                 <p>
-                    你已加入vipbic？马上去
+                    你已加入全栈导航？马上去
                     <a href="javascript:;" @click="loginOpen">登录</a>
                 </p>
             </div>

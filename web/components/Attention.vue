@@ -32,7 +32,7 @@
                 <div class="main">
                     <h2>扫码关注</h2>
                     <div class="main-content">
-                        <h4>扫码 关注vipbic公众号 每日更新</h4>
+                        <h4>扫码 关注[全栈导航]公众号 每日更新</h4>
                     </div>
                     <div class="main-code">
                         <img src="@/assets/images/code.png" alt />

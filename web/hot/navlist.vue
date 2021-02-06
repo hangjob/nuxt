@@ -4,20 +4,50 @@
             <h2>热榜</h2>
         </div>
         <ul class="clearfix">
-            <li>
-                <a href="/study/16.html">
-                    <img src="https://www.2qj.com/Public/Upload/Study/3GUWGZ3xlQlu1kW.jpg" alt />
-                    <span class="btn btn-green">立即访问</span>
-                    <h2>设计理论知识成长路径</h2>
-                </a>
-                <p>知其然知其所以然</p>
+            <li v-for="(item,index) in items" :key="index" v-if="item.pic">
+                <template v-if="item.isArticle">
+                    <nuxt-link :to="'/article/'+item.id">
+                        <img :src="item.pic" alt />
+                        <span class="btn btn-green">立即访问</span>
+                        <h2>{{item.name}}</h2>
+                    </nuxt-link>
+                    <p>{{item.des}}</p>
+                </template>
+                <template v-else>
+                    <a href="javascript:;">
+                        <img :src="item.pic" alt />
+                        <span class="btn btn-green" @click="openDialogVisible(item)">点击下载</span>
+                        <h2>{{item.name}}</h2>
+                    </a>
+                    <p>{{item.des}}</p>
+                </template>
             </li>
         </ul>
+        <DownloadPopup ref="DownloadPopup"></DownloadPopup>
     </div>
 </template>
 <script>
 export default {
+    props: {
+        items: {
+            type: Array,
+            default: () => { }
+        }
+    },
+    computed: {
+        link() {
+            return function (obj) {
+                if (obj.isArticle) {
 
+                }
+            }
+        }
+    }, 
+    methods: {
+        openDialogVisible(item){
+            this.$refs.DownloadPopup.openDialogVisible(item);
+        }
+    }
 }
 </script>
 <style lang="less" scoped>

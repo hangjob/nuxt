@@ -11,6 +11,7 @@
                 <h5>
                     扫码关注，回复
                     <span>“验证码”</span>，极刻获得所有访问权限
+                    <br />小可爱，如果你不想关注，按键盘ESC即可关闭
                 </h5>
             </div>
             <div class="attention__input">
@@ -47,15 +48,21 @@ export default {
         verification() {
             if (this.attentionVal == verificationCode) {
                 window.localStorage.setItem('isAttention', this.attentionVal);
-                this.$notify({
-                    title: '验证成功',
-                    message: '1秒中后跳转',
-                    type: 'success'
-                });
-                this.dialogVisible = false;
-                setTimeout(() => {
-                    window.open(this.url);
-                }, 300)
+                if (this.$listeners['successResult']) {
+                    this.dialogVisible = false;
+                    this.$emit('successResult');
+                } else {
+                    this.$notify({
+                        title: '验证成功',
+                        message: '1秒中后跳转',
+                        type: 'success'
+                    });
+                    this.dialogVisible = false;
+                    setTimeout(() => {
+                        window.open(this.url);
+                    }, 300)
+                }
+
             } else {
                 this.$message({
                     message: this.attentionVal ? '验证码有误' : '验证码不能为空',
@@ -66,7 +73,12 @@ export default {
         openWechat() {
             let isAttention = window.localStorage.getItem('isAttention');
             if (isAttention == verificationCode) {
-                window.open(this.url);
+                if (this.$listeners['successResult']) {
+                    this.dialogVisible = false;
+                    this.$emit('successResult');
+                } else {
+                    window.open(this.url);
+                }
             } else {
                 this.dialogVisible = true;
             }

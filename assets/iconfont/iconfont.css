@@ -1,8 +1,8 @@
 @font-face {
     font-family: 'iconfont';
     /* project id 2171087 */
-    src: url('//at.alicdn.com/t/font_2171087_h0mwz3yn6u.eot');
-    src: url('//at.alicdn.com/t/font_2171087_h0mwz3yn6u.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_2171087_h0mwz3yn6u.woff2') format('woff2'), url('//at.alicdn.com/t/font_2171087_h0mwz3yn6u.woff') format('woff'), url('//at.alicdn.com/t/font_2171087_h0mwz3yn6u.ttf') format('truetype'), url('//at.alicdn.com/t/font_2171087_h0mwz3yn6u.svg#iconfont') format('svg');
+    src: url('//at.alicdn.com/t/font_2171087_cp6w9tgfcfe.eot');
+    src: url('//at.alicdn.com/t/font_2171087_cp6w9tgfcfe.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_2171087_cp6w9tgfcfe.woff2') format('woff2'), url('//at.alicdn.com/t/font_2171087_cp6w9tgfcfe.woff') format('woff'), url('//at.alicdn.com/t/font_2171087_cp6w9tgfcfe.ttf') format('truetype'), url('//at.alicdn.com/t/font_2171087_cp6w9tgfcfe.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -11,6 +11,98 @@
     font-style: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-32:before {
+    content: "\e626";
+}
+
+.icon-mac:before {
+    content: "\e61e";
+}
+
+.icon-weizhi:before {
+    content: "\e614";
+}
+
+.icon-weizhi1:before {
+    content: "\e627";
+}
+
+.icon-guanyuwomen:before {
+    content: "\e63e";
+}
+
+.icon-IP:before {
+    content: "\e633";
+}
+
+.icon-tixing:before {
+    content: "\e628";
+}
+
+.icon-wenzhanghuoke-:before {
+    content: "\e659";
+}
+
+.icon-zanwushuju:before {
+    content: "\e62a";
+}
+
+.icon-weizhi2:before {
+    content: "\e647";
+}
+
+.icon-windows:before {
+    content: "\f266";
+}
+
+.icon-xiazai:before {
+    content: "\e648";
+}
+
+.icon-tixing1:before {
+    content: "\e660";
+}
+
+.icon-icon:before {
+    content: "\e64c";
+}
+
+.icon-liuyan:before {
+    content: "\e62b";
+}
+
+.icon-huifu:before {
+    content: "\e639";
+}
+
+.icon-xiazai1:before {
+    content: "\e65c";
+}
+
+.icon-windows-fill-round:before {
+    content: "\e69d";
+}
+
+.icon-women:before {
+    content: "\e7d3";
+}
+
+.icon-huifu1:before {
+    content: "\e6ce";
+}
+
+.icon-liuyanban-05:before {
+    content: "\e634";
+}
+
+.icon-biaoqiankuozhan_shouye-151:before {
+    content: "\eb0f";
+}
+
+.icon-biaoqiankuozhan_shouye-196:before {
+    content: "\eb3e";
 }
 
 .icon-xianshanglianjie:before {
