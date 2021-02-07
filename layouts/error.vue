@@ -160,7 +160,7 @@
                 <div class="e404-page-text">
                     <h2>{{statusCode}}</h2>
                     <p>
-                        抱歉，您访问的页面不存在或者已经删除
+                        抱歉，您访问的页面不存在或者已经删除{{message}}
                         <nuxt-link class="error-link" to="/">回到首页</nuxt-link>
                     </p>
                 </div>

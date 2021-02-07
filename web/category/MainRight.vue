@@ -5,7 +5,7 @@
             <div class="list">
                 <ul>
                     <li v-for="(item,index) in detailObject.new" :key="item.id">
-                        <a href>
+                        <a href="javascript:;">
                             <span>{{index+1}}</span>
                             <p>{{item.title}}</p>
                         </a>

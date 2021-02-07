@@ -3,19 +3,29 @@ import { handLastUrl, baseUrl } from '@/config/base'
 
 const http = axios.create({
     baseURL: baseUrl(),
-    timeout: 10000,
+    timeout: 20000,
     withCredentials: true
 })
 
 
 // 请求拦截器
-axios.interceptors.request.use(request => {
+http.interceptors.request.use(request => {
     return request;
 }, error => {
     return Promise.reject(error);
 });
 
 
+http.interceptors.response.use(response => {
+    const { data } = response;
+    if (data.code === 1) {
+        return response;
+    } else {
+        return Promise.reject(response.data);
+    }
+}, error => {
+    return Promise.reject(error);
+});
 
 const post = async(url, params, hand = { loca: false }) => {
     if (process.server) {

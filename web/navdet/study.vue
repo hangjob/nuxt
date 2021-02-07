@@ -13,15 +13,19 @@
                 <div class="tag">
                     <ul>
                         <li v-for="(item,index) in detail.keywords" :key="index">
-                            <a href>
+                            <nuxt-link :to="`/search?ks=${item}`">
                                 <i class="fa fa-leaf" aria-hidden="true"></i>
                                 <span>{{item}}</span>
-                            </a>
+                            </nuxt-link>
                         </li>
                     </ul>
                 </div>
                 <div class="mtm">
-                    <a href="javascript:;" class="leave itnavs-button" @click="$refs.attention.openWechat()">
+                    <a
+                        href="javascript:;"
+                        class="leave itnavs-button"
+                        @click="$refs.attention.openWechat()"
+                    >
                         <i class="fa fa-hand-o-right" aria-hidden="true"></i>前往官网
                     </a>
                     <!-- <a href class="collect itnavs-button">
@@ -96,10 +100,28 @@ export default {
                         display: inline-block;
                         height: 20px;
                         margin-right: 20px;
+                        margin-bottom: 15px;
                         a {
                             color: #2c3e50;
                             display: flex;
                             align-items: center;
+                            color: #2c3e50;
+                            display: flex;
+                            align-items: center;
+                            background-color: #fbf8f8;
+                            padding: 3px 5px;
+                            border-radius: 3px;
+                            box-sizing: border-box;
+                            transition: all 0.3s;
+                            &:hover{
+                                background-color: #999;
+                                i{
+                                    color: #fff;
+                                }
+                                span{
+                                    color: #fff;
+                                }
+                            }
                             i {
                                 padding-right: 5px;
                                 color: #b8c4ce;

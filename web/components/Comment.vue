@@ -155,7 +155,8 @@ export default {
         submitData() {
 
             if (!this.$store.state.userInfo.userid) {
-                this.$message({
+                this.$notify({
+                    title: '评论',
                     message: '小可爱，你还为登录',
                     type: 'warning'
                 });
@@ -163,13 +164,23 @@ export default {
             }
 
             if (!this.content) {
-                this.$message({
+                this.$notify({
+                    title: '评论',
                     message: '小可爱，内容不能为空哦！',
                     type: 'warning'
                 });
                 return false;
             }
-            
+
+            if (!this.$utils.delHtmlTagTrim(this.content)) {
+                this.$notify({
+                    title: '评论',
+                    message: `小可爱，内容不规范`,
+                    type: 'warning'
+                });
+                return false;
+            }
+
             apiDiscussAdd({ fid: this.$route.params.id, type: this.type, content: this.content })
                 .then(res => {
                     this.$notify({
@@ -179,7 +190,7 @@ export default {
                     });
                     this.content = '';
                 }).catch((err) => {
-                    this.$utils.isErrJson(err)
+                    this.$utils.isErrJson(err, this)
                 })
         },
         openReply(item) {

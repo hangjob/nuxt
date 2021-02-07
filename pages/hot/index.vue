@@ -2,11 +2,11 @@
     <div class="hot">
         <Header />
         <Banner />
-        <Special/>
+        <Special />
         <div class="wp clearfix">
             <div class="container">
                 <software :items="items" />
-                <navlist :items="downTheme"/>
+                <navlist :items="downTheme" />
             </div>
         </div>
         <Footer />
@@ -36,7 +36,6 @@ export default {
     head() {
         return {
             script: [
-                { src: 'https://www.vipbic.com/public/static/superslide/jquery-1.8.3.min.js' },
                 { src: 'https://www.vipbic.com/public/static/superslide/superslide.2.1.js' }
             ]
         }
@@ -47,9 +46,7 @@ export default {
         }
     },
     mounted() {
-        setTimeout(() => {
-            console.log(this.downTheme)
-        }, 2000)
+
     },
     async asyncData({ $axios, app, store, params }) {
         const res = await apiAppdownloadItems();

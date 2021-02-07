@@ -43,7 +43,7 @@ export default {
             apiFigureBans().then((res) => {
                 this.dataImage = res.data;
                 this.$nextTick(() => {
-                    this.initBanner();
+                   this.initBanner();
                 })
             })
         },

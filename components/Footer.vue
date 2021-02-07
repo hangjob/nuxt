@@ -4,14 +4,14 @@
             <p class="darkgray slogan">互联网职员，找导航，就上 全栈导航</p>
             <p>
                 友情链接：
-                <a>Vipbic</a>
+                <a href="https://www.vipbic.com/" target="_blank">Vipbic</a>
                 <span>|</span>
-                <a>凡间搜索</a>
+                <a href="http://search.vipbic.com/" target="_blank">凡间搜索</a>
                 <span>|</span>
                 <a style="color:#5ebdb9">查看所有</a>
             </p>
             <p class="darkgray">
-                <a>联系站长</a> |
+                <a href="https://www.vipbic.com/about.html" target="_blank">联系站长</a> |
                 <a>手机微信扫一扫</a> |
                 <a>吐个槽</a>
             </p>
@@ -21,12 +21,25 @@
         </div>
         <div
             class="recruit"
-        >本站创建于2019年06月03日，已经在互联网的长河游行了300天，Meeting you has been my honor ，我等你很久了~</div>
+        >本站创建于2020年05月07日，已经在互联网的长河游行了{{date.day}}天，Meeting you has been my honor ，我等你很久了~</div>
     </div>
 </template>
 <script>
 export default {
-
+    data() {
+        return {
+            date: {
+                day: ''
+            }
+        }
+    },
+    mounted() {
+        var date1 = new Date("07/05/2020");
+        var date2 = new Date();
+        var Difference_In_Time = date2.getTime() - date1.getTime();
+        var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+        this.date.day = parseInt(Difference_In_Days)
+    }
 }
 </script>
 <style lang="less" scoped>

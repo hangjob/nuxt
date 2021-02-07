@@ -25,6 +25,7 @@
     "v-viewer": "^1.5.1",
     "vue-awesome-swiper": "^4.1.1",
     "vue-count-to": "^1.0.13",
+    "vue-mini-weather": "^0.2.9",
     "vuex": "^3.6.0"
   },
   "devDependencies": {

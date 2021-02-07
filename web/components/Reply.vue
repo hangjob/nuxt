@@ -60,7 +60,7 @@ export default {
                 });
                 // this.content = '';
             }).catch((err) => {
-                this.$utils.isErrJson(err)
+                this.$utils.isErrJson(err,this)
             })
         }
     }

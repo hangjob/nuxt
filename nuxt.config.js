@@ -13,7 +13,9 @@ export default {
             { rel: 'stylesheet', href: '//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' }
         ],
         script: [
-            { src: 'https://cdn.bootcdn.net/ajax/libs/showdown/1.9.1/showdown.min.js' }
+            { src: 'https://cdn.bootcdn.net/ajax/libs/showdown/1.9.1/showdown.min.js' },
+            { src: 'https://www.vipbic.com/public/static/superslide/jquery-1.8.3.min.js' },
+            { src: 'https://www.vipbic.com/public/static/superslide/superslide.2.1.js' }
         ]
     },
     // 创建环境变量
@@ -52,6 +54,7 @@ export default {
         { src: '@/plugins/swiper.js', ssr: false },
         { src: '@/plugins/viewer.js', ssr: false },
         { src: '@/plugins/cropper.js', ssr: false },
+        { src: '@/plugins/weather.js', ssr: false },
         { src: '@/plugins/utils.js' },
         { src: '@/plugins/tool.js', mode: 'server' },
         { src: '@/plugins/vue-mavon-editor', ssr: false },

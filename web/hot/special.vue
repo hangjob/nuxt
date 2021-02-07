@@ -4,7 +4,7 @@
             <nuxt-link to="/" style="background-image: linear-gradient(45deg,#7fe496,#6edf8f)">
                 <div class="item-container">
                     <h6>
-                        <i class="icon-office fs-22 mr-3 v-m-3"></i>
+                        <i class="iconfont icon-biaoqiankuozhan_shouye-151"></i>
                         <span>全栈导航</span>
                     </h6>
                 </div>

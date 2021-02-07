@@ -26,7 +26,7 @@ utils.copy = () => {
 
 utils.isErrJson = function(res, that) {
     if (res.code != 1) {
-        let str = res.message || '小可爱出错了';
+        let str = res.message || '小可爱，出错了^_^';
         if (Object.prototype.toString.call(res.message) === "[object Object]") {
             for (let i in res.message) {
                 if (res.message[i]) {
@@ -36,7 +36,7 @@ utils.isErrJson = function(res, that) {
             }
         }
         that.$notify({
-            title: '小可出错了^_^',
+            title: '小可爱，出错了^_^',
             message: str,
             type: 'warning'
         })

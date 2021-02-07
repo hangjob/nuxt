@@ -272,15 +272,13 @@ export default {
             obj.shows = obj.shows === false ? 0 : 1;
             this.loading = true;
             apiNavtagAppend(obj).then((res) => {
-                if (res.code == 0) {
-                    this.$utils.isErrJson(res, this)
-                } else {
-                    this.$notify({
-                        title: '发表成功',
-                        message: `${this.ruleForm.it_name}已发表成功`,
-                        type: 'success'
-                    });
-                }
+                this.$notify({
+                    title: '发表成功',
+                    message: `${this.ruleForm.it_name}已发表成功`,
+                    type: 'success'
+                });
+            }).catch((err) => {
+                this.$utils.isErrJson(err, this)
             }).finally(() => {
                 this.loading = false;
             })

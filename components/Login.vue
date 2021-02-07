@@ -10,7 +10,7 @@
             <div slot="title"></div>
             <div class="login-center">
                 <div class="login-center-slogan">
-                    <span>不正经的话题区</span>
+                    <span>小可爱，欢迎你回来</span>
                 </div>
                 <div class="login-center-item">
                     <div class="login-center-item-short">
@@ -103,13 +103,15 @@ export default {
                     this.visible = false;
                     this.$store.commit('setUserInfo', res.data)
                 }).catch((err) => {
-                    this.$utils.isErrJson(err)
+                    this.$utils.isErrJson(err,this)
                 })
         },
         apiLoginUserinfo() {
             apiLoginUserinfo()
                 .then((res) => {
                     this.$store.commit('setUserInfo', res.data)
+                }).catch((err)=>{
+                    console.log()
                 })
         }
     }

@@ -10,7 +10,7 @@
             <div slot="title"></div>
             <div class="login-center">
                 <div class="login-center-slogan">
-                    <span>注册开启投票身份</span>
+                    <span>注册开启更多功能</span>
                 </div>
                 <div class="login-center-item">
                     <div class="login-center-item-short">
@@ -66,6 +66,7 @@
 <script>
 import randomNickname from '@/utils/name.js'
 import { apiRegister } from '@/api/login'
+import jsonp from 'jsonp';
 export default {
     data() {
         return {
@@ -79,6 +80,9 @@ export default {
             disabled: false,
             visible: false
         }
+    },
+    mounted(){
+        this.getIp()
     },
     methods: {
         randomNickname() {
@@ -128,9 +132,24 @@ export default {
             this.disabled = true;
             this.apiRegister();
         },
+        getIp() {
+            jsonp('http://whois.pconline.com.cn/ipJson.jsp', { name: 'IPCallBack' }, (err, data) => {
+                const { addr, city, ip, pro } = data;
+                this.registerData.userip = ip;
+                this.registerData.userhome = addr;
+            })
+        },
         apiRegister() {
             apiRegister(this.registerData).then((res) => {
-                console.log(res)
+                this.$notify({
+                    title: '注册成功',
+                    message: this.registerData.username,
+                    type: 'success'
+                });
+            }).catch((err) => {
+                this.$utils.isErrJson(err, this)
+            }).finally(() => {
+                this.disabled = false;
             })
         }
     }

@@ -5,22 +5,22 @@
         </div>
         <div class="right">
             <div class="list_user_content_message">
-                <a href="../book/?so=adad" title="只看有关“adad”的对话">大大大：</a>二万五千二群二
+                <a href="../book/?so=adad" title="只看有关“adad”的对话">{{detail.username}}：</a>
             </div>
             <div class="list_user_content_reply">
-                <div class="reply_content">三十岁的设计师不正年轻着吗？ ／ 00:08</div>
+                <div class="reply_content">{{detail.content}} ／ {{detail.create_time}}</div>
             </div>
             <div class="content_information_k">
-                <div class="content_information">12月17日 10:22 江苏 · 盐城</div>
+                <div class="content_information">{{detail.create_time}} {{detail.pro}} · {{detail.city}} · {{detail.weather}} · {{detail.nongli}}</div>
                 <div class="look_img"></div>
             </div>
-            <div class="content_lc">10538</div>
+            <div class="content_lc">{{detail.id}}</div>
         </div>
     </div>
 </template>
 <script>
 export default {
-
+    props: ['detail']
 }
 </script>
 <style lang="less" scoped>
@@ -61,6 +61,8 @@ export default {
                 line-height: 24px;
                 color: #333333;
                 text-indent: 24px;
+                padding: 10px;
+                box-sizing: border-box;
             }
         }
         .content_information_k {
