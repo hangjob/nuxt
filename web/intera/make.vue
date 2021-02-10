@@ -85,17 +85,14 @@ export default {
     },
     methods: {
         getIp() {
-            jsonp('http://whois.pconline.com.cn/ipJson.jsp', { name: 'IPCallBack' }, (err, data) => {
-                const { addr, city, ip, pro } = data;
-                this.subData.ip = ip;
-                this.subData.city = city;
-                this.subData.addr = addr;
-                this.subData.pro = pro;
-            })
+            
         },
         getWeatherInfo() {
             jsonp('https://tianqi.2345.com/api/getWeatherInfo.php', { name: 'callback' }, (err, data) => {
+                console.log(data)
                 const { weather, tempHigh, shortWea } = data.day1;
+                this.subData.city = data.cityNameWithSuffix;
+                this.subData.pro = data.prov;
                 this.subData.weather = weather;
                 this.subData.tempHigh = tempHigh;
                 this.subData.shortWea = shortWea;

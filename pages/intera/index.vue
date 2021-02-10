@@ -65,16 +65,13 @@ export default {
         }
     },
     methods: {
-        async apiLeaveItems({ page }) {
-            const listData = await apiLeaveItems({ page: page })
-            this.items = listData.data;
-            this.total = listData.data.total;
-        },
-        currentChange(page) {
-            this.apiLeaveItems({ page })
+        async currentChange(page) {
+            const res = await apiLeaveItems({ page: page })
+            this.items = res.data.data;
+            this.total = res.data.total;
         },
         addSuccess() {
-            this.currentChange({ page: 1 });
+            this.currentChange(1);
         }
     }
 }

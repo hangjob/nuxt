@@ -11,7 +11,7 @@
                 <div class="reply_content">{{detail.content}} ／ {{detail.create_time}}</div>
             </div>
             <div class="content_information_k">
-                <div class="content_information">{{detail.create_time}} {{detail.pro}} · {{detail.city}} · {{detail.weather}} · {{detail.nongli}}</div>
+                <div class="content_information">{{detail.pro}} · {{detail.city}} · {{detail.weather}} · {{detail.nongli}}</div>
                 <div class="look_img"></div>
             </div>
             <div class="content_lc">{{detail.id}}</div>

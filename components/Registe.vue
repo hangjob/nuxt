@@ -74,14 +74,16 @@ export default {
                 usermail: '',
                 password: '',
                 captcha: '',
-                username: randomNickname()
+                username: randomNickname(),
+                userip:'',
+                userhome:''
             },
             lock: true,
             disabled: false,
             visible: false
         }
     },
-    mounted(){
+    mounted() {
         this.getIp()
     },
     methods: {
@@ -133,11 +135,7 @@ export default {
             this.apiRegister();
         },
         getIp() {
-            jsonp('http://whois.pconline.com.cn/ipJson.jsp', { name: 'IPCallBack' }, (err, data) => {
-                const { addr, city, ip, pro } = data;
-                this.registerData.userip = ip;
-                this.registerData.userhome = addr;
-            })
+            
         },
         apiRegister() {
             apiRegister(this.registerData).then((res) => {
