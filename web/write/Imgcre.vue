@@ -41,7 +41,7 @@
                         <div slot="cancel"></div>
                         <div slot="confirm"></div>
                         <div slot="choose">
-                            <el-button v-show="isClick" type="danger" plain>重新上传</el-button>
+                            <el-button v-show="isClick" type="danger" plain>选择图片</el-button>
                         </div>
                     </ImgCutter>
                 </div>
@@ -68,6 +68,15 @@
     </div>
 </template>
 <script>
+const fileByBase64 = (file, callback) => {
+    var reader = new FileReader();
+    // 传入一个参数对象即可得到基于该参数对象的文本内容
+    reader.readAsDataURL(file);
+    reader.onload = function (e) {
+        // target.result 该属性表示目标对象的DataURL
+        callback(e.target.result)
+    };
+}
 import { apiUploadUpimage } from '@/api/upload'
 import { photoCompress, showSize, convertBase64UrlToBlob } from '@/utils/compress'
 export default {
@@ -124,9 +133,17 @@ export default {
             this.dialogVisible = true;
         },
         cutDown(obj) {
-            this.getImageInfo(obj.dataURL, (res) => {
-                console.log(res)
-            })
+            if (obj.dataURL) {
+                this.getImageInfo(obj.dataURL, (res) => {
+                })
+            } else {
+                fileByBase64(obj.file, (res) => {
+                    this.getImageInfo(res)
+                    obj.file.dataURL = res;
+                    this.onPrintImg(obj.file)
+                })
+            }
+
         },
         getImageInfo(base64, callback) {
             let img = new Image();

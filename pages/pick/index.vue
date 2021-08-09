@@ -18,9 +18,7 @@ export default {
         PickSpecials
     },
     mounted() {
-        setTimeout(() => {
-            console.log(this.listData)
-        }, 1000)
+        
     },
     async asyncData() {
         const res = await apiNactagCategory()

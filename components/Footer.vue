@@ -15,7 +15,7 @@
                 <a>手机微信扫一扫</a> |
                 <a>吐个槽</a>
             </p>
-            <p class="darkgray">Copyrights © 2019-2021. All rights reserved 鄂ICP备17016349号</p>
+            <p class="darkgray">Copyrights © 2019-2021. All rights reserved <a href="https://beian.miit.gov.cn/" target="_blank">鄂ICP备17016349号</a></p>
             <p class="darkgray">小提示：按 Ctrl+D 可收藏本网页，方便下一次快速打开使用。</p>
             <p class="darkgray">小提示：打开浏览器的 '设置页面' 找到 '启动时' 选项下面的 '打开特定网页或一组网页'，就可以把全栈导航设置为首页啦</p>
         </div>
@@ -48,6 +48,7 @@ export default {
     background-color: #00102af2;
     text-align: center;
     margin-top: 30px;
+    min-width: 1300px;
     &-container {
         position: relative;
         p {

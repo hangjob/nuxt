@@ -89,7 +89,7 @@ export default {
 
     proxy: {
         '/api': {
-            target: 'http://127.0.0.1:8000/', // 目标接口域名
+            target: 'http://127.0.0.1:8081/', // 目标接口域名
             pathRewrite: {
                 '^/api': '/', // 把 /api 替换成 /
                 changeOrigin: true // 表示是否跨域

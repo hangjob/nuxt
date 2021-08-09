@@ -18,6 +18,12 @@
                                 <a>{{detail.it_name}}</a>
                             </span>
                         </div>
+                        <div class="mesg">
+                            <div class="hits">
+                                <span class="t">阅读量</span>
+                                <span class="n">{{detail.hits}}</span>
+                            </div>
+                        </div>
                         <div class="detail-left-title">
                             <h1>{{detail.it_name}}</h1>
                             <a href="javascript:;" @click="openUrl">
@@ -38,7 +44,11 @@
                             </no-ssr>
                         </div>
                         <div class="tags-meat">
-                            <nuxt-link :to="`/search?ks=${item}`" v-for="(item,index) in detail.keywords" :key="index">
+                            <nuxt-link
+                                :to="`/search?ks=${item}`"
+                                v-for="(item,index) in detail.keywords"
+                                :key="index"
+                            >
                                 <span class="tag-img">
                                     <i class="icon-biaoqian iconfont"></i>
                                 </span>
@@ -183,6 +193,27 @@ export default {
                     margin: 0;
                 }
             }
+            .mesg {
+                position: absolute;
+                right: 10px;
+                top: 10px;
+                .hits {
+                    display: flex;
+                    align-items: center;
+                    .t {
+                        font-size: 12px;
+                        color: #bbb;
+                        margin-right: 3px;
+                    }
+                    .n {
+                        color: #bbb;
+                        letter-spacing: 1px;
+                        font-size: 18px;
+                        color: #ebebeb;
+                        font-family: BrandonText-Black;
+                    }
+                }
+            }
             &-title {
                 margin-top: 20px;
                 display: flex;
@@ -199,8 +230,8 @@ export default {
                     padding: 8px 20px;
                     font-size: 14px;
                     border-radius: 4px;
-                    background-color: #6fc496;
-                    border-color: #6fc496;
+                    background-color: #ff3366;
+                    border-color: #ff3366;
                     color: #fff;
                 }
             }

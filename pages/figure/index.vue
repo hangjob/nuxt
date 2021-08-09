@@ -22,7 +22,6 @@ export default {
     },
     async asyncData() {
         const data = await apiFigureItems();
-        console.log(data)
         return {
             items: data.data.data
         }

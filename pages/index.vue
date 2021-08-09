@@ -4,7 +4,13 @@
         <MainBanner></MainBanner>
         <Toplove></Toplove>
         <div class="wp clearfix">
-            <MainLeft :listData="listData" style="float: left;" :total="total" @apiNavtagItems="apiNavtagItems"></MainLeft>
+            <MainLeft
+                :listData="listData"
+                style="float: left;"
+                :total="total"
+                @apiNavtagItems="apiNavtagItems"
+                :specialData="specialData"
+            ></MainLeft>
             <MainRight style="float: right;"></MainRight>
         </div>
         <Footer />
@@ -18,6 +24,8 @@ import MainBanner from '@/web/components/MainBanner'
 import { mapMutations } from 'vuex'
 import Toplove from '@/web/components/Toplove'
 import { apiNavtagItems } from '@/api/index'
+import { apiSpecialList } from '@/api/special'
+
 export default {
     layout: 'theme_one',
     components: {
@@ -36,13 +44,16 @@ export default {
 
     },
     mounted() {
-        
+
     },
     async asyncData({ store }) {
         const listData = await apiNavtagItems({ page: 1 });
+        const specialData = await apiSpecialList();
+        specialData.data.push({name:'更多专题',icon:require('@/assets/chahua/5.jpg')})
         return {
             listData: listData.data,
-            total: listData.data.total
+            total: listData.data.total,
+            specialData: specialData.data
         }
     },
     methods: {
@@ -56,7 +67,7 @@ export default {
         async apiNavtagItems({ page }) {
             const listData = await apiNavtagItems({ page: page })
             this.listData = listData.data;
-            this.total =  listData.data.total;
+            this.total = listData.data.total;
         }
     }
 }

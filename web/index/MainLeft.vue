@@ -1,5 +1,7 @@
 <template>
     <div class="main-left">
+        <Special :specialData="specialData" />
+        <IndexBanner :specialData="specialData" />
         <div class="items">
             <nuxt-link
                 :to="`/thread/${item.id}`"
@@ -32,6 +34,8 @@
     </div>
 </template>
 <script>
+import IndexBanner from './components/IndexBanner'
+import Special from './components/Special'
 export default {
     props: {
         listData: {
@@ -41,7 +45,12 @@ export default {
         total: {
             type: Number,
             default: 0
-        }
+        },
+        specialData: Array,
+    },
+    components: {
+        IndexBanner,
+        Special
     },
     data() {
         return {
@@ -50,7 +59,7 @@ export default {
     },
     methods: {
         currentChange(page) {
-            this.$emit('apiNavtagItems', {page})
+            this.$emit('apiNavtagItems', { page })
         }
     }
 }

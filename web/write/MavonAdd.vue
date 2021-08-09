@@ -266,7 +266,7 @@ export default {
             }
             let obj = JSON.parse(JSON.stringify(this.ruleForm));
             obj.keywords = _utils.delHtmlTagTrim(obj.keywords.join(','));
-            if (this.isWrite) {
+            if (!this.isWrite) {
                 obj.title = obj.it_name;
             }
             obj.shows = obj.shows === false ? 0 : 1;
@@ -277,6 +277,8 @@ export default {
                     message: `${this.ruleForm.it_name}已发表成功`,
                     type: 'success'
                 });
+                this.ruleForm.it_name =  '';
+                window.location.href = '/'
             }).catch((err) => {
                 this.$utils.isErrJson(err, this)
             }).finally(() => {
@@ -287,7 +289,7 @@ export default {
             this.$refs[formName].resetFields();
         },
         typeChange() {
-            this.options = this.manipulationData(this.ruleForm.type)
+            this.options = this.manipulationData(this.ruleForm.reclassify)
             this.ruleForm.parentid = this.options[0].id;
         },
         manipulationData(id) {

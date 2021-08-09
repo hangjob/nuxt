@@ -2,7 +2,7 @@
     <div class="list">
         <div class="vol">
             <i class="iconfont vm iconfont-speak"></i>
-            <span class="vm">{{item.taxonomic.primary.mark}}</span>
+            <span class="vm">{{item.taxonomic.name}}</span>
         </div>
         <nuxt-link :to="$utils.navLink(item)" class="title">{{item.it_name}}</nuxt-link>
         <nuxt-link :to="$utils.navLink(item)" class="des">{{item.describe}}</nuxt-link>
@@ -40,7 +40,6 @@ export default {
     },
     methods: {
         openWechat(url) {
-            console.log(url);
             this.url = url;
             this.$nextTick(() => {
                 this.$refs.attention.openWechat()

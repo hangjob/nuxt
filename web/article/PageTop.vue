@@ -61,6 +61,7 @@ export default {
     }
 }
 .pagetop {
+    min-width: 1300px;
     height: 500px;
     background: #0299d8;
     background-image: linear-gradient(

@@ -1,6 +1,6 @@
 <template>
     <div class="detail">
-        <div class="detail-left">
+        <!-- <div class="detail-left">
             <div class="info">
                 <div class="header">
                     <h1>{{detail.title}}</h1>
@@ -39,7 +39,11 @@
                     </no-ssr>
                 </div>
                 <div class="tags-meat">
-                    <nuxt-link :to="`/search?ks=${item}`" v-for="(item,index) in detail.keywords" :key="index">
+                    <nuxt-link
+                        :to="`/search?ks=${item}`"
+                        v-for="(item,index) in detail.keywords"
+                        :key="index"
+                    >
                         <span class="tag-img">
                             <i class="icon-biaoqian iconfont"></i>
                         </span>
@@ -50,10 +54,10 @@
             <div class="community">
                 <img src="@/assets/images/qzdh.jpg" alt />
             </div>
-        </div>
+        </div> -->
         <div class="detail-right">
             <Rightuser />
-            <Casually :items="detail.recommended" />
+            <!-- <Casually :items="detail.recommended" /> -->
         </div>
     </div>
 </template>
@@ -65,12 +69,15 @@ export default {
         Rightuser,
         Casually
     },
-    props: {
-        detail: {
-            type: Object,
-            default: () => { }
-        }
+    detail: {
+        type: Object,
+        default: () => { }
     },
+    mounted() {
+        setTimeout(() => {
+            console.log('detail', this.detail)
+        }, 3000)
+    }
 }
 </script>
 <style lang="less" scoped>

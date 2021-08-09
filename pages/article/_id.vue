@@ -18,10 +18,13 @@ export default {
         const res = await apiNavthemeDetail({ id: params.id });
         return {
             detail: res.data,
+            params
         }
     },
     mounted() {
-        console.log(this.detail)
+        apiNavthemeDetail({ id: this.params.id }).then((res)=>{
+            console.log(res.data)
+        })
     }
 }
 </script>

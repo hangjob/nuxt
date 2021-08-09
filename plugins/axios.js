@@ -9,15 +9,12 @@ export default function({ $axios, redirect, context }) {
         }
     )
 
-    $axios.onRequest(config => {
-        console.log('Making request to ' + config.url)
-    })
+    $axios.onRequest(config => {})
 
     $axios.interceptors.response.use(
         response => {
             const res = response;
             if (res.status === 200) {
-                console.log(1111)
                 return res.data;
             } else {
                 redirect('/404')
@@ -25,8 +22,7 @@ export default function({ $axios, redirect, context }) {
             return Promise.reject(res)
         },
         error => {
-            console.log('err' + error)
-                // context.error({ statusCode: 404, message: '页面未找到或无数据' }) //跳转
+            // context.error({ statusCode: 404, message: '页面未找到或无数据' }) //跳转
             return Promise.reject(error)
         }
     )

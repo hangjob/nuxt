@@ -64,7 +64,7 @@ export default {
             flex-shrink: 0;
             max-height: 160px;
             min-height: 160px;
-            background-color: red;
+            background-color: #fbf8f8;
             display: flex;
             align-items: center;
             justify-content: center;

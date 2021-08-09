@@ -18,7 +18,6 @@ export default {
     },
     async asyncData({ $axios, app, store, params }) {
         const res = await apiNactagDaily();
-        console.log(res)
         return {
             items: res.data,
         }

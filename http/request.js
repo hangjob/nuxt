@@ -38,7 +38,6 @@ const post = async(url, params, hand = { loca: false }) => {
         }
         const res = await http.post(handLastUrl(url), params);
         if (hand.loca) {
-            console.log(key);
             window[key] = res.data;
         }
         return res.data;

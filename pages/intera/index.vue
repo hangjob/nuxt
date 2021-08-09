@@ -53,9 +53,7 @@ export default {
         }
     },
     mounted() {
-        setTimeout(() => {
-            console.log(this.items)
-        }, 3000)
+     
     },
     async asyncData({ $axios, app, store, params }) {
         const res = await apiLeaveItems();

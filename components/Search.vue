@@ -115,9 +115,9 @@ export default {
                     type: 'warning'
                 });
             } else {
-                if(this.select === 'logo.png'){
+                if (this.select === 'logo.png') {
                     this.$router.push({ path: '/search', query: { ks: this.ks } })
-                }else{
+                } else {
                     this.handleSelect();
                 }
             }
@@ -139,6 +139,7 @@ export default {
                         }
                         cb(arr)
                     })
+                    return false;
                 }
                 if (this.select === 'sogou.png') {
                     sougou({ key: this.ks }).then((res) => {
@@ -147,6 +148,7 @@ export default {
                         })
                         cb(arr)
                     })
+                    return false;
                 }
                 if (this.select === 'so.png') {
                     haosou({ word: this.ks }).then((res) => {
@@ -155,7 +157,9 @@ export default {
                         })
                         cb(arr)
                     })
+                    return false;
                 }
+                cb(arr)
             } else {
                 cb(arr)
             }

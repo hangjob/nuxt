@@ -59,8 +59,8 @@ export default {
     data() {
         return {
             loginData: {
-                usermail: '1234567@qq.com',
-                password: '1234567'
+                usermail: '',
+                password: ''
             },
             lock: true,
             disabled: false,
@@ -111,7 +111,6 @@ export default {
                 .then((res) => {
                     this.$store.commit('setUserInfo', res.data)
                 }).catch((err)=>{
-                    console.log()
                 })
         }
     }
