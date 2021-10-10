@@ -6,7 +6,7 @@ const apiSpecialList = (params) => {
 }
 
 const apiSpecialListids = (params) => {
-    return post(`${prefix}/special/listids`, params)
+    return post(`${prefix}/special/listids?id=${params.id}`, params)
 }
 
 const apiSpecialSpecialNav = (params) => {

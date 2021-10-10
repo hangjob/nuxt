@@ -51,8 +51,8 @@ export default {
             ]
         }
     },
-    async asyncData({ $axios, app, store, params }) {
-        const res = await apiNavtagDetail({ id: params.id });
+    async asyncData({ $axios, app, store, params ,route}) {
+        const res = await apiNavtagDetail({ id: route.params.id });
         const res2 = await apiTaxonomicYoulike({ id: res.data.detail.taxonomic.parentid })
         return {
             detail: res.data.detail,

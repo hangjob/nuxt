@@ -1,4 +1,4 @@
-import { post } from '@/http/request'
+import { post, get } from '@/http/request'
 const prefix = '/itapi';
 
 const apiNavthemeItems = (params) => {
@@ -7,7 +7,7 @@ const apiNavthemeItems = (params) => {
 
 // 详情
 const apiNavthemeDetail = (params) => {
-    return post(`${prefix}/navtheme/detail`, params)
+    return get(`${prefix}/navtheme/detail?id=${params.id}`, params)
 }
 
 

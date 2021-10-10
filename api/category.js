@@ -3,7 +3,7 @@ import { post } from '@/http/request'
 const prefix = '/itapi';
 
 const apiTaxonomicItems = (params) => {
-    return post(`${prefix}/taxonomic/items`, params)
+    return post(`${prefix}/taxonomic/items?id=${params.id}`, params)
 }
 
 const apiWxarticleCorrelation = (params) => {

@@ -14,7 +14,8 @@ export default {
     components:{
         Detail
     },
-    async asyncData({ $axios, app, store, params }) {
+    async asyncData({ $axios, app, store, params,route }) {
+        console.log('router',params.id);
         const res = await apiNavthemeDetail({ id: params.id });
         return {
             detail: res.data,
@@ -22,9 +23,10 @@ export default {
         }
     },
     mounted() {
-        apiNavthemeDetail({ id: this.params.id }).then((res)=>{
-            console.log(res.data)
-        })
+         setTimeout(() => {
+            console.log('params', this.params)
+            console.log('detail', this.detail)
+        }, 3000)
     }
 }
 </script>

@@ -33,7 +33,7 @@ const apiNactagCategory = (params) => {
 }
 
 const apiNavtagSearch = (params) => {
-    return post(`${prefix}/navtag/search`, params)
+    return post(`${prefix}/navtag/search?ks=${params.ks}`, params)
 }
 
 

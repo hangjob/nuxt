@@ -1,9 +1,9 @@
-import { post } from '@/http/request'
+import { post, get } from '@/http/request'
 const prefix = '/itapi';
 
 
 const apiTaxonomicYoulike = (params) => {
-    return post(`${prefix}/taxonomic/youlike`, params, { loca: true })
+    return get(`${prefix}/taxonomic/youlike?id=${params.id}`, params, { loca: true })
 }
 
 
