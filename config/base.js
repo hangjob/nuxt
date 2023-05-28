@@ -5,7 +5,7 @@ const handLastUrl = (url) => {
 const baseUrl = () => {
     if (process.env.NODE_ENV === 'development') {
         if (process.server) {
-            return 'http://127.0.0.1:8081'
+            return 'http://www.localityitnavs.com'
         } else {
             return '/api'
         }

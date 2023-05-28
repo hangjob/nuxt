@@ -40,7 +40,7 @@ export default {
         middleware: ['auth']
     },
     /**
-     *mode属性: 
+     *mode属性:
      * 不写mode属性, 表示前端客户端和前端服务端都生效
      * mode: 'client'   表示是仅在前端客户端生效
      * mode: 'server'   表示是仅在前端服务端生效
@@ -89,7 +89,7 @@ export default {
 
     proxy: {
         '/api': {
-            target: 'http://127.0.0.1:8081/', // 目标接口域名
+            target: 'www.localityitnavs.com/', // 目标接口域名
             pathRewrite: {
                 '^/api': '/', // 把 /api 替换成 /
                 changeOrigin: true // 表示是否跨域
