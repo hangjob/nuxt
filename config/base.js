@@ -11,7 +11,7 @@ const baseUrl = () => {
         }
     } else {
         if (process.server) {
-            return 'http://www.itnavs.com/api'
+            return 'https://www.itnavs.com/api'
         } else {
             return '/api'
         }

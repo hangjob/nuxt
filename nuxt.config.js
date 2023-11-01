@@ -16,6 +16,7 @@ export default {
             { src: 'https://cdn.bootcdn.net/ajax/libs/showdown/1.9.1/showdown.min.js' },
             { src: 'https://www.vipbic.com/public/static/superslide/jquery-1.8.3.min.js' },
             { src: 'https://www.vipbic.com/public/static/superslide/superslide.2.1.js' },
+            { src: 'https://hm.baidu.com/hm.js?34b4e68c3f35f93fd408bc4074149c18' },
         ]
     },
     // 创建环境变量
